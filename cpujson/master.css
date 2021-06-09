@@ -1,0 +1,73 @@
+html, body {
+	font-family: Arial, Helvetica, sans-serif;
+}
+.component {
+	border: 2px solid grey;
+	border-radius: 12px;
+	padding: 8px;
+	margin-bottom: 16px;
+}
+#components {
+	width: 60%;
+}
+.red {
+	background-color: #ff4f4f;
+}
+.green {
+	background-color: limegreen;
+}
+.blue {
+	background-color: #0058c4;
+}
+button {
+	border: 1px solid black;
+	padding: 6px 12px;
+	margin: 0px 2px;
+	cursor: pointer;
+}
+p {
+	margin: 0px;
+}
+.component-title {
+	margin: 4px 0px 12px 4px;
+}
+.flex {
+	display: flex;
+	align-items: center;
+}
+.container {
+	width: 100%;
+}
+.maxwidth {
+	width: 100%;
+}
+.largetext {
+	font-size: min(8vw, 28px);
+}
+#json {
+	background-color: lightgray;
+	padding: 10px;
+	border-radius: 16px;
+	line-height: 20px;
+	font-family: Consolas, monospace;
+	color: #333;
+	word-wrap: break-word;
+}
+input {
+	border-radius: 7px;
+	padding: 7px;
+	width: clamp(200px, 40%, 600px);
+}
+.fixed {
+	position: absolute;
+	right: 10px;
+	top: 10px;
+	width: 39%;
+}
+.warning {
+	color: red;
+	cursor: default;
+}
+.hidden {
+	opacity: 0;
+}

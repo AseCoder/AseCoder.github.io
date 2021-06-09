@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="master.css">
+	<title>Cpu Creator</title>
+</head>
+<body>
+	<div id='components'></div>
+	<div class="fixed">
+		<div class="flex container">
+			<button class='green maxwidth largetext' onclick='newCpu()'>New CPU</button>
+			<button class='red maxwidth largetext' onclick='removeCpu()'>Remove CPU</button>
+			<button class='blue maxwidth largetext' onclick='writeJson()'>Write JSON</button>
+		</div>
+		<p id="json">json</p>
+	</div>
+</body>
+<script src="componentForm.js"></script>
+<script src="app.js"></script>
+<script>
+	newCpu();
+</script>
+</html>
