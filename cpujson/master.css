@@ -2,13 +2,10 @@ html, body {
 	font-family: Arial, Helvetica, sans-serif;
 }
 .component {
-	border: 2px solid grey;
+	border: 3px solid black;
 	border-radius: 12px;
 	padding: 8px;
 	margin-bottom: 16px;
-}
-#components {
-	width: 60%;
 }
 .red {
 	background-color: #ff4f4f;
