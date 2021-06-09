@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="../master.css">
+	<title>Gpu Creator</title>
+</head>
+<body>
+	<p>What is the AIB brand (eg. Asus) or are these AMD or Nvidia FE cards? Enter the manufacturer name with the correct
+	capitalization.</p>
+	<input type="text" id="manufacturer">
+	<div id='components'></div>
+	<div class="flex container">
+		<button class='green maxwidth largetext' onclick='newCpu()'>New GPU</button>
+		<button class='red maxwidth largetext' onclick='removeCpu()'>Remove GPU</button>
+		<button class='blue maxwidth largetext' onclick='writeJson()'>Write JSON</button>
+	</div>
+	<p id="json">json</p>
+</body>
+<script src="../componentForm.js"></script>
+<script src="app.js"></script>
+</html>

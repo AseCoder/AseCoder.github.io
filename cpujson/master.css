@@ -69,3 +69,6 @@ input {
 .hidden {
 	opacity: 0;
 }
+#manufacturer {
+	margin-bottom: 20px;
+}
