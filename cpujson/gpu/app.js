@@ -11,26 +11,3 @@ function newCpu() {
 		.visualize()
 	components[component.id] = component;
 }
-function removeCpu() {
-	const element = document.getElementById('components').lastChild;
-	delete components[element.id]
-	element.remove();
-}
-function writeJson() {
-	const object = {
-		manufacturer: document.getElementById('manufacturer').value
-	};
-	Object.values(components).forEach(component => {
-		const simplifiedComponent = {};
-		component.fields.forEach(field => {
-			const value = field.getValue();
-			console.log(value);
-			if (!value && value !== 0) {
-				field.showWarning();
-			}
-			simplifiedComponent[field.key] = value;
-		});
-		object[component.getKey()] = simplifiedComponent;
-	}); 
-	document.getElementById('json').innerText = JSON.stringify(object);
-}

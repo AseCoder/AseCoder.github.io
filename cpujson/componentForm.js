@@ -4,11 +4,6 @@ function generateId() {
 	id++;
 	return 'hex-' + id.toString(16);
 }
-
-function inputChange() {
-
-}
-
 class PropertyField {
 	constructor(options = {}) {
 		this.name = options.name;
@@ -123,5 +118,46 @@ class ComponentForm {
 	}
 	getKey() {
 		return document.getElementById(this.titleId).innerText;
+	}
+}
+
+function removeCpu() {
+	const element = document.getElementById('components').lastChild;
+	delete components[element.id]
+	element.remove();
+}
+function writeJson(manufacturer) {
+	const object = { manufacturer };
+	Object.values(components).forEach(component => {
+		const simplifiedComponent = {};
+		component.fields.forEach(field => {
+			const value = field.getValue();
+			console.log(value);
+			if (!value && value !== 0) {
+				field.showWarning();
+			}
+			simplifiedComponent[field.key] = value;
+		});
+		object[component.getKey()] = simplifiedComponent;
+	});
+	document.getElementById('json').innerText = JSON.stringify(object);
+}
+function copyJson() {
+	const textArea = document.createElement('input');
+	textArea.style.opacity = 0;
+	textArea.value = document.getElementById('json').innerText;
+	document.body.appendChild(textArea);
+	textArea.focus();
+	textArea.select();
+	if (document.execCommand('copy')) {
+		const button = document.getElementById('copyjsonbutton');
+		button.classList.remove('blue');
+		button.classList.add('green');
+		button.innerText = 'Copied!';
+		setTimeout(() => {
+			button.classList.remove('green');
+			button.classList.add('blue');
+			button.innerText = 'Copy Text';
+		}, 3000);
 	}
 }
