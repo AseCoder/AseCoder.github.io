@@ -22,7 +22,7 @@ function writeGpuImageJson() {
 	Object.entries(json).filter(x => x[1].name).map(gpu => {
 		console.log('gpu key', gpu[0]);
 		const imageUrl = componentsArray.find(x => x[1].title === gpu[0])[1].fields[0].getValue();
-		if (imageUrl) {
+		if (imageUrl && imageUrl.length > 0) {
 			gpu[1].imageUrl = imageUrl;
 		}
 		object[gpu[0]] = gpu[1];
