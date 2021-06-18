@@ -246,3 +246,9 @@ function ungreenBg(elementId) {
 	const element = document.getElementById(elementId);
 	element.style.removeProperty('background-color');
 }
+window.addEventListener('beforeunload', function (e) {
+	// Cancel the event
+	e.preventDefault(); // If you prevent default behavior in Mozilla Firefox prompt will always be shown
+	// Chrome requires returnValue to be set
+	e.returnValue = '';
+});
