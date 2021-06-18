@@ -75,6 +75,75 @@ class PropertyField {
 	}
 }
 
+class gpuImageUrlField {
+	constructor(options = {}) {
+		this.name = options.name;
+		this.imageUrl;
+		this.parentId = options.parentId;
+		this.imageElementId;
+	}
+	createElement() {
+		// returns a div element containing name and url input
+		const div = document.createElement('div');
+		div.classList.add('property');
+		div.id = generateId();
+		this.divId = div.id;
+		const name = document.createElement('p');
+		const nameText = document.createTextNode(this.name);
+		const input = document.createElement('input');
+		name.appendChild(nameText);
+		input.placeholder = 'Image URL';
+		input.id = generateId();
+		input.onchange = () => {
+			console.log('input changed');
+			this.imageUrl = this.getValue();
+			this.setImage();
+			
+		};
+		this.inputFieldId = input.id;
+		div.appendChild(name);
+		div.appendChild(input);
+		return div;
+	}
+	setImage(imageUrl) {
+		if (!imageUrl) imageUrl = this.imageUrl || this.getValue();
+		if (!imageUrl) {
+			if (this.imageElementId) {
+				ungreenBg(this.parentId);
+				document.getElementById(this.imageElementId).removeAttribute('src');
+				return;
+			}
+		}
+		console.log(`setting ${this.name} image to ${imageUrl}`);
+		if (this.imageElementId) {
+			document.getElementById(this.imageElementId).src = imageUrl;
+		} else {
+			const img = document.createElement('img');
+			img.classList.add('gpuImg');
+			img.src = imageUrl;
+			img.id = generateId();
+			this.imageElementId = img.id;
+			document.getElementById(this.divId).appendChild(img);
+		}
+		const done = this.checkDone();
+		console.log('image done?', done);
+		if (done) greenBg(this.parentId);
+		else ungreenBg(this.parentId);
+	}
+	getValue() {
+		const value = document.getElementById(this.inputFieldId).value;
+		return value;
+	}
+	setValue(newValue) {
+		if (!newValue) return;
+		document.getElementById(this.inputFieldId).value = newValue;
+		document.getElementById(this.inputFieldId).onchange();
+	}
+	checkDone() {
+		return this.imageElementId && this.imageUrl && this.imageUrl.length > 0;
+	}
+}
+
 class ComponentForm {
 	constructor(options = {}) {
 		this.title = options.title;
@@ -96,6 +165,12 @@ class ComponentForm {
 				document.getElementById(field.warningId).classList.add('hidden');
 			};
 		}
+		this.fields.push(field);
+		return this;
+	}
+	addGpuImageField(options = {}) {
+		options.parentId = this.id;
+		const field = new gpuImageUrlField(options);
 		this.fields.push(field);
 		return this;
 	}
@@ -160,4 +235,14 @@ function copyJson() {
 			button.innerText = 'Copy Text';
 		}, 3000);
 	}
+	textArea.remove();
+}
+function greenBg(elementId) {
+	const element = document.getElementById(elementId);
+	const color = '#deffdb';
+	element.style.backgroundColor = color; 
+}
+function ungreenBg(elementId) {
+	const element = document.getElementById(elementId);
+	element.style.removeProperty('background-color');
 }

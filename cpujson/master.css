@@ -2,6 +2,7 @@ html, body {
 	font-family: Arial, Helvetica, sans-serif;
 }
 .component {
+	position: relative;
 	border: 3px solid black;
 	border-radius: 12px;
 	padding: 8px;
@@ -46,13 +47,14 @@ p {
 	margin: 10px 0px;
 	padding: 10px;
 	border-radius: 16px;
-	line-height: 20px;
+	line-height: 18px;
 	font-family: Consolas, monospace;
 	color: #333;
 	word-wrap: break-word;
 }
 input {
 	border-radius: 7px;
+	border-style: solid;
 	padding: 7px;
 	width: clamp(200px, 40%, 600px);
 }
@@ -71,4 +73,27 @@ input {
 }
 #manufacturer {
 	margin-bottom: 20px;
+}
+textarea {
+	width: 80%;
+	background-color: #ddd;
+	padding: 10px;
+	border-radius: 5px;
+	line-height: 18px;
+	font-family: Consolas, monospace;
+	color: #4f4f4f;
+	word-wrap: break-word;
+	font-size: 17px;
+}
+.gpuImg {
+	position: absolute;
+	top: 0;
+	right: 0;
+	height: 100%;
+}
+@media screen and (max-width: 500px) {
+	.gpuImg {
+		position: static;
+		height: min(28vw, 100px);
+	}
 }

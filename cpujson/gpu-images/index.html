@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="../master.css">
+	<title>Gpu Image Creator</title>
+</head>
+
+<body>
+	<p>This tool will take JSON of GPUs and allow you to edit image URLs of those GPUs.</p>
+	<p>Put GPU JSON here:</p>
+	<textarea id="jsonInput" rows="10" onchange="initJson()">input json</textarea>
+	<p id="manufacturer">Manufacturer: Unknown</p>
+	<div id='components'></div>
+	<div class="flex container">
+		<button class='blue maxwidth largetext' onclick='writeGpuImageJson(document.getElementById("manufacturer").innerText.slice(14))'>Write
+			JSON</button>
+	</div>
+	<p id="json">json</p>
+	<button class="blue" onclick="copyJson()" id="copyjsonbutton">Copy Text</button>
+</body>
+<script src="../componentForm.js"></script>
+<script src="app.js"></script>
+
+</html>

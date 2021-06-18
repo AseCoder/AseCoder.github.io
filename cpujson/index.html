@@ -10,8 +10,9 @@
 		.flex {
 			display: flex;
 			align-items: center;
+			justify-content: center;
 			margin: auto;
-			width: 60%;
+			width: calc(80% + 150px);
 		}
 		* {
 			margin-bottom: 60px;
@@ -25,22 +26,43 @@
 		}
 		p {
 			font-size: 24px;
-			margin-bottom: 80px;
+			margin-bottom: 60px;
 		}
 		button {
 			position: relative;
 			width: 100%;
 			height: 8vw;
-			margin: 10px;
-			font-size: 3vw;
+			margin: 1.5vw;
+			font-size: 2.5vw;
 			padding: 0;
 			border: none;
-			border-radius: 16px;
+			border-radius: 2vw;
 			transition-duration: 100ms;
 			bottom: 0;
+			left: 0;
 		}
 		button:hover {
 			bottom: 10px;
+		}
+		button p {
+			color: orangered; margin-bottom: -5px; font-size: 1.5vw;
+		}
+		@media screen and (max-width: 700px) {
+			.flex {
+				flex-direction: column;
+			}
+			button {
+				height: 12vw;
+				width: 50%;
+				font-size: 4vw;
+			}
+			button:hover {
+				left: 10px;
+				bottom: 0;
+			}
+			button p {
+				font-size: 2.4vw;
+			}
 		}
 		.blue {
 			background-color: #25f;
@@ -50,6 +72,9 @@
 		}
 		.green {
 			background-color: #0b2;
+		}
+		.gradient {
+			background: linear-gradient(235deg, rgba(121,255,47,1) 0%, rgba(17,166,255,1) 78%);
 		}
 	</style>
 </head>
@@ -61,6 +86,10 @@
 		<button class="blue" onclick="redirect('intel')">Intel CPU</button>
 		<button class="red" onclick="redirect('amd')">AMD CPU</button>
 		<button class="green" onclick="redirect('gpu')">Video Card</button>
+		<button class="gradient" onclick="redirect('gpu-images')">
+			<p>New!</p>
+			GPU Images
+		</button>
 	</div>
 </body>
 <script>
