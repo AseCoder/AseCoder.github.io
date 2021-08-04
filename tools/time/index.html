@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Time Tool</title>
+</head>
+<body>
+	<h1>THE TIME TOOL</h1>
+	<p>format time:</p>
+	<div style="margin-left: 20px;">
+		<label for="time">input milliseconds:</label>
+		<input type="text" placeholder="Δt" id="time" name="time" oninput="doFormatTime()">
+		<br>
+		<label for="accuracy">accuracy:</label>
+		<input type="text" id="accuracy" name="accuracy" placeholder="2" oninput="doFormatTime()">
+		<br>
+		<input type="checkbox" id="longNames" name="longNames" oninput="doFormatTime()">
+		<label for="longNames">long names</label>
+		<br>
+		<input type="checkbox" id="commas" name="commas" oninput="doFormatTime()">
+		<label for="commas">commas</label>
+		<p>output:</p>
+		<p id="formatOutput" style="border-left: 1px solid lightgray; padding-left: 20px;"></p>
+	</div>
+	<br>
+	<p>parse time:</p>
+	<div style="margin-left: 20px;">
+		<label for="time">input formatted time:</label>
+		<input type="text" placeholder="1d 12h" id="parsetime" name="parsetime" oninput="doParseTime()">
+		<p>output (milliseconds):</p>
+		<p id="parseOutput" style="border-left: 1px solid lightgray; padding-left: 20px;"></p>
+	</div>
+
+</body>
+<script src="formatTime.js"></script>
+<script src="parseTime.js"></script>
+<script src="timeNames.js"></script>
+<script>
+
+	function doFormatTime() {
+		console.log('changed');
+		document.getElementById('formatOutput').innerText = formatTime(parseInt(document.getElementById('time').value), parseInt(document.getElementById('accuracy').value), {
+			longNames: document.getElementById('longNames').checked,
+			commas: document.getElementById('commas').checked
+		}) || '';
+	}
+
+	function doParseTime() {
+		console.log('changed');
+		document.getElementById('parseOutput').innerText = parseTime(document.getElementById('parsetime').value) || '';
+	}
+	
+
+</script>
+</html>
