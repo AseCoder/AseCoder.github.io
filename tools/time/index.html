@@ -32,6 +32,16 @@
 		<p>output (milliseconds):</p>
 		<p id="parseOutput" style="border-left: 1px solid lightgray; padding-left: 20px;"></p>
 	</div>
+	<br>
+	<p>convert time:</p>
+	<div style="margin-left: 20px;">
+		<label for="convertinput">input time to convert:</label>
+		<input type="text" placeholder="3600s" id="convertinput" name="convertinput" oninput="doConvertTime()">
+		<label for="converttarget">target time name:</label>
+		<input type="text" id="converttarget" name="converttarget" placeholder="minute" oninput="doConvertTime()">
+		<p>output:</p>
+		<p id="convertoutput" style="border-left: 1px solid lightgray; padding-left: 20px;"></p>
+	</div>
 
 </body>
 <script src="formatTime.js"></script>
@@ -50,6 +60,12 @@
 	function doParseTime() {
 		console.log('changed');
 		document.getElementById('parseOutput').innerText = parseTime(document.getElementById('parsetime').value) || '';
+	}
+
+	function doConvertTime() {
+		const targetText = document.getElementById('converttarget').value;
+		const target = targetText ? timeNames.find(x => x.name.startsWith(targetText === 'm' ? 'minute' : targetText)) : { name: 'ms', length: 1 };
+		document.getElementById('convertoutput').innerText = (parseTime(document.getElementById('convertinput').value) / target.length).toLocaleString('en-US', { maximumFractionDigits: 4 }) + target.name.slice(0, ['ms', 'month'].includes(target.name) ? 2 : 1);
 	}
 	
 
