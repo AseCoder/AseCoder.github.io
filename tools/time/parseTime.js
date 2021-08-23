@@ -3,7 +3,7 @@ const parseTime = (string) => {
 	const expressions = string.split(' ');
 	let milliseconds = 0;
 	expressions.forEach(expression => {
-		const int = parseInt(expression);
+		const int = parseFloat(expression);
 		const identifier = expression.match(/[A-Z]/gi).join('').toLowerCase();
 		if (!int || !identifier) return;
 		const bestMatch = timeNames.find(x => x.name.startsWith(identifier));
