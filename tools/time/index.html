@@ -4,17 +4,18 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="./master.css">
 	<title>Time Tool</title>
 </head>
 <body>
 	<h1>THE TIME TOOL</h1>
 	<p>format time:</p>
-	<div style="margin-left: 20px;">
+	<div>
 		<label for="time">input milliseconds:</label>
 		<input type="text" placeholder="Δt" id="time" name="time" oninput="doFormatTime()">
 		<br>
 		<label for="accuracy">accuracy:</label>
-		<input type="text" id="accuracy" name="accuracy" placeholder="2" oninput="doFormatTime()">
+		<input type="text" id="accuracy" name="accuracy" placeholder="1" oninput="doFormatTime()" value="1">
 		<br>
 		<input type="checkbox" id="longNames" name="longNames" oninput="doFormatTime()">
 		<label for="longNames">long names</label>
@@ -22,27 +23,36 @@
 		<input type="checkbox" id="commas" name="commas" oninput="doFormatTime()">
 		<label for="commas">commas</label>
 		<p>output:</p>
-		<p id="formatOutput" style="border-left: 1px solid lightgray; padding-left: 20px;"></p>
+		<p id="formatOutput" class="output"></p>
+		<button onclick="copyOutput('formatOutput'); buttonPressAnimation('copy1')" id="copy1">Copy</button>
+		<button onclick="noteOutput('formatOutput'); buttonPressAnimation('note1')" id="note1">Note</button>
 	</div>
 	<br>
 	<p>parse time:</p>
-	<div style="margin-left: 20px;">
+	<div>
 		<label for="time">input formatted time:</label>
 		<input type="text" placeholder="1d 12h" id="parsetime" name="parsetime" oninput="doParseTime()">
 		<p>output (milliseconds):</p>
-		<p id="parseOutput" style="border-left: 1px solid lightgray; padding-left: 20px;"></p>
+		<p id="parseOutput" class="output"></p>
+		<button onclick="copyOutput('parseOutput'); buttonPressAnimation('copy2')" id="copy2">Copy</button>
+		<button onclick="noteOutput('parseOutput'); buttonPressAnimation('note2')" id="note2">Note</button>
 	</div>
 	<br>
 	<p>convert time:</p>
-	<div style="margin-left: 20px;">
+	<div>
 		<label for="convertinput">input time to convert:</label>
 		<input type="text" placeholder="3600s" id="convertinput" name="convertinput" oninput="doConvertTime()">
 		<label for="converttarget">target time name:</label>
 		<input type="text" id="converttarget" name="converttarget" placeholder="minute" oninput="doConvertTime()">
 		<p>output:</p>
-		<p id="convertoutput" style="border-left: 1px solid lightgray; padding-left: 20px;"></p>
+		<p id="convertoutput" class="output"></p>
+		<button onclick="copyOutput('convertoutput'); buttonPressAnimation('copy3')" id="copy3">Copy</button>
+		<button onclick="noteOutput('convertoutput'); buttonPressAnimation('note3')" id="note3">Note</button>
 	</div>
-
+	<div id="notes">
+		<p>notes:</p>
+		<textarea style="width: 100%;" rows="10" id="notearea"></textarea>
+	</div>
 </body>
 <script src="formatTime.js"></script>
 <script src="parseTime.js"></script>
@@ -50,7 +60,7 @@
 <script>
 
 	function doFormatTime() {
-		console.log('changed');
+		if (!document.getElementById('time').value) return;
 		document.getElementById('formatOutput').innerText = formatTime(parseInt(document.getElementById('time').value), parseInt(document.getElementById('accuracy').value), {
 			longNames: document.getElementById('longNames').checked,
 			commas: document.getElementById('commas').checked
@@ -58,14 +68,31 @@
 	}
 
 	function doParseTime() {
-		console.log('changed');
 		document.getElementById('parseOutput').innerText = parseTime(document.getElementById('parsetime').value) || '';
+		document.getElementById('time').value = parseTime(document.getElementById('parsetime').value) || '';
+		doFormatTime();
 	}
 
 	function doConvertTime() {
 		const targetText = document.getElementById('converttarget').value;
 		const target = targetText ? timeNames.find(x => x.name.startsWith(targetText === 'm' ? 'minute' : targetText)) : { name: 'ms', length: 1 };
 		document.getElementById('convertoutput').innerText = (parseTime(document.getElementById('convertinput').value) / target.length).toLocaleString('en-US', { maximumFractionDigits: 4 }) + target.name.slice(0, ['ms', 'month'].includes(target.name) ? 2 : 1);
+	}
+	function buttonPressAnimation(id) {
+		document.getElementById(id).classList.add('active');
+		setTimeout(() => {
+			document.getElementById(id).classList.remove('active');
+		}, 500);
+	}
+	function copyOutput(id) {
+		const el = document.getElementById(id);
+		navigator.clipboard.writeText(el.value || el.innerText);
+	}
+	function noteOutput(id) {
+		const el = document.getElementById(id);
+		const value = el.value || el.innerText;
+		if (!value) return;
+		document.getElementById('notearea').value += value + '\n';
 	}
 	
 

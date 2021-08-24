@@ -1,0 +1,31 @@
+div {
+	margin-left: 20px;
+}
+.output {
+	border-left: 1px solid lightgray;
+	padding-left: 20px;
+}
+#notes {
+	position: absolute;
+	top: 0;
+	right: 100px;
+	resize: none;
+	width: calc(30% + 100px);
+}
+button {
+	border: 1px solid gray;
+	border-radius: 3px;
+}
+.active {
+	background-color: skyblue;
+}
+@media screen and (max-width: 850px) {
+	#notes {
+		position: relative;
+		width: 90%;
+		right: 0;
+		margin-left: 5%;
+		top: 30px;
+		resize: none;
+	}
+}

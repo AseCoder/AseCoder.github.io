@@ -4,7 +4,7 @@ const parseTime = (string) => {
 	let milliseconds = 0;
 	expressions.forEach(expression => {
 		const int = parseFloat(expression);
-		const identifier = expression.match(/[A-Z]/gi).join('').toLowerCase();
+		const identifier = expression.match(/[A-Z]/gi)?.join('').toLowerCase();
 		if (!int || !identifier) return;
 		const bestMatch = timeNames.find(x => x.name.startsWith(identifier));
 		if (bestMatch) { // indentifier is a partial or whole timeName
