@@ -26,5 +26,5 @@ const timeNames = [
 	{
 		name: 'second',
 		length: 1000
-	}
+	},
 ]

@@ -15,7 +15,7 @@
 		<input type="text" placeholder="Δt" id="time" name="time" oninput="doFormatTime()">
 		<br>
 		<label for="accuracy">accuracy:</label>
-		<input type="text" id="accuracy" name="accuracy" placeholder="1" oninput="doFormatTime()" value="1">
+		<input type="number" id="accuracy" name="accuracy" placeholder="1" oninput="doFormatTime()" value="1">
 		<br>
 		<input type="checkbox" id="longNames" name="longNames" oninput="doFormatTime()">
 		<label for="longNames">long names</label>
@@ -70,6 +70,7 @@
 	function doParseTime() {
 		document.getElementById('parseOutput').innerText = parseTime(document.getElementById('parsetime').value) || '';
 		document.getElementById('time').value = parseTime(document.getElementById('parsetime').value) || '';
+		document.getElementById('convertinput').value = parseTime(document.getElementById('parsetime').value) || '';
 		doFormatTime();
 	}
 
