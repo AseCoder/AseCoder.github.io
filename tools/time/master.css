@@ -3,7 +3,8 @@ div {
 }
 .output {
 	border-left: 1px solid lightgray;
-	padding-left: 20px;
+	width: fit-content;
+	padding: 4px 20px 4px 20px;
 }
 #notes {
 	position: absolute;
@@ -12,12 +13,17 @@ div {
 	resize: none;
 	width: calc(30% + 100px);
 }
-button {
+input {
 	border: 1px solid gray;
 	border-radius: 3px;
 }
+button {
+	border: 1px solid gray;
+	border-radius: 3px;
+	background-color: white;
+}
 .active {
-	background-color: skyblue;
+	background-color: #cfc;
 }
 @media screen and (max-width: 850px) {
 	#notes {
