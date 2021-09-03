@@ -1,0 +1,10 @@
+.nav-button {
+	padding: 20px;
+	border: 2px solid lightgray;
+	display: block;
+	margin-bottom: 10px;
+	width: fit-content;
+}
+h1 {
+	font-size: 25px;
+}
