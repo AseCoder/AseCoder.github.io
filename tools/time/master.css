@@ -1,29 +1,12 @@
 div {
 	margin-left: 20px;
 }
-.output {
-	border-left: 1px solid lightgray;
-	width: fit-content;
-	padding: 4px 20px 4px 20px;
-}
 #notes {
 	position: absolute;
 	top: 0;
 	right: 100px;
 	resize: none;
 	width: calc(30% + 100px);
-}
-input {
-	border: 1px solid gray;
-	border-radius: 3px;
-}
-button {
-	border: 1px solid gray;
-	border-radius: 3px;
-	background-color: white;
-}
-.active {
-	background-color: #cfc;
 }
 @media screen and (max-width: 850px) {
 	#notes {
