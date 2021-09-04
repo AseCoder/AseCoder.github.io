@@ -1,0 +1,48 @@
+* {
+	box-sizing: border-box;
+}
+body, html {
+	height: 100%;
+	margin-top: 0;
+	margin-bottom: 0;
+	overflow: auto;
+}
+p {
+	font-size: 26px;
+}
+.flex-container {
+	width: 100%;
+	display: flex;
+}
+.flex-container > * {
+	flex: 1;
+}
+.input-container {
+	width: 70%;
+	margin-left: 15%;
+	margin-bottom: 4px;
+}
+.input-container > div > *, button {
+	height: 34px;
+	font-size: 20px;
+	line-height: 0;
+}
+.input-container > div > input {
+	width: 90%;
+}
+.input-container > div > button {
+	width: calc(100% / 3);
+	margin-left: 15%;
+
+}
+#add-button {
+	width: 20%;
+	margin-top: 35px;
+}
+#disclaimer {
+	color: #aaa;
+	position: absolute;
+	bottom: 0;
+	margin: 5px;
+	font-size: 13px;
+}

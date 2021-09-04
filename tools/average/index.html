@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="A tool for calculating averages and deviation">
+	<link rel="stylesheet" href="master.css">
+	<link rel="stylesheet" href="../tools.css">
+	<title>Average Tool</title>
+</head>
+<body>
+	<h1>THE WEIGHTED AVERAGE TOOL</h1>
+	<div class="flex-container">
+		<div>
+			<div class="flex-container input-container">
+				<p>Remove</p>
+				<p>Value</p>
+				<p>Weight</p>
+			</div>
+			<div id="inputs"></div>
+			<button class="active input-container" id="add-button" onclick="addInputField()">Add</button>
+		</div>
+		<div class="outputs">
+			<p>Arithmetic Mean:</p>
+			<p class="output" id="meanout"></p>
+			<p>Absolute Deviation:</p>
+			<p class="output" id="absdev"></p>
+			<p>Relative Deviation</p>
+			<p class="output" id="reldev"></p>
+		</div>
+	</div>
+
+	<p id="disclaimer">Weight is unaccounted for in Absolute Deviation and Relative Deviation.</p>
+
+	<script src="app.js"></script>
+</body>
+</html>
