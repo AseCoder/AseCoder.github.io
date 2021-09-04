@@ -1,8 +1,8 @@
 * {
 	box-sizing: border-box;
+	--base-left-margin: 15%;
 }
 body, html {
-	height: 100%;
 	margin-top: 0;
 	margin-bottom: 0;
 	overflow: auto;
@@ -14,12 +14,18 @@ p {
 	width: 100%;
 	display: flex;
 }
+.flex-wrap {
+	flex-wrap: wrap;
+}
+.flex-wrap > * {
+	margin-bottom: 40px;
+}
 .flex-container > * {
 	flex: 1;
 }
 .input-container {
-	width: 70%;
-	margin-left: 15%;
+	width: calc(100% - (2 * var(--base-left-margin)));
+	margin-left: var(--base-left-margin);
 	margin-bottom: 4px;
 }
 .input-container > div > *, button {
@@ -31,18 +37,30 @@ p {
 	width: 90%;
 }
 .input-container > div > button {
-	width: calc(100% / 3);
-	margin-left: 15%;
-
+	width: max(50px, calc(100% / 3));
+	margin-left: var(--base-left-margin);
+}
+.input-container > p {
+	margin-bottom: 10px;
 }
 #add-button {
 	width: 20%;
 	margin-top: 35px;
 }
 #disclaimer {
-	color: #aaa;
-	position: absolute;
-	bottom: 0;
-	margin: 5px;
+	color: #bbb;
+	margin-top: 70px;
 	font-size: 13px;
+}
+
+@media screen and (max-width: 1000px) {
+	* {
+		--base-left-margin: 3%;
+	}
+	.flex-container > * {
+		flex: 1 1 100%;
+	}
+	.outputs {
+		margin-left: var(--base-left-margin);
+	}
 }
