@@ -28,7 +28,12 @@
 			<p class="output" id="absdev"></p>
 			<p>Relative Deviation</p>
 			<p class="output" id="reldev"></p>
-			<p id="disclaimer">Weight is unaccounted for in Mean Absolute Deviation and Relative Deviation.</p>
+			<p>Output Format</p>
+			<select id="format" oninput="inputChanged()">
+				<option value="apprx">Approximate</option>
+				<option value="exact">Exact</option>
+			</select>
+			<p id="disclaimer">Weight is not accounted for in Mean Absolute Deviation and Relative Deviation.</p>
 		</div>
 	</div>
 

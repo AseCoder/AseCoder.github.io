@@ -1,11 +1,33 @@
 let inputFieldcount = -1;
 
 function moveToNextInput(event) {
+	if (!['Enter', 'KeyA'].includes(event.code)) return;
+
+	const arr = Array.from(document.querySelectorAll('.input-container input'));
+	const directions = {
+		'up': -2,
+		'down': 2,
+		'right': 1,
+		'left': -1
+	};
+	function moveTowards(direction) {
+		const desiredEl = arr[arr.findIndex(x => x.isSameNode(event.target)) + directions[direction]]
+		if (desiredEl) {
+			desiredEl.select();
+			return true;
+		} else return false;
+	};
+
 	if (event.code === 'Enter') {
-		const arr = Array.from(document.querySelectorAll('.input-container input'));
-		const nextEl = arr[arr.findIndex(x => x.isSameNode(event.target)) + 2];
-		if (nextEl) nextEl.select();
-		else addInputField().select();
+		if (event.shiftKey) {
+			moveTowards('up');
+		} else {
+			const res = moveTowards('down');
+			if (!res) addInputField().select();
+		}
+	} else if (event.code === 'KeyA') {
+		event.preventDefault();
+		event.target.select();
 	}
 }
 
@@ -73,35 +95,83 @@ function inputChanged() {
 	// when any input changes, is removed, is added, or has its weight modified
 	// the outputs are recalculated
 
+	// get output format
+	const format = document.getElementById('format').value;
+
 	// get all the number values from all input fields
 	const inputFieldValues = Array.from(document.querySelectorAll('.input-container input')).map(x => parseFloat(x.value))
-	console.log(inputFieldValues);
 	
 	// mean
 
 	// get all values and apply weights. values are mapped -> value * weight (weight is the input field after this one)
-	const meanValues = inputFieldValues.map((x, i, a) => a[i + 1] !== 1 ? Array(isNaN(Math.floor(a[i + 1])) ? 1 : Math.floor(a[i + 1])).fill(x) : x).filter((x, i) => i % 2 === 0).flat().filter(x => !isNaN(x + 1))
-	console.log(meanValues);
+	let denominator = 0;
+	const meanValues = inputFieldValues.map((x, i, a) => {
+		// only do this for value inputs, not weights
+		if (i % 2 !== 0) return;
+
+		const weight = a[i + 1];
+		if (weight !== 1 && !isNaN(weight)) {
+			denominator += weight;
+			return x * weight;
+		} else {
+			// default weight is 1
+			denominator += 1;
+
+			if (!isNaN(x)) return x;
+			else return 0;
+		}
+	}).filter((x, i) => i % 2 === 0);
 
 	const meanoutel = document.getElementById('meanout');
-	const mean = meanValues.reduce((a, b) => a + b, 0) / (meanValues.length || 1);
-	meanoutel.innerText = mean.toFixed(4);
+	const meanSum = meanValues.reduce((a, b) => a + b, 0);
+	const meanDenominator = (denominator || 1);
+	const mean = meanSum / meanDenominator;
+
+	if (format === 'apprx') meanoutel.innerText = mean.toFixed(4);
+	else meanoutel.innerText = meanSum + '/' + meanDenominator;
+
 
 	// absolute deviation
 
 	// get all values by removing half
 	const absdevValues = inputFieldValues.filter((x, i) => i % 2 === 0 && !isNaN(parseInt(x)));
-	console.log(absdevValues);
-	// calculate absolute deviation
-	const absdev = absdevValues.map(x => Math.abs(x - mean)).reduce((a, b) => a + b, 0) / (absdevValues.length || 1);
-	console.log(absdev);
 	const absdevel = document.getElementById('absdev');
-	absdevel.innerText = '±' + absdev.toFixed(4);
+
+	// calculate absolute deviation
+	const deviationsSum = absdevValues.map(x => Math.abs(x - mean)).reduce((a, b) => a + b, 0);
+	const inputsCount = (absdevValues.length || 1);
+	const absdev = deviationsSum / inputsCount;
+	const exactDeviations = absdevValues.map(x => Math.abs((x * meanDenominator) - meanSum)).reduce((a, b) => a + b, 0);
+	const absdevDenominator = inputsCount * meanDenominator;
+	if (format === 'apprx') {
+		absdevel.innerText = '±' + absdev.toFixed(4);
+	} else {
+		absdevel.innerText = '±' + exactDeviations + '/' + absdevDenominator;
+	}
+
+
+	
 
 	// relative deviation
 	const reldevel = document.getElementById('reldev');
-	const reldev = absdev / (mean || 1);
-	reldevel.innerText = (reldev * 100).toFixed(2) + '%';
+	const rel_denom = mean || 1;
+	const reldev = absdev / rel_denom;
+
+	// exact reldev = absdev / mean
+	// = (exactDeviations / absdevDenominator) / (meanSum / meanDenominator)
+	const exactReldev = (exactDeviations / absdevDenominator) / (meanSum / meanDenominator);
+	// = (exactDeviations / absdevDenominator) * (meanDenominator / meanSum)
+	// = (exactDeviations * meanDenominator) / (absdevDenominator * meanSum)
+	
+	console.table({ meanSum, meanDenominator, mean, deviationsSum, exactDeviations, inputsCount, absdev, absdevDenominator, exactReldev, reldev });
+	
+	if (format === 'apprx') {
+		reldevel.innerText = (reldev * 100).toFixed(2) + '%';
+	} else {
+		if (Number.isInteger(exactReldev)) reldevel.innerText = exactReldev;
+		else reldevel.innerText = exactDeviations * meanDenominator + '/' + absdevDenominator * meanSum;
+	}
+
 }
 
 function removeInputField(id) {

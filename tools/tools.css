@@ -1,13 +1,12 @@
+html {
+	font-family: sans-serif;
+}
 .output {
 	border-left: 1px solid lightgray;
 	width: fit-content;
 	padding: 4px 20px 4px 20px;
 }
-input {
-	border: 1px solid gray;
-	border-radius: 3px;
-}
-button {
+input, button, select {
 	border: 1px solid gray;
 	border-radius: 3px;
 	background-color: white;
