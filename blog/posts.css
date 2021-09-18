@@ -18,10 +18,15 @@ ul p {
 	margin-left: 0;
 }
 p {
-	font-size: 1.05vw;
+	font-size: 22px;
 	margin-top: 18px;
 	margin-bottom: 18px;
 }
 img {
 	margin-top: 60px;
+}
+@media screen and (max-width: 600px) {
+	.halfWidth {
+		width: calc(100%);
+	}
 }
