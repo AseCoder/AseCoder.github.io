@@ -33,6 +33,11 @@ p {
 	font-size: 20px;
 	line-height: 0;
 }
+.large-input {
+	height: 34px;
+	font-size: 20px;
+	line-height: 0;
+}
 .input-container > div > input {
 	width: 90%;
 }

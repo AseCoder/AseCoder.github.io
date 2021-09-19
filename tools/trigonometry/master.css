@@ -19,3 +19,13 @@ td {
 	text-align: center;
 	width: 25%;
 }
+.dimensions {
+	margin: 0 8% 0 8%;
+	width: auto;
+}
+@media screen and (max-width: 700px) {
+	.dimensions {
+		margin: 0 3px 0 3px;
+		width: 100%;
+	}
+}

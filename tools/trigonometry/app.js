@@ -95,7 +95,15 @@ canvas.onmousedown = (e) => {
 	mousePressed = true;
 	console.log('mouse pressed');
 };
+canvas.ontouchstart = (e) => {
+	mousePressed = true;
+	console.log('mouse pressed');
+};
 canvas.onmouseup = (e) => {
+	mousePressed = false;
+	console.log('mouse unpressed');
+}
+canvas.ontouchend = (e) => {
 	mousePressed = false;
 	console.log('mouse unpressed');
 }
@@ -107,12 +115,20 @@ canvas.onmouseout = (e) => {
 	mouseInCanvas = false;
 	console.log('mouse unpressed');
 }
-canvas.onmousemove = (e) => {
+const onmove = (e) => {
 	if (!mousePressed || !mouseInCanvas) return;
-	console.log({
-		x: e.clientX - canvasPos[0],
-		y: e.clientY - canvasPos[1]
-	});
 	knobPos = [e.clientX - canvasPos[0] - leftmargin, maxHeight - e.clientY + canvasPos[1]];
+	updateTriangle();
+};
+canvas.onmousemove = onmove;
+canvas.ontouchmove = onmove;
+
+function dimensionChange() {
+	const width = parseFloat(document.getElementById('width').value) * 10;
+	const height = parseFloat(document.getElementById('height').value) * 10;
+	knobPos = [
+		isNaN(width) ? knobPos[0] : width,
+		isNaN(height) ? knobPos[1] : height
+	];
 	updateTriangle();
 }
