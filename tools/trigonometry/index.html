@@ -1,0 +1,72 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Trigonometry</title>
+	<link rel="stylesheet" href="../tools.css">
+	<link rel="stylesheet" href="../tool-utils.css">
+	<link rel="stylesheet" href="master.css">
+</head>
+<body>
+	<h1>THE TRIGONOMETRY EXPLAINER</h1>
+	<div class="centered-container">
+		<canvas id="triangle"></canvas>
+		<p class="fine-print">Click & drag the blue ball.</p>
+		<table>
+			<tr>
+				<th>
+					<p>tan</p>
+				</th>
+				<th>
+					<p>sin</p>
+				</th>
+				<th>
+					<p>cos</p>
+				</th>
+				<th>
+					<p>angle</p>
+				</th>
+			</tr>
+			<tr>
+				<td>
+					<p id="tan"></p>
+				</td>
+				<td>
+					<p id="sin"></p>
+				</td>
+				<td>
+					<p id="cos"></p>
+				</td>
+				<td>
+					<p id="arctan"></p>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<p class="fine-print">Opposite / Adjacent</p>
+				</td>
+				<td>
+					<p class="fine-print">Opposite / Hypotenuse</p>
+				</td>
+				<td>
+					<p class="fine-print">Adjacent / Hypotenuse</p>
+				</td>
+				<td>
+					<p class="fine-print">Inverse Function (arctan, etc.)</p>
+				</td>
+			</tr>
+		</table>
+		<p class="fine-print">
+			360° = 2π rad
+			<br>
+			degrees = radians ⋅ ( 180 / π )
+			<br>
+			radians = degrees ⋅ ( π / 180 )
+		</p>
+	</div>
+</body>
+<script src="app.js"></script>
+</html>
