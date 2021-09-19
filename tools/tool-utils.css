@@ -47,13 +47,21 @@ p {
 	margin-top: 26px;
 	margin-bottom: 10px;
 }
+.centered-container {
+	width: calc(100% - (2 * var(--base-left-margin)));
+	margin-left: var(--base-left-margin);
+}
 #add-button {
 	width: 20%;
 	margin-top: 35px;
 }
-#disclaimer {
+.disclaimer {
 	color: #bbb;
 	margin-top: 70px;
+	font-size: 13px;
+}
+.fine-print {
+	color: #bbb;
 	font-size: 13px;
 }
 
