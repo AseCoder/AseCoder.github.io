@@ -13,7 +13,9 @@
 <body>
 	<h1>THE TRIGONOMETRY EXPLAINER</h1>
 	<div class="centered-container">
-		<canvas id="triangle"></canvas>
+		<div id="canvas-container">
+			<canvas id="triangle"></canvas>
+		</div>
 		<p class="fine-print">Click & drag the blue ball.</p>
 		<div class="flex-container">
 			<input type="numebr" id="width" class="large-input dimensions" placeholder="Width" oninput="dimensionChange()">
@@ -22,16 +24,16 @@
 		<table>
 			<tr>
 				<th>
-					<p>tan</p>
+					<p id="tantitle">tan()</p>
 				</th>
 				<th>
-					<p>sin</p>
+					<p id="sintitle">sin()</p>
 				</th>
 				<th>
-					<p>cos</p>
+					<p id="costitle">cos()</p>
 				</th>
 				<th>
-					<p>angle</p>
+					<p id="arctantitle">arctan()</p>
 				</th>
 			</tr>
 			<tr>

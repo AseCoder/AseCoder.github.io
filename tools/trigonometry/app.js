@@ -83,6 +83,11 @@ function updateTriangle() {
 
 
 	// tables
+	document.getElementById('tantitle').innerText = `tan(${angle.toFixed(2)}°)`;
+	document.getElementById('sintitle').innerText = `sin(${angle.toFixed(2)}°)`;
+	document.getElementById('costitle').innerText = `cos(${angle.toFixed(2)}°)`;
+	document.getElementById('arctantitle').innerText = `arctan(${(lengthOpposite / 10).toFixed(1)}/${(lengthAdjacent / 10).toFixed(1)})`;
+
 	document.getElementById('tan').innerText = Math.tan(radians).toFixed(4);
 	document.getElementById('sin').innerText = Math.sin(radians).toFixed(4);
 	document.getElementById('cos').innerText = Math.cos(radians).toFixed(4);
@@ -93,31 +98,25 @@ updateTriangle();
 
 canvas.onmousedown = (e) => {
 	mousePressed = true;
-	console.log('mouse pressed');
 };
 canvas.ontouchstart = (e) => {
 	mousePressed = true;
-	console.log('mouse pressed');
 };
 canvas.onmouseup = (e) => {
 	mousePressed = false;
-	console.log('mouse unpressed');
 }
 canvas.ontouchend = (e) => {
 	mousePressed = false;
-	console.log('mouse unpressed');
 }
 canvas.onmouseenter = (e) => {
 	mouseInCanvas = true;
-	console.log('mouse pressed');
 }
 canvas.onmouseout = (e) => {
 	mouseInCanvas = false;
-	console.log('mouse unpressed');
 }
 const onmove = (e) => {
 	if (!mousePressed || !mouseInCanvas) return;
-	knobPos = [e.clientX - canvasPos[0] - leftmargin, maxHeight - e.clientY + canvasPos[1]];
+	knobPos = [e.clientX - canvasPos[0] - leftmargin, maxHeight - e.clientY + canvasPos[1] - window.scrollY];
 	updateTriangle();
 };
 canvas.onmousemove = onmove;
