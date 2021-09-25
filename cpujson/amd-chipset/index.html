@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="../master.css">
+	<title>Chipset Creator</title>
+</head>
+<body>
+	<p>Create AMD chipsets</p>
+	<div id="components"></div>
+	<div class="flex container">
+		<button class="green maxwidth largetext" onclick="newCpu()">New Chipset</button>
+		<button class="red maxwidth largetext" onclick="removeCpu()">Remove Chipset</button>
+		<button class="blue maxwidth largetext" onclick="writeJson('AMD')">Write JSON</button>
+	</div>
+	<p id="json"></p>
+	<button class="blue" onclick="copyJson()" id="copyjsonbutton">Copy Text</button>
+</body>
+<script src="../componentForm.js"></script>
+<script src="app.js"></script>
+</html>

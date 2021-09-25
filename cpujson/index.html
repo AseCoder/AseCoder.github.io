@@ -12,7 +12,7 @@
 			align-items: center;
 			justify-content: center;
 			margin: auto;
-			width: calc(80% + 150px);
+			width: 100%;
 		}
 		* {
 			margin-bottom: 60px;
@@ -32,7 +32,7 @@
 			position: relative;
 			width: 100%;
 			height: 8vw;
-			margin: 1.5vw;
+			margin: 0.5vw;
 			font-size: 2.5vw;
 			padding: 0;
 			border: none;
@@ -42,18 +42,18 @@
 			left: 0;
 		}
 		button:hover {
-			bottom: 10px;
+			bottom: 4px;
 		}
 		button p {
 			color: orangered; margin-bottom: -5px; font-size: 1.5vw;
 		}
-		@media screen and (max-width: 700px) {
+		@media screen and (max-width: 800px) {
 			.flex {
 				flex-direction: column;
 			}
 			button {
 				height: 12vw;
-				width: 50%;
+				width: 70%;
 				font-size: 4vw;
 			}
 			button:hover {
@@ -86,10 +86,9 @@
 		<button class="blue" onclick="redirect('intel')">Intel CPU</button>
 		<button class="red" onclick="redirect('amd')">AMD CPU</button>
 		<button class="green" onclick="redirect('gpu')">Video Card</button>
-		<button class="gradient" onclick="redirect('gpu-images')">
-			<p>New!</p>
-			GPU Images
-		</button>
+		<button class="gradient" onclick="redirect('gpu-images')">GPU Images</button>
+		<button class="blue" onclick="redirect('intel-chipset')">Intel Chipset</button>
+		<button class="red" onclick="redirect('amd-chipset')">AMD Chipset</button>
 	</div>
 </body>
 <script>
