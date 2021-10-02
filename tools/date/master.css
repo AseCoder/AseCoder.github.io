@@ -37,6 +37,9 @@ table th {
 table {
 	width: min(100%, 700px);
 }
+table td, table th {
+	width: calc(100% / 6);
+}
 table input {
 	width: 100%;
 	font-size: 20px;
