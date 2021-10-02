@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="../tools.css">
+	<link rel="stylesheet" href="../tool-utils.css">
+	<link rel="stylesheet" href="master.css">
+	<title>Date Tool</title>
+</head>
+<body>
+	<h1>THE DATE TOOL</h1>
+	<div class="centered-container">
+		<div class="inputchooser">
+			<p>Input format:</p>
+			<div id="inputchoosingbuttons">
+				<button id="dateInput" class="active" onclick="inputType('date')">Date</button>
+				<button id="unixInput" onclick="inputType('unix')">UNIX epoch</button>
+			</div>
+		</div>
+		<div id="inputs"></div>
+		<div id="outputs"></div>
+		<p class="fine-print">All dates and times are in UTC.</p>
+	</div>
+</body>
+<script src="god_tool.js"></script>
+<script src="date-inputs.js"></script>
+<script src="date-outputs.js"></script>
+<script src="unix-inputs.js"></script>
+<script src="unix-outputs.js"></script>
+<script src="app.js"></script>
+</html>

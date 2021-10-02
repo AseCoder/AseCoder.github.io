@@ -1,0 +1,48 @@
+.inputchooser button {
+	height: 50px;
+	width: 150px;
+	padding: 0;
+	font-size: 22px;
+	cursor: pointer;
+}
+.inputchooser {
+	font-size: 0;
+}
+.inputchooser > * {
+	display: inline-block;
+}
+.inputchoosingbuttons * {
+	display: inline;
+}
+.inputchooser p {
+	margin-right: 16px;
+}
+#dateInput {
+	border-right: none;
+	border-radius: 16px 0px 0px 16px;
+}
+#unixInput {
+	border-radius: 0px 16px 16px 0px;
+}
+.option-button {
+	height: 24px;
+	font-size: 16px;
+	border-radius: 8px;
+	padding: 0 8px 0 8px;
+}
+table th {
+	font-size: 22px;
+	font-weight: normal;
+}
+table {
+	width: min(100%, 700px);
+}
+table input {
+	width: 100%;
+	font-size: 20px;
+}
+@media screen and (max-width: 600px) {
+	table * {
+		font-size: 16px !important;
+	}
+}
