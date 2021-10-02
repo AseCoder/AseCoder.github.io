@@ -35,7 +35,7 @@ table th {
 	font-weight: normal;
 }
 table {
-	width: min(100%, 700px);
+	width: clamp(340px, 50%, 450px);
 }
 table td, table th {
 	width: calc(100% / 6);
@@ -43,6 +43,10 @@ table td, table th {
 table input {
 	width: 100%;
 	font-size: 20px;
+}
+.tablecontainer {
+	display: flex;
+	flex-wrap: wrap;
 }
 @media screen and (max-width: 600px) {
 	table * {

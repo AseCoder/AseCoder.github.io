@@ -4,16 +4,20 @@ function date_inputs() {
 	// input title
 	inputsDiv.appendChild(el('p', 'Input a date:'));
 
-	// inputs table
+	// tables
+	const tablecontainer = el('div');
+	tablecontainer.classList.add('tablecontainer');
+	
+	// large inputs table
 	const table = el('table');
 
 	// table data
 	const headerRow = el('tr');
 	const inputsRow = el('tr');
-	const names = ['year', 'month', 'day', 'hour', 'minute', 'second'];
-	const defaultvalues = [1970, 1, 1, 0, 0, 0];
+	const names = ['year', 'month', 'day'];
+	const defaultvalues = [1970, 1, 1];
 
-	for (let i = 0; i < 6; i++) {
+	for (let i = 0; i < 3; i++) {
 		// name
 		const th = el('th', names[i][0].toUpperCase() + names[i].slice(1));
 		headerRow.appendChild(th);
@@ -31,5 +35,36 @@ function date_inputs() {
 	}
 	table.appendChild(headerRow);
 	table.appendChild(inputsRow);
-	inputsDiv.appendChild(table);
+	tablecontainer.appendChild(table);
+
+	// small table
+	// large inputs table
+	const smalltable = el('table');
+
+	// table data
+	const smallheaderRow = el('tr');
+	const smallinputsRow = el('tr');
+	const smallnames = ['hour', 'minute', 'second'];
+
+	for (let i = 0; i < 3; i++) {
+		// name
+		const th = el('th', smallnames[i][0].toUpperCase() + smallnames[i].slice(1));
+		smallheaderRow.appendChild(th);
+
+		// input field
+		const td = el('td');
+		const input = el('input');
+		input.setAttribute('type', 'number');
+		input.setAttribute('oninput', 'inputChanged()');
+		input.classList.add('large-input');
+		input.value = 0;
+		input.id = smallnames[i] + '-input';
+		td.appendChild(input);
+		smallinputsRow.appendChild(td);
+	}
+	smalltable.appendChild(smallheaderRow);
+	smalltable.appendChild(smallinputsRow);
+	tablecontainer.appendChild(smalltable);
+
+	inputsDiv.appendChild(tablecontainer);
 }
