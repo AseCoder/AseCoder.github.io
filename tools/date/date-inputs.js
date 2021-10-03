@@ -6,7 +6,7 @@ function date_inputs() {
 
 	// tables
 	const tablecontainer = el('div');
-	tablecontainer.classList.add('tablecontainer');
+	tablecontainer.classList.add('flex-wrap');
 	
 	// large inputs table
 	const table = el('table');

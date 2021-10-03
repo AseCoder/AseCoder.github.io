@@ -7,7 +7,7 @@ body, html {
 	margin-bottom: 0;
 	overflow: auto;
 }
-p {
+p, label {
 	font-size: 26px;
 }
 .flex-container {
@@ -15,10 +15,8 @@ p {
 	display: flex;
 }
 .flex-wrap {
+	display: flex;
 	flex-wrap: wrap;
-}
-.flex-wrap > * {
-	margin-bottom: 40px;
 }
 .flex-container > * {
 	flex: 1;

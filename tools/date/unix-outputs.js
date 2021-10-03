@@ -21,25 +21,10 @@ function unix_outputs() {
 	};
 	outputDiv.appendChild(date_copy);
 
-	// discord format
-	outputDiv.appendChild(el('p', 'Discord date embedding syntax:'));
-	const dc_out = el('p');
-	dc_out.classList.add('output');
-	dc_out.id = 'dc_out';
-	outputDiv.appendChild(dc_out);
-
-	// copy button
-	const dc_copy = el('button', 'Copy');
-	dc_copy.classList.add('option-button');
-	dc_copy.onclick = e => {
-		e.target.classList.add('active');
-		copyOutput('dc_out');
-		setTimeout(() => e.target.classList.remove('active'), 500);
-	};
-	outputDiv.appendChild(dc_copy);
+	add_dc_out(outputDiv);
 }
 function update_unix_outputs() {
 	const date = new Date(parseInt(document.getElementById('ms_in').value));
 	document.getElementById('date_out').innerText = date.toUTCString();
-	document.getElementById('dc_out').innerText = `<t:${Math.floor(date.getTime() / 1000)}>`
+	update_dc_out(date);
 }
