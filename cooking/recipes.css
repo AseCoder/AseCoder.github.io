@@ -39,3 +39,10 @@ ol li {
 	font-family: consolas, monospace;
 	text-align: center;
 }
+.staticBlue {
+	background-color: #def;
+	padding: 0 5px;
+	border-radius: 5px;
+	font-family: consolas, monospace;
+	text-align: center;
+}
