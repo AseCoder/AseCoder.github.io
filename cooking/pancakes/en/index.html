@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>American style pancakes</title>
+	<link rel="stylesheet" href="../../recipes.css">
+</head>
+<body>
+	<h1>American style pancakes</h1>
+	<p><a href="../fi/index.html">In finnish</a></p>
+	<p>Batter size</p>
+	<button class="quantitybutton active" id="quantity1" onclick="quantities(1)">1x</button>
+	<p class="inlineText">For a couple of people</p>
+	<br>
+	<button class="quantitybutton" id="quantity2" onclick="quantities(2)">2x</button>
+	<p class="inlineText">Family size</p>
+	<div class="ingredients">
+		<h2>Ingredients</h2>
+		<table>
+			<tr>
+				<th>Amount</th>
+				<th>Ingredient</th>
+			</tr>
+			<tr>
+				<td class="quantityDependant"></td>
+				<td>egg</td>
+			</tr>
+			<tr>
+				<td class="quantityDependant" id="f2udl"></td>
+				<td>milk</td>
+			</tr>
+			<tr>
+				<td class="quantityDependant" id="f2udl"></td>
+				<td>wheat flour</td>
+			</tr>
+			<tr>
+				<td class="quantityDependant" id="f2utsp"></td>
+				<td>baking powder</td>
+			</tr>
+			<tr>
+				<td class="quantityDependant" id="f1utbsp"></td>
+				<td>sugar</td>
+			</tr>
+			<tr>
+				<td class="quantityDependant" id="f1utsp"></td>
+				<td>vanilla sugar</td>
+			</tr>
+			<tr>
+				<td class="quantityDependant" id="f1upinch-es"></td>
+				<td>salt</td>
+			</tr>
+			<tr>
+				<td class="quantityDependant" id="f1utbsp"></td>
+				<td>liquid margarine</td>
+			</tr>
+		</table>
+	</div>
+	<div class="instructions">
+		<h2>Instructions</h2>
+		<ol type="1">
+			<li>Break <span class="quantityDependant inlineText"></span> egg in a bowl</li>
+			<li>Mix thoroughly</li>
+			<li>Add <span class="quantityDependant" id="f2udl"></span> of milk</li>
+			<li>Add <span class="quantityDependant" id="f2udl"></span> of wheat flour</li>
+			<li>Add <span class="quantityDependant" id="f2utsp"></span> of baking powder</li>
+			<li>Add <span class="quantityDependant" id="f1urtbsp"></span> of sugar</li>
+			<li>Add <span class="quantityDependant" id="f1utsp"></span> of vanilla sugar</li>
+			<li>Add <span class="quantityDependant" id="f1upinch-es"></span> of salt</li>
+			<li>Mix</li>
+			<li>Add <span class="quantityDependant" id="f1utbsp"></span> of margarine</li>
+			<li>Mix thoroughly</li>
+			<li>Let rise in the fridge</li>
+		</ol>
+	</div>
+	<p>
+		Source: <a href="https://anna.fi/reseptit/amerikkalaiset-pannukakut"
+		target="_blank">https://anna.fi/reseptit/amerikkalaiset-pannukakut</a>
+	</p>
+
+</body>
+<script src="../app.js"></script>
+</html>

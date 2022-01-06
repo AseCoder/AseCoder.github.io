@@ -1,0 +1,5 @@
+marking ingredient requirements:
+mark an element with class "quantityDependant". it will be blue and display an amount and a unit depending on the chosen recipe quantity
+this element requires an id, with format
+id="f(amount)u(unit)"
+where (amount) is a number and (unit) is a unit symbol. both without parentheses. additionally, a plural form of the unit can be added with - and the ending of the plural form. with -! the following will be the whole plural unit. 

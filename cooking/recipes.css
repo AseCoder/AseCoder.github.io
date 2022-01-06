@@ -1,0 +1,41 @@
+* {
+	font-family: calibri, Helvetica, sans-serif;
+}
+*:not(h1,h2,h3,h4,h5,h6) {
+	font-size: 23px;
+}
+p {
+	margin: 10px 0;
+}
+button {
+	cursor: pointer;
+}
+table * {
+	text-align: center;
+}
+tr *:nth-child(2n) {
+	padding-left: 13px;
+}
+ol li {
+	padding: 6px 0;
+}
+.quantitybutton {
+	padding: 10px;
+	border: 2px solid grey;
+	border-radius: 4px;
+	margin: 4px 0;
+}
+.quantitybutton.active {
+	border-color: #3c0;
+	background-color: #dfd;
+}
+.inlineText {
+	display: inline-block;
+}
+.quantityDependant {
+	background-color: #def;
+	padding: 0 5px;
+	border-radius: 5px;
+	font-family: consolas, monospace;
+	text-align: center;
+}
