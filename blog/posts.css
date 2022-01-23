@@ -17,6 +17,9 @@ h1, p, img, ul, div {
 ul p {
 	margin-left: 0;
 }
+li {
+	margin-bottom: 8px;
+}
 p {
 	font-size: 22px;
 	margin-top: 18px;
