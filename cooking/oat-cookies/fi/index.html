@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Kaurakeksit</title>
+	<link rel="stylesheet" href="../../recipes.css">
+</head>
+
+<body>
+	<h1>Kaurakeksit</h1>
+	<p><a href="../en/index.html">In english</a></p>
+	<p>Taikinan koko</p>
+	<button class="quantitybutton active" id="quantity1" onclick="quantities(1)">1x</button>
+	<p class="inlineText">Perhekoko. Vaihtoehtoja ei ole.</p>
+	<div class="ingredients">
+		<h2>Aineet</h2>
+		<table>
+			<tr>
+				<th>Määrä</th>
+				<th>Aine</th>
+			</tr>
+			<tr>
+				<td class="quantityDependant" id="f125ug"></td>
+				<td>voita</td>
+			</tr>
+			<tr>
+				<td class="quantityDependant" id="f2.5udl"></td>
+				<td>sokeria</td>
+			</tr>
+			<tr>
+				<td class="quantityDependant"></td>
+				<td>kananmuna</td>
+			</tr>
+			<tr>
+				<td class="quantityDependant" id="f1utl"></td>
+				<td>vaniljasokeria</td>
+			</tr>
+			<tr>
+				<td class="quantityDependant" id="fx/2utl"></td>
+				<td>kanelia</td>
+			</tr>
+			<tr>
+				<td class="quantityDependant" id="f2.5udl"></td>
+				<td>kaurahiutaleita</td>
+			</tr>
+			<tr>
+				<td class="quantityDependant" id="f2udl"></td>
+				<td>vehnäjauhoja</td>
+			</tr>
+			<tr>
+				<td class="quantityDependant" id="fx/3utl"></td>
+				<td>leivinjauhetta</td>
+			</tr>
+		</table>
+	</div>
+	<div class="instructions">
+		<h2>Ohjeet</h2>
+		<ol type="1">
+			<li>Vaahdota <span class="quantityDependant" id="f125ug"></span> huoneenlämpöistä voita ja <span class="quantityDependant" id="f2.5udl"></span> sokeria</li>
+			<li>Lisää <span class="quantityDependant" id="f1umuna-a"></span>, <span class="quantityDependant" id="f1utl"></span> vaniljasokeria ja <span class="quantityDependant" id="fx/2utl"></span> kanelia</li>
+			<li>Lisää kuivat aineet (<span class="quantityDependant" id="f2.5udl"></span> kaurahiutaleita, <span class="quantityDependant" id="f2udl"></span> vehnäjauhoja ja <span class="quantityDependant" id="fx/3utl"></span> leivinjauhetta)</li>
+			<li>Sekoita</li>
+			<li>Lusikoi uunipellille leivinpaperille ruokalusikalla</li>
+			<li>Paista <span class="staticBlue">175°C</span> lämmöllä uunin yläosassa <span class="staticBlue">n. 25 min</span></li>
+			<li>Jäähdytä ja tarjoa</li>
+		</ol>
+	</div>
+	<p>
+		Lähde: <a href="https://www.valio.fi/reseptit/kaurakeksit/"
+			target="_blank">https://www.valio.fi/reseptit/kaurakeksit/</a>
+	</p>
+</body>
+<script src="../../app.js"></script>
+</html>

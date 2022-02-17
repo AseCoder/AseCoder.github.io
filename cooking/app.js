@@ -4,7 +4,15 @@ function redraw(number) {
 	const elList = Array.from(document.getElementsByClassName('quantityDependant'));
 	elList.forEach(el => {
 		// change content
-		const amount = number * parseInt(el.id?.slice(1) || 1);
+		const amount = (() => {
+			if (!el.id) return 1;
+			const formulaEnd = el.id.indexOf('u') > 0 ? el.id.indexOf('u') : el.id.length - 1;
+			if (el.id.slice(1, formulaEnd).includes('/')) {
+				const evalStr = el.id.slice(1, formulaEnd).replace(/x/g, number.toString());
+				if (eval(evalStr) % 1 === 0) return eval(evalStr);
+				else return evalStr;
+			} else return number * parseFloat(el.id.slice(1));
+		})();
 
 		// unit
 		// basically it checks what is required
