@@ -1,8 +1,11 @@
 * {
 	font-family: Arial, Helvetica, sans-serif;
 }
+li {
+	margin-bottom: 16px;
+}
 p {
 	margin: 0;
 	font-size: 18px;
-	line-height: 28px;
+	line-height: 34px;
 }
