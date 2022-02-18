@@ -36,6 +36,6 @@ function update_date_outputs() {
 		parseInt(document.getElementById('minute-input').value) || 0,
 		parseInt(document.getElementById('second-input').value) || 0
 	);
-	document.getElementById('ms_out').innerText = `${date.getTime()}`;
+	document.getElementById('ms_out').innerText = Math.floor(date.getTime() / 1000) * 1000;
 	update_dc_out(date);
 }
