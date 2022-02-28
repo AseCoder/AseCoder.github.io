@@ -3,7 +3,7 @@ html, body {
 	--margleft: clamp(var(--margleft-min), calc(50% - 540px), 18%);
 	margin: 0;
 }
-h1, p, img, ul, div {
+h1, h2, h3, h4, h5, h6, p, img, ul, div {
 	font-family: Arial, Helvetica, sans-serif;
 	margin-left: var(--margleft);
 	width: calc(100% - 2 * var(--margleft));
