@@ -61,11 +61,11 @@ p, label {
 .disclaimer {
 	color: #bbb;
 	margin-top: 70px;
-	font-size: 13px;
+	font-size: 14px;
 }
 .fine-print {
 	color: #bbb;
-	font-size: 13px;
+	font-size: 14px;
 }
 
 @media screen and (max-width: 1000px) {
