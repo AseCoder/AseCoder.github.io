@@ -13,22 +13,26 @@
 </head>
 <body>
 	<h1>The Quadratic Equation Generator</h1>
-	<div class="centered-container">
-		<p>To get started, give me three points.</p>
-		<div class="point-inputs">
-			<div class="points">
-				<p id="point1"><i>A</i> = (<input type="number" id="point1x">, <input type="number" id="point1y">)</p>
-				<p id="point2"><i>B</i> = (<input type="number" id="point2x">, <input type="number" id="point2y">)</p>
-				<p id="point3"><i>C</i> = (<input type="number" id="point3x">, <input type="number" id="point3y">)</p>
+	<div class="flex-container wider-centered-container flex-wrap">
+		<div>
+			<p>To get started, give me three points.</p>
+			<div class="point-inputs">
+				<div class="points">
+					<p id="point1"><i>A</i> = (<input type="number" id="point1x">, <input type="number" id="point1y">)</p>
+					<p id="point2"><i>B</i> = (<input type="number" id="point2x">, <input type="number" id="point2y">)</p>
+					<p id="point3"><i>C</i> = (<input type="number" id="point3x">, <input type="number" id="point3y">)</p>
+				</div>
+				<img src="ikea-man.jpg" alt="" id="ikea-man">
 			</div>
-			<img src="ikea-man.jpg" alt="" id="ikea-man">
+			<div class="outputs">
+				<p>Formula of the quadratic equation that intersects all three points:</p>
+				<p class="output" id="out-formula-formatted"></p>
+				<p class="output" id="out-formula-plaintext"></p>
+			</div>
 		</div>
-		<div class="outputs">
-			<p>Formula of the quadratic equation that intersects all three points:</p>
-			<p class="output" id="out-formula-formatted"></p>
-			<p class="output" id="out-formula-plaintext"></p>
+		<div id="canvas-container">
+			<canvas id="plot"></canvas>
 		</div>
-		<p class="disclaimer">Graph plotting maybe coming soon.</p>
 	</div>
 </body>
 <script src="app.js"></script>

@@ -54,6 +54,10 @@ p, label {
 	width: calc(100% - (2 * var(--base-left-margin)));
 	margin-left: var(--base-left-margin);
 }
+.wider-centered-container {
+	width: calc(100% - var(--base-left-margin));
+	margin-left: calc(1 / 2 * var(--base-left-margin));
+}
 #add-button {
 	width: 20%;
 	margin-top: 35px;
@@ -67,7 +71,6 @@ p, label {
 	color: #bbb;
 	font-size: 14px;
 }
-
 @media screen and (max-width: 1000px) {
 	* {
 		--base-left-margin: 3%;
