@@ -1,5 +1,4 @@
 const pointCoordinates = [undefined, undefined, undefined, undefined, undefined, undefined];
-
 const canvas = document.getElementById('plot');
 const ctx = canvas.getContext('2d');
 
