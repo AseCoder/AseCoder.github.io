@@ -51,6 +51,9 @@ function redraw() {
 	if (b !== '0') {
 		plaintext += `${b}*x`;
 		formatted += `${b}\\cdot x`;
+		
+	}
+	if (a !== '0') {
 		if (parseFloat(c) > 0) {
 			plaintext += '+';
 			formatted += '+';
