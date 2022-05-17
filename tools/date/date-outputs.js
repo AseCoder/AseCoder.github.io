@@ -21,6 +21,13 @@ function date_outputs() {
 	};
 	outputDiv.appendChild(ms_copy);
 
+	// format date
+	outputDiv.appendChild(el('p', 'Date formatted to current locale:'));
+	const formatted_date = el('p');
+	formatted_date.classList.add('output');
+	formatted_date.id = 'formatted_date';
+	outputDiv.appendChild(formatted_date);
+
 	add_dc_out(outputDiv);
 }
 function update_date_outputs() {
@@ -37,5 +44,6 @@ function update_date_outputs() {
 		parseInt(document.getElementById('second-input').value) || 0
 	);
 	document.getElementById('ms_out').innerText = Math.floor(date.getTime() / 1000) * 1000;
+	document.getElementById('formatted_date').innerText = date.toString();
 	update_dc_out(date);
 }
