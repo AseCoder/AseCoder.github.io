@@ -2,11 +2,19 @@ html, body {
 	--margleft-min: 20px;
 	--margleft: clamp(var(--margleft-min), calc(50% - 540px), 18%);
 	margin: 0;
+	background-color: #111115;
 }
-h1, h2, h3, h4, h5, h6, p, img, ul, div {
-	font-family: Arial, Helvetica, sans-serif;
+h1, h2, h3, h4, h5, h6, p, img, ul, ol, div {
+	font-family: 'dyslexie', sans-serif;
 	margin-left: var(--margleft);
 	width: calc(100% - 2 * var(--margleft));
+	color: white;
+}
+a:link {
+	color: #52ffb1;
+}
+a:visited {
+	color: #c5ff59;
 }
 .halfWidth {
 	width: calc((100% - 2 * var(--margleft)) / 2);
@@ -14,19 +22,32 @@ h1, h2, h3, h4, h5, h6, p, img, ul, div {
 .halfWidth * {
 	margin-left: 0;
 }
-ul p {
+ul p, ol p {
 	margin-left: 0;
 }
 li {
 	margin-bottom: 8px;
 }
-p {
-	font-size: 22px;
+p, li {
+	font-size: 18px;
 	margin-top: 18px;
 	margin-bottom: 18px;
+	line-height: 38px;
+}
+h1 {
+	font-size: 36px;
+}
+h2 {
+	font-size: 24px;
 }
 img {
 	margin-top: 60px;
+}
+.disclaimer {
+	color: #bbb;
+}
+.cleanfont {
+	font-family: Gadugi, Arial, sans-serif;
 }
 @media screen and (max-width: 600px) {
 	.halfWidth {
