@@ -12,7 +12,6 @@ function setup() {
 		[windowWidth / 4 * 3, windowHeight / 2],
 		[windowWidth / 2, windowHeight / 8 * 7],
 	].map(point => point.map(coord => Math.round(coord / guidelineres) * guidelineres));
-	// frameRate(1);
 	colorMode(HSB, 100);
 }
 let mouseDown = false;
@@ -62,6 +61,8 @@ function draw() {
 		circle(...point, 10);
 		text('(' + point.join(', ') + ')', point[0], point[1] + 30)
 	});
+	movedX = mouseX - pmouseX;
+	movedY = mouseY - pmouseY;
 	if (mouseDown) {
 		function movePoint() {
 			let mousecoords;
@@ -72,19 +73,20 @@ function draw() {
 				ptouch[0] ??= touches[0].x;
 				ptouch[1] ??= touches[0].y;
 				moved = [touches[0].x - ptouch[0], touches[0].y - ptouch[1]];
-			} else if (movedX) {
+			} else if (movedX !== 0 || movedY !== 0) {
 				// define pos and moved by mouse
 				mousecoords = [mouseX, mouseY];
-				moved = [movedX / window.devicePixelRatio, movedY / window.devicePixelRatio];
+				moved = [movedX, movedY];
 			} else return;
-			console.log('touches[0]?.x', touches[0]?.x, 'ptouch[0]', ptouch[0], 'movedX', movedX);
 			// get closest point, if any
-			const closest = points.map((point, i) => [Math.sqrt( (point[0] - mousecoords[0]) ** 2 + (point[1] - mousecoords[1]) ** 2 ), i]).sort((a, b) => a[0] - b[0])[0];
-			if (closest[0] > (touches[0]?.x === undefined ? 50 : 30) && pointBeingMoved !== closest [1]) return; 
-			pointBeingMoved = pointBeingMoved || closest[1];
+			if (isNaN(pointBeingMoved)) {
+				const closest = points.map((point, i) => [Math.sqrt( (point[0] - mousecoords[0]) ** 2 + (point[1] - mousecoords[1]) ** 2 ), i]).sort((a, b) => a[0] - b[0])[0];
+				if (closest[0] > (touches[0]?.x === undefined ? 30 : 50)) return;
+				pointBeingMoved = closest[1];
+			}; 
 			// move it according to mouse movement since last frame
-			points[pointBeingMoved][0] += moved[0];
-			points[pointBeingMoved][1] += moved[1];
+			points[pointBeingMoved][0] = Math.max(Math.min(windowWidth, points[pointBeingMoved][0] + moved[0]), 0);
+			points[pointBeingMoved][1] = Math.max(Math.min(windowHeight, points[pointBeingMoved][1] + moved[1]), 0);
 		}
 		movePoint();
 
