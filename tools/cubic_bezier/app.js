@@ -1,5 +1,12 @@
 window.onresize = () => {
 	resizeCanvas(windowWidth, windowHeight);
+	console.log(window.devicePixelRatio);
+	console.log(window.outerWidth / window.innerWidth);
+	try {
+		text(window.devicePixelRatio.toString(), 10, 10)
+	} catch {
+		console.log('text failed');
+	}
 }
 let points;
 const bezres = 100;
@@ -97,6 +104,10 @@ function draw() {
 	if (touches.length > 0) {
 		ptouch = [touches[0].x, touches[0].y];
 	}
+	textAlign(LEFT);
+	fill('grey')
+	text(window.devicePixelRatio.toFixed(3), 10, 20)
+
 }
 function touchStarted() {
 	mouseDown = true;
