@@ -10,6 +10,13 @@ h1, h2, h3, h4, h5, h6, p, img, ul, ol, div:not(.CtxtMenu_Menu, .CtxtMenu_MenuIt
 	width: calc(100% - 2 * var(--margleft));
 	color: white;
 }
+ul, ol {
+	padding-left: 20px;
+	width: calc(100% - 2 * var(--margleft) - 20px);
+}
+a {
+	word-wrap: break-word;
+}
 a:link {
 	color: #52ffb1;
 }
@@ -64,6 +71,15 @@ img.noVertMargin {
 	font-family: Gadugi, Arial, sans-serif;
 }
 @media screen and (max-width: 600px) {
+	h1 {
+		font-size: 17px;
+	}
+	h2 {
+		font-size: 14px;
+	}
+	p {
+		font-size: 11px;
+	}
 	.halfWidth {
 		width: calc(100% - 2 * var(--margleft));
 	}
