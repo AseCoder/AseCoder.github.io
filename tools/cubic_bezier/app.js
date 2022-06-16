@@ -2,7 +2,7 @@ window.onresize = () => {
 	resizeCanvas(windowWidth, windowHeight);
 }
 let points;
-const bezres = 100;
+const bezres = 300;
 const guidelineres = 50;
 function setup() {
 	createCanvas(windowWidth, windowHeight);
@@ -21,8 +21,8 @@ function draw() {
 	resizeCanvas(windowWidth, windowHeight);
 	clear();
 	// guidelines
-	strokeWeight(2);
-	stroke(11);
+	strokeWeight(2.3);
+	stroke(0);
 	let currentGuidelineX = guidelineres;
 	let currentGuidelineY = guidelineres;
 	while (currentGuidelineX < windowWidth) {
@@ -34,12 +34,12 @@ function draw() {
 		currentGuidelineY += guidelineres;
 	}
 	// lines between points
-	stroke(25);
-	strokeWeight(3.5);
+	stroke(28);
+	strokeWeight(3.8);
 	line(...points[0], ...points[1]);
 	line(...points[2], ...points[3]);
 	// bez
-	strokeWeight(4);
+	strokeWeight(4.5);
 	let prevBezPoint;
 	for (let i = 0; i <= bezres; i++) {
 		const t = i / bezres;
@@ -52,14 +52,15 @@ function draw() {
 		prevBezPoint = [x, y];
 	}
 	// points
-	fill(255);
-	textSize(16);
+	textSize(12);
 	textAlign(CENTER);
 	textFont('sans-serif')
 	noStroke();
 	points.forEach((point, i) => {
-		circle(...point, 10);
-		text('(' + point.join(', ') + ')', point[0], point[1] + 30)
+		fill(75);
+		circle(...point, 12);
+		fill(100)
+		text('(' + point.join(', ') + ')', point[0], point[1] + 21)
 	});
 	movedX = mouseX - pmouseX;
 	movedY = mouseY - pmouseY;
