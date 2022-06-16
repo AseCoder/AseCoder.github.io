@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Bézier curve with vectors</title>
+	<link rel="stylesheet" href="../../font.css">
+	<link rel="stylesheet" href="../../posts.css">
+	<meta name="theme-color" content="#946c4b">
+	<meta name="description" content="Explaining the mathematics behind a cubic Bezier curve by using vectors">
+	<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+	<h1>Cubic Bézier curve with vectors</h1>
+	<p>A cubic Bézier curve consists of 4 points. An example situation where \(t=0.5\):</p>
+	<img src="example.svg" class="invertmargin threeQuartersWidth" alt="">
+	<p>Our objective is to define point J with only A, B, C, D and t. We shall start by defining some vectors:</p>
+	<p>\(\overline{AE}=t\overline{AB}{,}\qquad \overline{BF}=t\overline{BC}{,}\qquad \overline{CG}=t\overline{CD}\)</p>
+	<p>And some more with the same principle:</p>
+	<p>\(\overline{EH}=t\overline{EF}{,}\qquad \overline{FI}=t\overline{FG}\)</p>
+	<p>And finally:</p>
+	<p>\(\overline{HJ}=t\overline{HI}\)</p>
+	<p>Now let's define even more vectors, but with addition instead.</p>
+	<p>\(\overline{EF}=\overline{EB}+\overline{BF}{,}\qquad \overline{FG}=\overline{FC}+\overline{CG}{,}\qquad \overline{HI}=\overline{HF}+\overline{FI}\)</p>
+	<p>Now, to define, for example, \(\overline{EF}\) in terms of A, B, C and D, we need to know \(\overline{EB}\). Look at this:</p>
+	<img src="1-t.svg" class="noVertMargin halfWidth" alt="">
+	<p>Because of this, \(\overline{EB}=(1-t)\overline{AB}\), \(\quad\overline{FC}=(1-t)\overline{BC}\) and \(\overline{HF}=(1-t)\overline{EF}\)</p>
+	<p>Now we can define the position vector \(\overline{OJ}\) as</p>
+	<p>\[
+	\begin{align*}
+		\overline{OJ} &= \overline{OA}+ \overline{AE} + \overline{EH} + \overline{HJ}\\
+		&=\overline{OA}+ t\overline{AB}+t\overline{EF}+t\overline{HI}\\
+		&=\overline{OA}+ t\overline{AB}+t\left(\overline{EB}+\overline{BF}\right)+t\left(\overline{HF}+\overline{FI}\right)\\
+		&=\overline{OA}+t\overline{AB}+t\left(\left[1-t\right]\overline{AB}+t\overline{BC}\right)+t\left(\left[1-t\right]\overline{EF}+t\overline{FG}\right)\\
+		&=\overline{OA}+t\overline{AB}+t\left(\left[1-t\right]\overline{AB}+t\overline{BC}\right)+t\left(\left[1-t\right]\left[\overline{EB}+\overline{BF}\right]+t\left[\overline{FC}+\overline{CG}\right]\right)\\
+		&=\overline{OA}+t\overline{AB}+t\left(\left[1-t\right]\overline{AB}+t\overline{BC}\right)+t\left(\left[1-t\right]\left[\left\{1-t\right\}\overline{AB}+t\overline{BC}\right]+t\left[\left\{1-t\right\}\overline{BC}+t\overline{CD}\right]\right)\\
+		&=\overline{OA}+t\overline{AB}+t\left(1-t\right)\overline{AB}+t^2\overline{BC}+t\left(\left[1-t\right]^2\overline{AB}+t\left[1-t\right]\overline{BC}+t\left[1-t\right]\overline{BC}+t^2\overline{CD}\right)\\
+		&=\overline{OA}+t\overline{AB}+t\left(1-t\right)\overline{AB}+t^2\overline{BC}+t\left(\left[1-t\right]^2\overline{AB}+2t\left[1-t\right]\overline{BC}+t^2\overline{CD}\right)\\
+		&=\overline{OA}+t\overline{AB}+t\left(1-t\right)\overline{AB}+t^2\overline{BC}+t\left(1-t\right)^2\overline{AB}+2t^2\left(1-t\right)\overline{BC}+t^3\overline{CD}\\
+		&=\overline{OA}+t\overline{AB}+t\left(1-t\right)\overline{AB}+t\left(1-t\right)^2\overline{AB}+t^2\overline{BC}+2t^2\left(1-t\right)\overline{BC}+t^3\overline{CD}\\
+		&=\overline{OA}+\left(t+t\left[1-t\right]+t\left[1-t\right]^2\right)\overline{AB}+\left(t^2+2t^2\left[1-t\right]\right)\overline{BC}+t^3\overline{CD}\\
+		&=\overline{OA}+\left(t^3-3t^2+3t\right)\overline{AB}+\left(3t^2-2t^3\right)\overline{BC}+t^3\overline{CD}
+	\end{align*}
+	\]</p>
+	<p>We will now make this into a parametric equation. To define the vectors by their x and y components, let's define them by their coordinates.</p>
+	<p>\(\overline{OA}=x_1\overline{i}+y_1\overline{j}\)</p>
+	<p>\(\overline{AB}=\left(x_2-x_1\right)\overline{i}+\left(y_2-y_1\right)\overline{j}\)</p>
+	<p>\(\overline{BC}=\left(x_3-x_2\right)\overline{i}+\left(y_3-y_2\right)\overline{j}\)</p>
+	<p>\(\overline{CD}=\left(x_4-x_3\right)\overline{i}+\left(y_4-y_3\right)\overline{j}\)</p>
+	<p>Then, insert these into the earlier:</p>
+	<p>\(\overline{OJ}=x_1\overline{i}+y_1\overline{j}+\left(t^3-3t^2+3t\right)\left(x_2-x_1\right)\overline{i}+\left(t^3-3t^2+3t\right)\left(y_2-y_1\right)\overline{j}\)</p>
+	<p>\(+\left(3t^2-2t^3\right)\left(x_3-x_2\right)\overline{i}+\left(3t^2-2t^3\right)\left(y_3-y_2\right)\overline{j}+t^3\left(x_4-x_3\right)\overline{i}+t^3\left(y_4-y_3\right)\overline{j}\)
+	</p>
+
+	<p>Separate x and y components:</p>
+	<p>\(\overline{OJ}_x=x_1\overline{i}+\left(t^3-3t^2+3t\right)\left(x_2-x_1\right)\overline{i}+\left(3t^2-2t^3\right)\left(x_3-x_2\right)\overline{i}+t^3\left(x_4-x_3\right)\overline{i}\)</p>
+	<p>\(\overline{OJ}_y=y_1\overline{j}+\left(t^3-3t^2+3t\right)\left(y_2-y_1\right)\overline{j}+\left(3t^2-2t^3\right)\left(y_3-y_2\right)\overline{j}+t^3\left(y_4-y_3\right)\overline{j}\)</p>
+	<p>Express as a parametric equation:</p>
+	<p>\(
+	\begin{cases}
+		x=x_1+\left(t^3-3t^2+3t\right)\left(x_2-x_1\right)+\left(3t^2-2t^3\right)\left(x_3-x_2\right)+t^3\left(x_4-x_3\right)\\
+		y=y_1+\left(t^3-3t^2+3t\right)\left(y_2-y_1\right)+\left(3t^2-2t^3\right)\left(y_3-y_2\right)+t^3\left(y_4-y_3\right)
+	\end{cases}
+	{,}\quad 0\le t\le1
+	\)</p>
+	<p>Voilà.</p>
+	<p>Link to <a href="../../tools/index.html">an interactive tool</a> using this principle.</p>
+</body>
+</html>
