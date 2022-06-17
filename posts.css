@@ -64,6 +64,9 @@ img.noVertMargin {
 	margin-top: 0;
 	margin-bottom: 0;
 }
+.MathJax {
+	font-size: 24px !important;
+}
 .disclaimer {
 	color: #868599;
 }
@@ -85,5 +88,8 @@ img.noVertMargin {
 	}
 	.threeQuartersWidth {
 		width: calc(100% - 2 * var(--margleft));
+	}
+	.MathJax {
+		font-size: 18px !important;
 	}
 }

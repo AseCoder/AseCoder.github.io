@@ -8,7 +8,7 @@
 	<link rel="stylesheet" href="../../font.css">
 	<link rel="stylesheet" href="../../posts.css">
 	<meta name="theme-color" content="#946c4b">
-	<meta name="description" content="Explaining the mathematics behind a cubic Bezier curve by using vectors">
+	<meta name="description" content="Explaining the mathematics behind a cubic Bézier curve by using vectors">
 	<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
 	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
@@ -30,41 +30,51 @@
 	<p>Now we can define the position vector \(\overline{OJ}\) as</p>
 	<p>\[
 	\begin{align*}
-		\overline{OJ} &= \overline{OA}+ \overline{AE} + \overline{EH} + \overline{HJ}\\
-		&=\overline{OA}+ t\overline{AB}+t\overline{EF}+t\overline{HI}\\
-		&=\overline{OA}+ t\overline{AB}+t\left(\overline{EB}+\overline{BF}\right)+t\left(\overline{HF}+\overline{FI}\right)\\
-		&=\overline{OA}+t\overline{AB}+t\left(\left[1-t\right]\overline{AB}+t\overline{BC}\right)+t\left(\left[1-t\right]\overline{EF}+t\overline{FG}\right)\\
-		&=\overline{OA}+t\overline{AB}+t\left(\left[1-t\right]\overline{AB}+t\overline{BC}\right)+t\left(\left[1-t\right]\left[\overline{EB}+\overline{BF}\right]+t\left[\overline{FC}+\overline{CG}\right]\right)\\
-		&=\overline{OA}+t\overline{AB}+t\left(\left[1-t\right]\overline{AB}+t\overline{BC}\right)+t\left(\left[1-t\right]\left[\left\{1-t\right\}\overline{AB}+t\overline{BC}\right]+t\left[\left\{1-t\right\}\overline{BC}+t\overline{CD}\right]\right)\\
-		&=\overline{OA}+t\overline{AB}+t\left(1-t\right)\overline{AB}+t^2\overline{BC}+t\left(\left[1-t\right]^2\overline{AB}+t\left[1-t\right]\overline{BC}+t\left[1-t\right]\overline{BC}+t^2\overline{CD}\right)\\
-		&=\overline{OA}+t\overline{AB}+t\left(1-t\right)\overline{AB}+t^2\overline{BC}+t\left(\left[1-t\right]^2\overline{AB}+2t\left[1-t\right]\overline{BC}+t^2\overline{CD}\right)\\
-		&=\overline{OA}+t\overline{AB}+t\left(1-t\right)\overline{AB}+t^2\overline{BC}+t\left(1-t\right)^2\overline{AB}+2t^2\left(1-t\right)\overline{BC}+t^3\overline{CD}\\
-		&=\overline{OA}+t\overline{AB}+t\left(1-t\right)\overline{AB}+t\left(1-t\right)^2\overline{AB}+t^2\overline{BC}+2t^2\left(1-t\right)\overline{BC}+t^3\overline{CD}\\
-		&=\overline{OA}+\left(t+t\left[1-t\right]+t\left[1-t\right]^2\right)\overline{AB}+\left(t^2+2t^2\left[1-t\right]\right)\overline{BC}+t^3\overline{CD}\\
+		\overline{OJ} &= \overline{OA}+ \overline{AE} + \overline{EH} + \overline{HJ}\\[7pt]
+		&=\overline{OA}+ t\overline{AB}+t\overline{EF}+t\overline{HI}\\[7pt]
+		&=\overline{OA}+ t\overline{AB}+t\left(\overline{EB}+\overline{BF}\right)+t\left(\overline{HF}+\overline{FI}\right)\\[7pt]
+		&=\overline{OA}+t\overline{AB}+t\left(\left[1-t\right]\overline{AB}+t\overline{BC}\right)+t\left(\left[1-t\right]\overline{EF}+t\overline{FG}\right)\\[7pt]
+		&=\overline{OA}+t\overline{AB}+t\left(\left[1-t\right]\overline{AB}+t\overline{BC}\right)+t\left(\left[1-t\right]\left[\overline{EB}+\overline{BF}\right]+t\left[\overline{FC}+\overline{CG}\right]\right)\\[7pt]
+		&=\overline{OA}+t\overline{AB}+t\left(\left[1-t\right]\overline{AB}+t\overline{BC}\right)+t\left(\left[1-t\right]\left[\left\{1-t\right\}\overline{AB}+t\overline{BC}\right]+t\left[\left\{1-t\right\}\overline{BC}+t\overline{CD}\right]\right)\\[7pt]
+		&=\overline{OA}+t\overline{AB}+t\left(1-t\right)\overline{AB}+t^2\overline{BC}+t\left(\left[1-t\right]^2\overline{AB}+t\left[1-t\right]\overline{BC}+t\left[1-t\right]\overline{BC}+t^2\overline{CD}\right)\\[7pt]
+		&=\overline{OA}+t\overline{AB}+t\left(1-t\right)\overline{AB}+t^2\overline{BC}+t\left(\left[1-t\right]^2\overline{AB}+2t\left[1-t\right]\overline{BC}+t^2\overline{CD}\right)\\[7pt]
+		&=\overline{OA}+t\overline{AB}+t\left(1-t\right)\overline{AB}+t^2\overline{BC}+t\left(1-t\right)^2\overline{AB}+2t^2\left(1-t\right)\overline{BC}+t^3\overline{CD}\\[7pt]
+		&=\overline{OA}+t\overline{AB}+t\left(1-t\right)\overline{AB}+t\left(1-t\right)^2\overline{AB}+t^2\overline{BC}+2t^2\left(1-t\right)\overline{BC}+t^3\overline{CD}\\[7pt]
+		&=\overline{OA}+\left(t+t\left[1-t\right]+t\left[1-t\right]^2\right)\overline{AB}+\left(t^2+2t^2\left[1-t\right]\right)\overline{BC}+t^3\overline{CD}\\[7pt]
 		&=\overline{OA}+\left(t^3-3t^2+3t\right)\overline{AB}+\left(3t^2-2t^3\right)\overline{BC}+t^3\overline{CD}
 	\end{align*}
 	\]</p>
 	<p>We will now make this into a parametric equation. To define the vectors by their x and y components, let's define them by their coordinates.</p>
-	<p>\(\overline{OA}=x_1\overline{i}+y_1\overline{j}\)</p>
-	<p>\(\overline{AB}=\left(x_2-x_1\right)\overline{i}+\left(y_2-y_1\right)\overline{j}\)</p>
-	<p>\(\overline{BC}=\left(x_3-x_2\right)\overline{i}+\left(y_3-y_2\right)\overline{j}\)</p>
-	<p>\(\overline{CD}=\left(x_4-x_3\right)\overline{i}+\left(y_4-y_3\right)\overline{j}\)</p>
+	<p>
+		\[
+			\begin{align*}
+				\overline{OA}&=x_1\overline{i}+y_1\overline{j}\\[7pt]
+				\overline{AB}&=\left(x_2-x_1\right)\overline{i}+\left(y_2-y_1\right)\overline{j}\\[7pt]
+				\overline{BC}&=\left(x_3-x_2\right)\overline{i}+\left(y_3-y_2\right)\overline{j}\\[7pt]
+				\overline{CD}&=\left(x_4-x_3\right)\overline{i}+\left(y_4-y_3\right)\overline{j}
+			\end{align*}
+		\]
+	</p>
 	<p>Then, insert these into the earlier:</p>
-	<p>\(\overline{OJ}=x_1\overline{i}+y_1\overline{j}+\left(t^3-3t^2+3t\right)\left(x_2-x_1\right)\overline{i}+\left(t^3-3t^2+3t\right)\left(y_2-y_1\right)\overline{j}\)</p>
-	<p>\(+\left(3t^2-2t^3\right)\left(x_3-x_2\right)\overline{i}+\left(3t^2-2t^3\right)\left(y_3-y_2\right)\overline{j}+t^3\left(x_4-x_3\right)\overline{i}+t^3\left(y_4-y_3\right)\overline{j}\)
+	<p>\[
+		\overline{OJ}=x_1\overline{i}+y_1\overline{j}+\left(t^3-3t^2+3t\right)\left(x_2-x_1\right)\overline{i}+\left(t^3-3t^2+3t\right)\left(y_2-y_1\right)\overline{j}
+	+\left(3t^2-2t^3\right)\left(x_3-x_2\right)\overline{i}+\left(3t^2-2t^3\right)\left(y_3-y_2\right)\overline{j}+t^3\left(x_4-x_3\right)\overline{i}+t^3\left(y_4-y_3\right)\overline{j}
+	\]
 	</p>
 
 	<p>Separate x and y components:</p>
-	<p>\(\overline{OJ}_x=x_1\overline{i}+\left(t^3-3t^2+3t\right)\left(x_2-x_1\right)\overline{i}+\left(3t^2-2t^3\right)\left(x_3-x_2\right)\overline{i}+t^3\left(x_4-x_3\right)\overline{i}\)</p>
-	<p>\(\overline{OJ}_y=y_1\overline{j}+\left(t^3-3t^2+3t\right)\left(y_2-y_1\right)\overline{j}+\left(3t^2-2t^3\right)\left(y_3-y_2\right)\overline{j}+t^3\left(y_4-y_3\right)\overline{j}\)</p>
+	<p>\[\begin{align*}
+		\overline{OJ}_x&=x_1\overline{i}+\left(t^3-3t^2+3t\right)\left(x_2-x_1\right)\overline{i}+\left(3t^2-2t^3\right)\left(x_3-x_2\right)\overline{i}+t^3\left(x_4-x_3\right)\overline{i}\\[7pt]
+		\overline{OJ}_y&=y_1\overline{j}+\left(t^3-3t^2+3t\right)\left(y_2-y_1\right)\overline{j}+\left(3t^2-2t^3\right)\left(y_3-y_2\right)\overline{j}+t^3\left(y_4-y_3\right)\overline{j}
+	\end{align*}\]</p>
 	<p>Express as a parametric equation:</p>
-	<p>\(
+	<p>\[
 	\begin{cases}
-		x=x_1+\left(t^3-3t^2+3t\right)\left(x_2-x_1\right)+\left(3t^2-2t^3\right)\left(x_3-x_2\right)+t^3\left(x_4-x_3\right)\\
+		x=x_1+\left(t^3-3t^2+3t\right)\left(x_2-x_1\right)+\left(3t^2-2t^3\right)\left(x_3-x_2\right)+t^3\left(x_4-x_3\right)\\[7pt]
 		y=y_1+\left(t^3-3t^2+3t\right)\left(y_2-y_1\right)+\left(3t^2-2t^3\right)\left(y_3-y_2\right)+t^3\left(y_4-y_3\right)
 	\end{cases}
 	{,}\quad 0\le t\le1
-	\)</p>
+	\]</p>
 	<p>Voilà.</p>
 	<p>Link to <a href="../../tools/cubic_bezier/index.html">an interactive tool</a> using this principle.</p>
 </body>
