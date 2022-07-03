@@ -14,9 +14,6 @@ ul, ol {
 	padding-left: 20px;
 	width: calc(100% - 2 * var(--margleft) - 20px);
 }
-a {
-	word-wrap: break-word;
-}
 a:link {
 	color: #52ffb1;
 }
@@ -39,19 +36,21 @@ ul p, ol p {
 	margin-left: 0;
 }
 li {
+	margin-top: 8px;
 	margin-bottom: 8px;
 }
 p, li {
 	font-size: 15px;
-	margin-top: 18px;
-	margin-bottom: 18px;
-	line-height: 38px;
+	line-height: 265%;
 }
 h1 {
-	font-size: 26px;
+	font-size: 25px;
 }
 h2 {
-	font-size: 19px;
+	font-size: 21px;
+}
+h3 {
+	font-size: 18px;
 }
 img {
 	margin-top: 60px;
@@ -75,13 +74,16 @@ img.noVertMargin {
 }
 @media screen and (max-width: 600px) {
 	h1 {
-		font-size: 17px;
+		font-size: 16px;
 	}
 	h2 {
 		font-size: 14px;
 	}
-	p {
-		font-size: 11px;
+	h3 {
+		font-size: 13px;
+	}
+	p, li {
+		font-size: 12px;
 	}
 	.halfWidth {
 		width: calc(100% - 2 * var(--margleft));

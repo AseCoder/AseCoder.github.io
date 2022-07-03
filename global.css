@@ -8,3 +8,9 @@
 h1 {
 	font-size: 25px;
 }
+a {
+	word-wrap: break-word;
+}
+button {
+	color: black;
+}
