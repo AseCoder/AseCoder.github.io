@@ -10,8 +10,11 @@ h1, h2, h3, h4, h5, h6, p, img, ul, ol, div:not(.CtxtMenu_Menu, .CtxtMenu_MenuIt
 	width: calc(100% - 2 * var(--margleft));
 	color: white;
 }
+button {
+	font-family: 'dyslexie', sans-serif;
+}
 ul, ol {
-	padding-left: 20px;
+	padding-left: 32px;
 	width: calc(100% - 2 * var(--margleft) - 20px);
 }
 a:link {
@@ -42,6 +45,9 @@ li {
 p, li {
 	font-size: 15px;
 	line-height: 265%;
+}
+td, th {
+	font-size: 15px;
 }
 h1 {
 	font-size: 25px;
@@ -82,7 +88,7 @@ img.noVertMargin {
 	h3 {
 		font-size: 13px;
 	}
-	p, li {
+	p, li, td, th {
 		font-size: 12px;
 	}
 	.halfWidth {

@@ -1,48 +1,55 @@
-* {
-	font-family: calibri, Helvetica, sans-serif;
+body>* {
+	margin-left: 12px !important;
+	width: auto;
 }
-*:not(h1,h2,h3,h4,h5,h6) {
-	font-size: 23px;
-}
-p {
-	margin: 10px 0;
-}
-button {
-	cursor: pointer;
+.ingredients>*, .instructions>* {
+	margin-left: 0;
 }
 table * {
 	text-align: center;
 }
 tr *:nth-child(2n) {
-	padding-left: 13px;
+	padding-left: 6px;
 }
 ol li {
 	padding: 6px 0;
 }
 .quantitybutton {
-	padding: 10px;
-	border: 2px solid grey;
-	border-radius: 4px;
-	margin: 4px 0;
+	border: 2px solid #696986;
+	background-color: #353441;
+	border-radius: 6px;
+	padding: 0;
+	width: 44px;
+	height: 44px;
+	color: white;
 }
 .quantitybutton.active {
-	border-color: #3c0;
-	background-color: #dfd;
+	border-color: rgb(42, 230, 0);
+	background-color: rgb(8, 97, 8);
 }
 .inlineText {
 	display: inline-block;
 }
 .quantityDependant {
-	background-color: #def;
-	padding: 0 5px;
-	border-radius: 5px;
+	font-size: 17.5px;
+	background-color: #083290;
+	padding: 4px 10px;
+	border-radius: 6px;
 	font-family: consolas, monospace;
 	text-align: center;
+	margin: 0 3px;
 }
 .staticBlue {
-	background-color: #def;
-	padding: 0 5px;
-	border-radius: 5px;
+	font-size: 17.5px;
+	background-color: #083290;
+	padding: 4px 10px;
+	border-radius: 6px;
 	font-family: consolas, monospace;
 	text-align: center;
+	margin: 0 3px;
+}
+@media screen and (max-width: 600px) {
+	.staticBlue, .quantityDependant {
+		font-size: 15px;
+	}
 }
