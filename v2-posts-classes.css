@@ -1,0 +1,24 @@
+.disclaimer {
+	color: #9c9db8;
+}
+.halfWidth {
+	width: calc((100% - 2 * var(--post-margleft)) * 0.5);
+}
+.threeQuartersWidth {
+	width: calc((100% - 2 * var(--post-margleft)) * 0.75);
+}
+.cleanFont {
+	font-family: Dubai, Arial, sans-serif;
+}
+.seafoamBackground {
+	background-color: #52ffb1;;
+}
+.limeBackground {
+	background-color: #c5ff59;
+}
+.greyBackground {
+	background-color: #666;
+}
+.monospace {
+	font-family: consolas, monospace;
+}

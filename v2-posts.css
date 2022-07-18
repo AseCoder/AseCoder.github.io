@@ -1,0 +1,44 @@
+html {
+	--post-margleft-min: 12px;
+	--post-margleft: clamp(var(--post-margleft-min), calc(50% - 540px), 18%);
+}
+article a:link {
+	color: #52ffb1;
+}
+article a:visited {
+	color: #c5ff59;
+}
+article {
+	font-family: 'dyslexie', sans-serif;
+	background-color: #111115;
+	color: white;
+	margin-left: var(--post-margleft);
+	width: calc(100% - 2 * var(--post-margleft) - 4vw);
+	font-family: 'dyslexie', sans-serif;
+	padding: 2vw;
+	border-radius: 2vw;
+}
+article p, article ul, article ol, article table {
+	font-size: 1vw;
+}
+article h1 {
+	font-size: 1.6vw;
+}
+article h2 {
+	font-size: 1.4vw;
+}
+article h3 {
+	font-size: 1.2vw;
+}
+article button, article input {
+	font-size: 1vw;
+	font-family: 'dyslexie', sans-serif;
+	color: white;
+	background-color: #34355e;
+	border: 2px solid black;
+	border-radius: 0.5vw;
+	padding: 0.3vw 0.7vw;
+}
+article input {
+	background-color: #33333d;
+}

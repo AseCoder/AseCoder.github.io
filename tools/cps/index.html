@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Click speed</title>
+	<meta name="description"
+		content="A tool for measuring your clicks per second">
+	<meta name="theme-color" content="#80c74a">
+	<link rel="stylesheet" href="../../font.css">
+	<link rel="stylesheet" href="../../global.css">
+	<link rel="stylesheet" href="../../v2-posts-wholepage.css">
+	<link rel="stylesheet" href="../../v2-posts-classes.css">
+</head>
+<body>
+	<article>
+		<h1>Measure your clicking speed</h1>
+		<h2>Controls</h2>
+		<button id="resetButton">Reset measurement</button>
+		<p>Rolling average over X seconds:</p>
+		<input id="rollingAverageInput" type="number" placeholder="10" value="10">
+		<h2>Results</h2>
+		<p>Time elapsed:
+			<span id="timeElapsed" class="monospace"></span>
+		</p>
+		<p>Total clicks:
+			<span id="totalClicks" class="monospace"></span>
+		</p>
+		<p>Average clicking speed:
+			<span id="avgCps" class="monospace"></span>
+		</p>
+		<p id="avgCpm" class="monospace"></p>
+		<p>Rolling average clicking speed:
+			<span id="ravgCps" class="monospace"></span>
+		</p>
+		<p id="ravgCpm" class="monospace"></p>
+	</article>
+</body>
+<script src="app.js"></script>
+</html>
