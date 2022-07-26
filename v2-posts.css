@@ -15,29 +15,29 @@ article {
 	margin-left: var(--post-margleft);
 	width: calc(100% - 2 * var(--post-margleft) - 4vw);
 	font-family: 'dyslexie', sans-serif;
-	padding: 2vw;
-	border-radius: 2vw;
+	padding: 22px;
+	border-radius: 26px;
 }
 article p, article ul, article ol, article table {
-	font-size: 1vw;
+	font-size: 12px;
 }
 article h1 {
-	font-size: 1.6vw;
+	font-size: 19.5px;
 }
 article h2 {
-	font-size: 1.4vw;
+	font-size: 17px;
 }
 article h3 {
-	font-size: 1.2vw;
+	font-size: 14.5px;
 }
 article button, article input {
-	font-size: 1vw;
+	font-size: 12px;
 	font-family: 'dyslexie', sans-serif;
 	color: white;
 	background-color: #34355e;
 	border: 2px solid black;
-	border-radius: 0.5vw;
-	padding: 0.3vw 0.7vw;
+	border-radius: 10px;
+	padding: 3.5px 11px;
 }
 article input {
 	background-color: #33333d;
