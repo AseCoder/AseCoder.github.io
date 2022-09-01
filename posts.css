@@ -50,13 +50,13 @@ td, th {
 	font-size: 15px;
 }
 h1 {
-	font-size: 25px;
+	font-size: 20px;
 }
 h2 {
-	font-size: 21px;
+	font-size: 18.33px;
 }
 h3 {
-	font-size: 18px;
+	font-size: 16.67px;
 }
 img {
 	margin-top: 60px;
@@ -79,18 +79,6 @@ img.noVertMargin {
 	font-family: Gadugi, Arial, sans-serif;
 }
 @media screen and (max-width: 600px) {
-	h1 {
-		font-size: 16px;
-	}
-	h2 {
-		font-size: 14px;
-	}
-	h3 {
-		font-size: 13px;
-	}
-	p, li, td, th {
-		font-size: 12px;
-	}
 	.halfWidth {
 		width: calc(100% - 2 * var(--margleft));
 	}

@@ -19,19 +19,19 @@ article {
 	width: calc(100% - 2 * var(--post-margleft));
 }
 article p, article ul, article ol, article table {
-	font-size: 12px;
+	font-size: 15px;
 }
 article h1 {
-	font-size: 19.5px;
+	font-size: 20px;
 }
 article h2 {
-	font-size: 17px;
+	font-size: 18.33px;
 }
 article h3 {
-	font-size: 14.5px;
+	font-size: 16.67px;
 }
 article button, article input {
-	font-size: 12px;
+	font-size: 15px;
 	font-family: 'dyslexie', sans-serif;
 	color: white;
 	background-color: #34355e;
