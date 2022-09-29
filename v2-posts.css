@@ -13,10 +13,12 @@ article {
 	background-color: #111115;
 	color: white;
 	margin-left: var(--post-margleft);
-	width: calc(100% - 2 * var(--post-margleft) - 4vw);
+	width: calc(100% - 2 * var(--post-margleft));
 	font-family: 'dyslexie', sans-serif;
-	padding: 22px;
+	padding: 10px 25px;
 	border-radius: 26px;
+	line-height: 165%;
+	box-sizing: border-box;
 }
 article p, article ul, article ol, article table {
 	font-size: 15px;

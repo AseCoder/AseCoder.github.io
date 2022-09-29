@@ -17,6 +17,7 @@ article {
 	font-family: 'dyslexie', sans-serif;
 	margin-left: var(--post-margleft);
 	width: calc(100% - 2 * var(--post-margleft));
+	line-height: 165%;
 }
 article p, article ul, article ol, article table {
 	font-size: 15px;
