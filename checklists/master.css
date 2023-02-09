@@ -1,0 +1,28 @@
+body {
+	background-color: black;
+	color: white;
+	line-height: 150%;
+	margin: 0;
+	font-size: clamp(13px, 3vw, 18px);
+}
+button {
+	margin: 0 5px 1px 0;
+	color: black;
+	border: none;
+	background-color: white;
+	border-radius: 2em;
+	padding: 0.13em 0.8em;
+}
+p {
+	margin: 8px 0 3px 10px;
+}
+.navbar {
+	margin: 6px 0 0 6px;
+}
+#loaded_checklist > ol {
+	margin: 0 3px 15px 0;
+}
+.active_checklist {
+	background-color: #9df;
+	box-shadow: 0 0 12px #59f;
+}

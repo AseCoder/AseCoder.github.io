@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>C152 Checklists</title>
+	<link rel="stylesheet" href="../master.css">
+</head>
+<body>
+	
+</body>
+<script src="../checklist.js"></script>
+<script>
+	const copyright = 'Source: Pilot\'s Operating Handbook, 1983 Model 152\n© Cessna Aircraft Company 1982';
+	const checklists = [
+		[
+			"BEFORE STARTING ENGINE",
+			[
+				"Preflight Inspection -- COMPLETE.",
+				"Passenger Briefing -- COMPLETE.",
+				"Seats, Seat Belts, Shoulder Harnesses -- ADJUST and LOCK.",
+				"Brakes -- TEST and SET.",
+				"Electrical Equipment -- OFF.",
+				"Radios -- OFF.",
+				"Circuit Breakers -- CHECK IN.",
+				"Fuel Shutoff Valve -- ON."
+			]
+		],
+		[
+			"STARTING ENGINE",
+			"(Temperatures Above Freezing)",
+			[
+				"Prime -- AS REQUIRED (up to 3 strokes - none if engine is warm).",
+				"Carburetor Heat -- COLD.",
+				"Throttle -- OPEN 1/2 INCH (CLOSED if engine is warm).",
+				"Mixture -- RICH.",
+				"Propeller Area -- CLEAR.",
+				"Master Switch -- ON.",
+				"Ignition Switch -- START. (release when engine starts)",
+				"Throttle -- ADJUST for 1000 RPM or less.",
+				"Oil Pressure -- CHECK.",
+				"Starter -- CHECK DISENGAGED. (if starter were to remain engaged, ammeter would indicate two-thirds scale or more charge with engine running at 1000 RPM)",
+				"Navigation Lights and Flashing Beacon -- ON as required.",
+				"Radios -- ON."
+			]
+		],
+		[
+			"BEFORE TAKEOFF",
+			[
+				"Parking Brake -- SET.",
+				"Seats, Seat Belts, Shoulder Harnesses -- CHECK SECURE.",
+				"Cabin Doors -- CLOSED and LATCHED.",
+				"Flight Controls -- FREE and CORRECT.",
+				"Flight Instruments -- CHECK and SET.",
+				"Fuel Quantity -- CHECK.",
+				"Fuel Shutoff Valve -- RECHECK ON.",
+				"Mixture -- RICH (below 3000 feet).",
+				"Elevator Trim -- SET for takeoff.",
+				"Throttle -- 1700 RPM.",
+				[
+					"Magnetos -- CHECK (RPM drop should not exceed 125 RPM on either magneto or 50 RPM differential between magnetos).",
+					"Carburetor Heat -- CHECK (for RPM drop).",
+					"Suction Gage -- CHECK.",
+					"Engine Instruments and Ammeter -- CHECK."
+				],
+				"Throttle -- 1000 RPM OR LESS.",
+				"Throttle Friction Lock -- ADJUST.",
+				"Strobe Lights -- AS DESIRED.",
+				"Radios and Avionics -- SET",
+				"Wing Flaps -- SET for takeoff. (see Takeoff checklists)",
+				"Brakes -- RELEASE."
+			]
+		],
+		[
+			"TAKEOFF",
+			"NORMAL TAKEOFF",
+			[
+				"Wing Flaps -- 0°-10°.",
+				"Carburetor Heat -- COLD.",
+				"Throttle -- FULL OPEN.",
+				"Elevator Control -- LIFT NOSE WHEEL at 50 KIAS.",
+				"Climb Speed -- 65-75 KIAS."
+			],
+			"SHORT FIELD TAKEOFF",
+			[
+				"Wing Flaps -- 10°.",
+				"Carburetor Heat -- COLD.",
+				"Brakes -- APPLY.",
+				"Throttle -- FULL OPEN.",
+				"Mixture -- RICH (above 3000 feet, LEAN to obtain maximum RPM).",
+				"Brakes -- RELEASE.",
+				"Elevator Control -- SLIGHTLY TAIL LOW.",
+				"Climb Speed -- 54 KIAS (until all obstacled are cleared).",
+				"Wing Flaps -- RETRACT slowly after reaching 60 KIAS."
+			]
+		],
+		[
+			"ENROUTE CLIMB",
+			[
+				"Airspeed -- 70-80 KIAS.",
+				"Throttle -- FULL OPEN.",
+				"Mixture -- RICH below 3000 feet, LEAN for maximum RPM above 3000 feet (after a total of 50 hours has accumulated)."
+			]
+		],
+		[
+			"CRUISE",
+			[
+				"Power -- 1900-2550 RPM (no more than 75% is recommended).",
+				"Elevator Trim -- ADJUST.",
+				"Mixture -- LEAN.",
+			]
+		],
+		[
+			"DESCENT",
+			[
+				"Carburetor Heat -- FULL HEAT AS REQUIRED.",
+				"Power -- AS DESIRED.",
+				"Mixture -- ADJUST for smooth operation (full rich for idle power)."
+			]
+		],
+		[
+			"BEFORE LANDING",
+			[
+				"Seats, Seat Belts, Shoulder Harnesses -- ADJUST and LOCK.",
+				"Mixture -- RICH.",
+				"Carburetor Heat -- ON (apply full heat before reducing power)."
+			]
+		],
+		[
+			"LANDING",
+			"NORMAL LANDING",
+			[
+				"Airspeed -- 60-70 KIAS. (flaps UP)",
+				"Wing Flaps -- AS DESIRED (below 85 KIAS).",
+				"Airspeed -- 55-65 KIAS (flaps DOWN).",
+				"Touchdown -- MAIN WHEELS FIRST.",
+				"Landing Roll -- LOWER NOSE WHEEL GENTLY.",
+				"Braking -- MINIMUM REQUIRED."
+			],
+			"SHORT FIELD LANDING",
+			[
+				"Airspeed -- 60-70 KIAS. (flaps UP)",
+				"Wing Flaps -- 30° (below 85 KIAS).",
+				"Airspeed -- MAINTAIN 54 KIAS.",
+				"Power -- REDUCE to idle as obstacle is cleared.",
+				"Touchdown -- MAIN WHEELS FIRST.",
+				"Brakes -- APPLY HEAVILY.",
+				"Wing Flaps -- RETRACT."
+			],
+			"BALKED LANDING",
+			[
+				"Throttle -- FULL OPEN.",
+				"Carburetor Heat -- COLD.",
+				"Wing Flaps -- RETRACT to 20°.",
+				"Airspeed -- 55 KIAS.",
+				"Wing Flaps -- RETTRACT (slowly)."
+			]
+		],
+		[
+			"AFTER LANDING",
+			[
+				"Carburetor Heat -- COLD.",
+				"Wing Flaps -- UP."
+			]
+		],
+		[
+			"SECURING AIRPLANE",
+			[
+				"Parking Brake -- SET.",
+				"Electrical Equipment -- OFF.",
+				"Radios and Avionics -- OFF.",
+				"Mixture -- IDLE CUT-OFF (pull full out).",
+				"Ignition Switch -- OFF.",
+				"Master Switch -- OFF.",
+				"Control Lock -- INSTALL."
+			]
+		]
+	];
+	init();
+</script>
+</html>
