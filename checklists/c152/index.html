@@ -6,15 +6,27 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>C152 Checklists</title>
 	<link rel="stylesheet" href="../master.css">
-	<meta name="description" content="Cessna 152 checklists.">
+	<meta name="description" content="Cessna 152 checklists">
 	<meta name="theme-color" content="#80d0ff">
 </head>
 <body>
-	
+	<div id="toprow">
+		<button id="left" class="arrowBtn" onclick="previous()">←</button>
+		<select id="listname" onchange="loadCurrent()">
+			<option disabled selected></option>
+		</select>
+		<button id="right" class="arrowBtn" onclick="next()">→</button>
+	</div>
+	<div id="checklist">
+		<p>
+			Source: Pilot's Operating Handbook, 1983 Model 152
+			<br>
+			© Cessna Aircraft Company 1982
+		</p>
+	</div>
 </body>
 <script src="../checklist.js"></script>
 <script>
-	const copyright = 'Source: Pilot\'s Operating Handbook, 1983 Model 152\n© Cessna Aircraft Company 1982';
 	const checklists = [
 		[
 			"BEFORE STARTING ENGINE",

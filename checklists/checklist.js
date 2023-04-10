@@ -1,9 +1,32 @@
 function load(checklist, depth = 0) {
 	// load wanted checklist
 	let parent;
-	if (depth === 0) parent = document.createElement('div'); else parent = document.createElement('ol');
+	if (depth === 0) parent = document.createElement('div'); else {
+		if (checklist[0].ul) parent = document.createElement('ul');
+		else parent = document.createElement('ol');
+	}
 
-	if (depth === 2) parent.type = 'a';
+	if (checklist[0].start) parent.start = checklist[0].start;
+
+	if (checklist[0].type) {
+		if (parent.nodeName === 'UL') {
+			console.log('here');
+			parent.style.listStyleType = '"' + checklist[0].type + '"';
+			
+		}
+		else parent.type = checklist[0].type;
+	} else if (depth === 2) {
+		if (parent.nodeName === 'UL') parent.style.listStyleType = 'square';
+		else parent.type = 'a';
+	}
+
+	
+
+	if (checklist[0].indent !== undefined) {
+		parent.style.paddingLeft = (checklist[0].indent * 20) + 'px';
+		parent.style.marginBottom = '10px';
+	}
+
 	checklist.forEach(item => {
 		if (typeof item === 'string' && depth === 0) {
 			const text = document.createElement('p');
@@ -13,13 +36,13 @@ function load(checklist, depth = 0) {
 			const text = document.createElement('li');
 			text.textContent = item;
 			parent.appendChild(text);
-		} else {
+		} else if (Array.isArray(item)) {
 			const text = load(item, depth + 1);
 			if (depth === 0) parent.appendChild(text); else parent.lastChild.appendChild(text);
 		}
 	});
 	if (depth === 0) {
-		const div = document.getElementById('loaded_checklist');
+		const div = document.getElementById('checklist');
 		div.innerHTML = parent.innerHTML;
 	} else {
 		return parent;
@@ -29,24 +52,39 @@ function load(checklist, depth = 0) {
 function init() {
 	// make buttons and load first checlist
 	console.log(checklists);
-	const navbar = document.createElement('div');
-	navbar.classList.add('navbar');
+	const select = document.getElementById('listname');
 	checklists.forEach((checklist, i) => {
-		const button = document.createElement('button');
-		button.classList.add('checlist_button');
-		button.textContent = checklist[0];
-		button.onclick = (e) => {
-			load(checklists[i]);
-			document.getElementsByClassName('active_checklist').item(0)?.classList.remove('active_checklist');
-			e.target.classList.add('active_checklist');
-		}
-		navbar.appendChild(button);
+		const option = document.createElement('option');
+		option.value = i;
+		option.textContent = checklist[0];
+		select.appendChild(option);
 	});
-	document.body.appendChild(navbar);
-	const loaded_checklist = document.createElement('div');
-	loaded_checklist.id = 'loaded_checklist';
-	const text = document.createElement('p');
-	text.textContent = copyright;
-	loaded_checklist.appendChild(text);
-	document.body.appendChild(loaded_checklist);
 };
+
+const listname = document.getElementById('listname');
+
+function loadCurrent() {
+	console.log('loadcurrent');
+	const current = parseInt(listname.value);
+	if (isNaN(current)) return;
+	if (current >= checklists.length || current < 0) return;
+	load(checklists[current]);
+}
+
+function previous() {
+	let current = parseInt(listname.value);
+	if (isNaN(current)) current = checklists.length;
+	const previousI = current - 1;
+	if (previousI < 0) return;
+	listname.value = previousI;
+	loadCurrent();
+}
+
+function next() {
+	let current = parseInt(listname.value);
+	if (isNaN(current)) current = -1;
+	const nextI = current + 1;
+	if (nextI >= checklists.length) return;
+	listname.value = nextI;
+	loadCurrent();
+}
