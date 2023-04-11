@@ -7,15 +7,16 @@
 	<title>C152 Checklists</title>
 	<link rel="stylesheet" href="../master.css">
 	<meta name="description" content="Cessna 152 checklists">
-	<meta name="theme-color" content="#80d0ff">
 </head>
 <body>
-	<div id="toprow">
-		<button id="left" class="arrowBtn" onclick="previous()">←</button>
-		<select id="listname" onchange="loadCurrent()">
-			<option disabled selected></option>
-		</select>
-		<button id="right" class="arrowBtn" onclick="next()">→</button>
+	<div id="bottomrowcontainer">
+		<div id="bottomrow">
+			<button id="left" class="arrowBtn" onclick="previous()">←</button>
+			<select id="listname" onchange="loadCurrent()">
+				<option disabled selected></option>
+			</select>
+			<button id="right" class="arrowBtn" onclick="next()">→</button>
+		</div>
 	</div>
 	<div id="checklist">
 		<p>

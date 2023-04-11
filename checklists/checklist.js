@@ -24,7 +24,6 @@ function load(checklist, depth = 0) {
 
 	if (checklist[0].indent !== undefined) {
 		parent.style.paddingLeft = (checklist[0].indent * 20) + 'px';
-		parent.style.marginBottom = '10px';
 	}
 
 	checklist.forEach(item => {

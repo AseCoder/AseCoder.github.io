@@ -1,7 +1,7 @@
 body {
 	background-color: black;
 	color: white;
-	line-height: 150%;
+	line-height: 160%;
 	margin: 4px;
 }
 button {
@@ -11,10 +11,12 @@ button {
 	border-radius: 6px;
 	line-height: 100%;
 	background-color: black;
-	border: 1px solid #999;
+	border: 1px solid white;
+	height: 2rem;
+	cursor: pointer;
 }
 p {
-	margin: 4px 0;
+	margin: 0;
 }
 select {
 	color: white;
@@ -23,21 +25,36 @@ select {
 	flex: 1;
 	width: 100%;
 	background-color: black;
-	border: 1px solid #999;
+	border: 1px solid white;
+	height: 2rem;
 }
-#toprow {
+#bottomrowcontainer {
+	width: 100%;
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	text-align: center;
+}
+#bottomrow {
 	display: flex;
 	gap: 4px;
-	width: min(100%, 500px);
+	margin-left: max(0px, calc(50% - 200px));
+	margin-right: max(0px, calc(50% - 200px));
+	padding: 4px;
+	background-color: black;
+	box-shadow: 0 0 16px 16px black;
 }
 .arrowBtn {
 	width: 50px;
 }
+#checklist {
+	margin-bottom: calc(2rem + 40px);
+}
 #checklist > ol, #checklist > ul {
-	margin: 4px 0;
 	padding: 0;
 }
 ol, ul {
 	list-style-position: inside;
 	padding-left: 20px;
+	margin: 0;
 }
