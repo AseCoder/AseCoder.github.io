@@ -1,3 +1,16 @@
+let checklists;
+const params = new URLSearchParams(window.location.search);
+const airplane = params.get('airplane');
+if (!airplane) throw new Error('no airplane found');
+fetch(airplane + '.json').then(async response => {
+	const data = await response.json();
+	document.title = data.title;
+	document.getElementById('copyright').innerHTML = data.copyright;
+	checklists = data.checklists;
+	init();
+});
+
+
 function load(checklist, depth = 0) {
 	// load wanted checklist
 	let parent;
@@ -48,6 +61,8 @@ function load(checklist, depth = 0) {
 	}
 }
 
+const listname = document.getElementById('listname');
+
 function init() {
 	// make buttons and load first checlist
 	console.log(checklists);
@@ -58,19 +73,32 @@ function init() {
 		option.textContent = checklist[0];
 		select.appendChild(option);
 	});
-};
+	const wantedChecklist = params.get('checklist');
+	if (wantedChecklist) {
+		const wantedChecklistInt = parseInt(wantedChecklist);
+		if (isNaN(wantedChecklistInt)) return;
+		listname.value = wantedChecklistInt;
+		load(checklists[wantedChecklistInt]);
+	}
+}
 
-const listname = document.getElementById('listname');
+function setParam(i) {
+	const url = new URL(window.location);
+	url.searchParams.set('checklist', i);
+	window.history.replaceState(null, '', url.toString());
+}
 
 function loadCurrent() {
-	console.log('loadcurrent');
+	if (!checklists) return;
 	const current = parseInt(listname.value);
 	if (isNaN(current)) return;
 	if (current >= checklists.length || current < 0) return;
+	setParam(current);
 	load(checklists[current]);
 }
 
 function previous() {
+	if (!checklists) return;
 	let current = parseInt(listname.value);
 	if (isNaN(current)) current = checklists.length;
 	const previousI = current - 1;
@@ -80,6 +108,7 @@ function previous() {
 }
 
 function next() {
+	if (!checklists) return;
 	let current = parseInt(listname.value);
 	if (isNaN(current)) current = -1;
 	const nextI = current + 1;

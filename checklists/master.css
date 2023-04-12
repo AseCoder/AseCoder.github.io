@@ -1,3 +1,6 @@
+* {
+	--bottom-row-width: 250px;
+}
 body {
 	background-color: black;
 	color: white;
@@ -38,8 +41,8 @@ select {
 #bottomrow {
 	display: flex;
 	gap: 4px;
-	margin-left: max(0px, calc(50% - 200px));
-	margin-right: max(0px, calc(50% - 200px));
+	margin-left: max(0px, calc(50% - var(--bottom-row-width)));
+	margin-right: max(0px, calc(50% - var(--bottom-row-width)));
 	padding: 4px;
 	background-color: black;
 	box-shadow: 0 0 16px 16px black;
