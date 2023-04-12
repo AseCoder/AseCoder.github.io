@@ -1,0 +1,441 @@
+{
+	"title": "TBM 930 Checklists",
+	"copyright": "Source: Pilot's Information Manual, TBM 930<br>© DAHER AEROSPACE 2020",
+	"checklists": [
+		[
+			"Before starting engine",
+			[
+				"Crash lever -- Up",
+				"ATIS -- Copied",
+				"Start clearance -- As required",
+				"SOURCE -- BATT or GPU",
+				"GENERATOR -- MAIN",
+				"TEST -- Press",
+				"LANDING GEAR LIGHTS / CHECK DOWN -- Test",
+				"MFD -- Initialize",
+				"Fuel on board -- Check",
+				"Residual ITT -- Check"
+			],
+			"If residual ITT > 150 °C:",
+			[
+				{
+					"start": 11, "indent": 1
+				},
+				"Perform procedure -- Motoring",
+				[
+					{
+						"ul": true
+					},
+					"Refer to procedure hereafter"
+				]
+			],
+			[
+				{
+					"start": 12
+				},
+				"VOLTS: BATT > 24.5 V / GPU ~28 V -- Check",
+				"CAS -- Check"
+			]
+		],
+		[
+			"Motoring",
+			"(If residual ITT > 150°C)",
+			[
+				"Ignition -- OFF",
+				"AUX BP -- ON",
+				"\"AUX BOOST PMP ON\" -- Check ON",
+				"Propeller area -- Clear",
+				"STARTER -- ON",
+				[
+					{
+						"ul": true
+					},
+					"2 sec then OFF"
+				]
+			],
+			"After 30 seconds maximum:",
+			[
+				{
+					"indent": 1,
+					"start": 6
+				},
+				"STARTER -- ABORT",
+				[
+					{
+						"ul": true
+					},
+					"Then OFF"
+				]
+			],
+			[
+				{
+					"start": 7
+				},
+				"AUX BP -- OFF"
+			]
+		],
+		[
+			"Engine start",
+			[
+				"IGNITION -- AUTO",
+				"AUX BP -- ON",
+				"\"AUX BOOST PMP ON\" -- CHECK ON",
+				"Propeller area -- Clear",
+				"STARTER -- ON",
+				[
+					{
+						"ul": true
+					},
+					"2 sec then OFF"
+				]
+			],
+			"When Ng around 13 %:",
+			[
+				{
+					"start": 6,
+					"indent": 1
+				},
+				"THROTTLE -- LO-IDLE",
+				"ITT, Ng, OIL °C and OIL PSI -- Monitor"
+			],
+			"When",
+			[
+				{
+					"ul": true,
+					"indent": 1
+				},
+				"Ng > 50 % and,",
+				"1 minute max:"
+			],
+			[
+				{
+					"start": 8,
+					"indent": 1
+				},
+				"Starter -- Check OFF automatically"
+			]
+		],
+		[
+			"After engine start with GPU",
+			[
+				"SOURCE -- BATT",
+				"GPU -- Disconnect",
+				"\"GPU DOOR\" -- Check OFF"
+			]
+		],
+		[
+			"After engine start",
+			[
+				"THROTTLE -- Flight IDLE",
+				"Ng -- Check 70 % ± 2 %",
+				"OIL °C and OIL PSI -- Check",
+				"AUX BP -- AUTO",
+				"FUEL SEL -- AUTO",
+				"SHIFT -- Test",
+				"AP / TRIMS -- ON"
+			],
+			"If BATT < 80 amps:",
+			[
+				{
+					"start": 8,
+					"indent": 1
+				},
+				"GENERATOR -- ST-BY / Test"
+			],
+			[
+				{
+					"start": 9
+				},
+				"GENERATOR -- MAIN",
+				"CAS -- Check",
+				"A/C -- As required",
+				"BLEED -- AUTO or MAX DIFF"
+			]
+		],
+		[
+			"Before taxiing",
+			[
+				"Stand-by instruments -- Check",
+				"DE ICE SYSTEM -- Test",
+				"INERT SEP -- ON",
+				"Flight controls -- Check",
+				"TRIMS -- Test",
+				"Flaps -- UP",
+				"MFD",
+				[
+					{
+						"ul": true
+					},
+					"FPL -- Set",
+					"LFE -- Set / Check",
+					"WX RADAR -- STBY"
+				],
+				"THROTTLE -- Feather twice",
+				"EIS -- Check",
+				"CAS -- Check",
+				"TAXI lights - ON"
+			]
+		],
+		[
+			"Before line up",
+			[
+				"LDG lights -- ON",
+				"NAV -- ON",
+				"STROBE -- ON",
+				"IGNITION -- As required",
+				[
+					{
+						"ul": true
+					},
+					"AUTO or ON"
+				],
+				"AUX BP -- AUTO",
+				"FUEL SEL -- AUTO",
+				"DE ICE SYSTEM -- As required",
+				"PITOTT L HTR / PITOT R & STALL HTR -- ON",
+				"INERT SEP -- ON",
+				"TRIMS -- TO",
+				"FLAPS -- TO",
+				"A/C -- As required",
+				"BLEED -- AUTO or MAX DIFF",
+				"LFE -- Check",
+				"FUEL gages -- Check imbalance",
+				"BATT -- Check below 50 amps",
+				"EIS -- Check",
+				"CAS -- Check",
+				"Altimeters setting -- As required",
+				"Instruments departure setting -- Check",
+				"SID (PROC) -- Set",
+				"ALT SEL -- Set",
+				"XPDR squawk -- Set"
+			]
+		],
+		[
+			"Normal takeoff",
+			[
+				"ADI, HSI, headings -- Check",
+				"PROP RPM -- Green sector",
+				"Brakes -- Release",
+				"TRQ -- 100 %",
+				"Attitude -- 10° Up"
+			],
+			"When vertical speed is positive:",
+			[
+				{
+					"start": 6,
+					"indent": 1
+				},
+				"Brakes -- Apply",
+				"LANDING GEAR -- UP"
+			],
+			"When airspeed above 115 KIAS:",
+			[
+				{
+					"start": 8,
+					"indent": 1
+				},
+				"FLAPS -- UP"
+			]
+		],
+		[
+			"Short takeoff",
+			[
+				"ADI, HSI, headings -- Check",
+				"PROP RPM -- Green sector",
+				"TRQ -- 100 %",
+				"Brakes -- Release",
+				"Attitude -- 12.5°‒15° Up"
+			],
+			"When vertical speed is positive:",
+			[
+				{
+					"start": 6,
+					"indent": 1
+				},
+				"Brakes -- Apply",
+				"LANDING GEAR -- UP"
+			],
+			"When airspeed above 115 KIAS:",
+			[
+				{
+					"start": 8,
+					"indent": 1
+				},
+				"FLAPS -- UP"
+			]
+		],
+		[
+			"After takeoff",
+			[
+				"LANDING GEAR -- Check UP",
+				"FLAPS -- Check Up",
+				"TRQ -- Check max 100 %",
+				"EIS -- Check",
+				"CAS -- Check",
+				"DE ICE SYSTEM -- As required",
+				"INERT SEP -- As required"
+			]
+		],
+		[
+			"Climb",
+			[
+				"ALT SEL -- Check",
+				"Altimeters setting -- As required",
+				"Autopilot -- Check",
+				"TRQ adjustment / ITT / Ng -- Check",
+				"EIS -- Check",
+				"CAS -- Check",
+				"WX RADAR -- As required",
+				"Pressurization -- Check",
+				"FUEL gages -- Check",
+				"AMPS / VOLTS -- Check",
+				"DE ICE SYSTEM -- As required",
+				"INERT SEP -- As required",
+				"LDG lights -- As required"
+			]
+		],
+		[
+			"Cruise",
+			[
+				"Altimeters setting -- Check",
+				"Autopilot -- Check",
+				"TRQ adjustment / ITT / Ng -- Check",
+				"EIS -- Check",
+				"CAS -- Check",
+				"Pressurization -- Check",
+				"FUEL gages -- Check",
+				"AMPS / VOLTS -- Check",
+				"DE ICE SYSTEM -- As required",
+				"INERT SEP -- As required",
+				"LDG lights -- OFF",
+				"Top of desscent -- Computed"
+			]
+		],
+		[
+			"Before descent",
+			[
+				"Briefing before approach -- Completed",
+				"Altimeters setting -- Check",
+				"Pressurization -- Check",
+				"LFE -- Check",
+				"FUEL gages -- Check",
+				"AMPS / VOLTS -- Check",
+				"DE ICE SYSTEM -- As required",
+				"INERT SEP -- As required"
+			]
+		],
+		[
+			"Approach",
+			[
+				"Altimeters setting (QNH) -- Set / Check",
+				"Minimums -- Set / Check",
+				"COM / NAV / GPS -- Set / Check",
+				"Pressurization -- Check",
+				"LFE -- Check",
+				"FUEL gages -- Check",
+				"AMPS / VOLTS -- Check",
+				"DE ICE SYSTEM -- As required",
+				"INERT SEP -- ON"
+			],
+			"Below FL100:",
+			[
+				{
+					"start": 10,
+					"indent": 1
+				},
+				"LDG lights -- ON"
+			]
+		],
+		[
+			"Final approach (in GS) or downwind leg (VMC)",
+			[
+				"LDG lights -- ON",
+				"LANDING GEAR -- DN",
+				[
+					{
+						"ul": true
+					},
+					"Check 3 green"
+				],
+				"FLAPS -- TO"
+			]
+		],
+		[
+			"Short final (≈ 500 ft)",
+			[
+				"LANDING GEAR -- Check",
+				[
+					{
+						"ul": true
+					},
+					"DN and 3 green"
+				],
+				"FLAPS -- LDG",
+				"AP / YD -- Disconnect"
+			]
+		],
+		[
+			"Runway clear",
+			[
+				"TAXI light -- ON",
+				"NAV -- As required",
+				"STROBE -- As required",
+				"DE ICE SYSTEM -- As required",
+				"TRIMS -- Reset to TO",
+				"FLAPS -- UP",
+				"A/C -- As required",
+				"XPDR -- Check",
+				"WX RADAR -- Check"
+			]
+		],
+		[
+			"Shutdown",
+			[
+				"PARK BRAKE -- Set / ON",
+				"EXT LIGHTS -- All OFF",
+				"INT LIGHTS -- As required",
+				"OXYGEN -- OFF",
+				"FUEL SEL -- MAN",
+				"AP / TRIMS -- OFF",
+				"A/C -- OFF",
+				"BLEED -- OFF",
+				"THROTTLE -- Flight IDLE",
+				[
+					{
+						"ul": true
+					},
+					"For 2 min"
+				],
+				"THROTTLE -- LO-IDLE",
+				[
+					{
+						"ul": true
+					},
+					"For 15 sec"
+				],
+				"THROTTLE -- CUT OFF",
+				"INERT SEP -- OFF",
+				"\"AUX BOOST PMP ON\" -- Check ON",
+				"AUX BP -- OFF",
+				"GENERATOR -- OFF"
+			],
+			"When inertial separator is retracted, after approximately 40 sec:",
+			[
+				{
+					"start": 16,
+					"indent": 1
+				},
+				"SOURCE -- OFF"
+			],
+			[
+				{
+					"start": 17,
+					"indent": 1
+				},
+				"Crash lever -- Pull down",
+				"Stand-by instruments -- OFF",
+				"Oxygen cylinder -- Close"
+			]
+		]
+	]
+}
