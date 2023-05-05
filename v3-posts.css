@@ -1,0 +1,30 @@
+body {
+	background-color: #111115;
+	color: white;
+	font-family: dyslexie, sans-serif;
+	word-wrap: break-word;
+	text-align: center;
+	line-height: 2;
+}
+p {
+	font-size: small;
+	margin: 20px 0;
+}
+h1 {
+	font-size: large;
+}
+a:link {
+	color: #52ffb1;
+}
+
+a:visited {
+	color: #c5ff59;
+}
+article {
+	width: min(100%, 900px);
+	display: inline-block;
+	text-align: left;
+}
+.disclaimer {
+	color: #9c9db8;
+}

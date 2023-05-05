@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="100mm"
+   height="100mm"
+   viewBox="0 0 100 100"
+   version="1.1"
+   id="svg5"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs2" />
+  <g
+     id="layer1">
+    <rect
+       style="fill:#806040;fill-opacity:1;stroke:none;stroke-width:0.7;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.42;paint-order:stroke fill markers"
+       id="rect184"
+       width="70.847198"
+       height="92.899437"
+       x="14.576401"
+       y="7.1005626"
+       rx="10"
+       ry="10" />
+    <rect
+       style="fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.631735;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.42;paint-order:stroke fill markers"
+       id="rect5678"
+       width="48.62225"
+       height="72.368141"
+       x="25.688879"
+       y="17.302601" />
+    <path
+       id="rect5267"
+       style="fill:#999999;fill-opacity:1;stroke-width:0.7;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.42;paint-order:stroke fill markers"
+       d="m 35.014312,0 h 29.969874 c 2.216,0 4.061715,1.7848595 4,4 V 17.302601 H 31.014309 V 4 c 0,-2.216 1.784,-4 4,-4 z" />
+    <circle
+       style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.7;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.42;paint-order:stroke fill markers"
+       id="path5940"
+       cx="35.606281"
+       cy="28.307467"
+       r="6" />
+    <rect
+       style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.748228;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.42;paint-order:stroke fill markers"
+       id="rect6102"
+       width="28.56353"
+       height="4"
+       x="43.443443"
+       y="26.307467" />
+    <circle
+       style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.7;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.42;paint-order:stroke fill markers"
+       id="circle6987"
+       cx="35.606281"
+       cy="52.979954"
+       r="6" />
+    <rect
+       style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.748228;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.42;paint-order:stroke fill markers"
+       id="rect6989"
+       width="28.56353"
+       height="4"
+       x="43.443443"
+       y="50.979954" />
+    <rect
+       style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.748228;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.42;paint-order:stroke fill markers"
+       id="rect6993"
+       width="28.56353"
+       height="4"
+       x="43.443443"
+       y="75.652443" />
+    <circle
+       style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.7;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.42;paint-order:stroke fill markers"
+       id="circle7040"
+       cx="35.606281"
+       cy="77.652443"
+       r="6" />
+  </g>
+</svg>

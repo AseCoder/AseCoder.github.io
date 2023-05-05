@@ -73,19 +73,15 @@ function init() {
 		option.textContent = checklist[0];
 		select.appendChild(option);
 	});
-	const wantedChecklist = params.get('checklist');
-	if (wantedChecklist) {
-		const wantedChecklistInt = parseInt(wantedChecklist);
-		if (isNaN(wantedChecklistInt)) return;
-		listname.value = wantedChecklistInt;
-		load(checklists[wantedChecklistInt]);
+	const wantedChecklist = sessionStorage.getItem('checklist');
+	if (wantedChecklist !== null) {
+		listname.value = wantedChecklist;
+		load(checklists[wantedChecklist]);
 	}
 }
 
 function setParam(i) {
-	const url = new URL(window.location);
-	url.searchParams.set('checklist', i);
-	window.history.replaceState(null, '', url.toString());
+	sessionStorage.setItem('checklist', i);
 }
 
 function loadCurrent() {
