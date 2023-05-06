@@ -10,7 +10,6 @@ fetch(airplane + '.json').then(async response => {
 	init();
 });
 
-
 function load(checklist, depth = 0) {
 	// load wanted checklist
 	let parent;
@@ -84,31 +83,74 @@ function setParam(i) {
 	sessionStorage.setItem('checklist', i);
 }
 
-function loadCurrent() {
+function loadCurrent(direction) {
 	if (!checklists) return;
 	const current = parseInt(listname.value);
 	if (isNaN(current)) return;
 	if (current >= checklists.length || current < 0) return;
 	setParam(current);
 	load(checklists[current]);
+	const duration = 400;
+	if (direction) {
+		document.body.style.transitionDuration = duration + 'ms';
+		if (direction === 1) {
+			document.body.style.backgroundPosition = '0% 0';
+		} else {
+			document.body.style.backgroundPosition = '100% 0';
+		}
+		setTimeout(() => {
+			document.body.style.transitionDuration = '0s';
+			document.body.style.backgroundPosition = '50% 0';
+		}, duration);
+	}
 }
 
-function previous() {
+function previous(animate) {
 	if (!checklists) return;
 	let current = parseInt(listname.value);
 	if (isNaN(current)) current = checklists.length;
 	const previousI = current - 1;
 	if (previousI < 0) return;
 	listname.value = previousI;
-	loadCurrent();
+	loadCurrent(animate ? 1 : undefined);
 }
 
-function next() {
+function next(animate) {
 	if (!checklists) return;
 	let current = parseInt(listname.value);
 	if (isNaN(current)) current = -1;
 	const nextI = current + 1;
 	if (nextI >= checklists.length) return;
 	listname.value = nextI;
-	loadCurrent();
+	loadCurrent(animate ? -1 : undefined);
+}
+const touchXs = {};
+window.ontouchstart = e => {
+	const thisTouch = e.changedTouches[0];
+	console.log('touch started', thisTouch.identifier, thisTouch.pageX, thisTouch.pageY, Date.now());
+	touchXs[thisTouch.identifier] = [thisTouch.pageX, thisTouch.pageY, Date.now()];
+}
+window.ontouchmove = e => {
+	const thisTouch = e.changedTouches[0];
+	if (touchXs[thisTouch.identifier] === undefined) return;
+	console.log('touch moved', e.changedTouches[0].identifier, thisTouch.pageX, Date.now());
+	const changeX = thisTouch.pageX - touchXs[thisTouch.identifier][0];
+	const changeY = thisTouch.pageY - touchXs[thisTouch.identifier][1];
+	const changeT = Date.now() - touchXs[thisTouch.identifier][2];
+	const thresholdDis = 100;
+	const thresholdSpeed = 0.6;
+	const speed = changeX / changeT;
+	console.log(changeY);
+	if (changeY / changeX > 1) return; // not straight enough
+	console.log(speed);
+	if (changeX < -thresholdDis || speed < -thresholdSpeed) {
+		console.log('swipeleft');
+		delete touchXs[thisTouch.identifier]
+		next(true);
+	}
+	else if (changeX > thresholdDis || speed > thresholdSpeed) {
+		console.log('swipeRIGHT');
+		delete touchXs[thisTouch.identifier]
+		previous(true);
+	}
 }

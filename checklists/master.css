@@ -1,10 +1,13 @@
 * {
 	--bottom-row-width: 250px;
 	--bg: black;
-	--highlight: #def;
+	--highlight: #bef;
 }
 body {
-	background-color: var(--bg);
+	background: linear-gradient(90deg, var(--bg) 0%, var(--bg) 25%, var(--highlight) 31.25%, var(--bg) 37.5%, var(--bg) 62.5%, var(--highlight) 68.75%, var(--bg) 75%, var(--bg) 100%);
+	background-position: 50% 0;
+	background-size: 400%;
+	background-repeat: repeat-y;
 	color: var(--highlight);
 	line-height: 2;
 	margin: 4px;
