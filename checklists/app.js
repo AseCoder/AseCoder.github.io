@@ -139,9 +139,10 @@ window.ontouchmove = e => {
 	const changeT = Date.now() - touchXs[thisTouch.identifier][2];
 	const thresholdDis = 100;
 	const thresholdSpeed = 0.6;
+	const thresholdGradient = 0.5;
 	const speed = changeX / changeT;
 	console.log(changeY);
-	if (changeY / changeX > 1) return; // not straight enough
+	if (Math.abs(changeY / changeX) > thresholdGradient) return; // not straight enough
 	console.log(speed);
 	if (changeX < -thresholdDis || speed < -thresholdSpeed) {
 		console.log('swipeleft');
