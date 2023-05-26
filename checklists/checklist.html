@@ -5,23 +5,17 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="theme-color" content="#55aabb" />
 	<title>Airplane checklists</title>
 	<link rel="stylesheet" href="master.css">
 	<link rel="shortcut icon" href="favicon.svg" type="image/x-icon">
 </head>
 
 <body>
-	<div id="bottomrowcontainer">
-		<div id="bottomrow">
-			<button id="left" class="arrowBtn" onclick="previous()">←</button>
-			<select id="listname" onchange="loadCurrent()">
-				<option disabled selected></option>
-			</select>
-			<button id="right" class="arrowBtn" onclick="next()">→</button>
+	<div id="container">
+		<div>
+			<p id="copyright"></p>
 		</div>
-	</div>
-	<div id="checklist">
-		<p id="copyright"></p>
 	</div>
 </body>
 <script src="app.js"></script>
