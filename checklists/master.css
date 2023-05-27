@@ -22,22 +22,29 @@ body {
 p {
 	margin: 0;
 }
-#container div {
+#container div:not(.border) {
 	box-sizing: border-box;
-	width: max(max-content, 100%);
+	width: max-content;
+	max-width: 100%;
 	display: inline-block;
 	overflow-x: hidden;
 	overflow-y: auto;
-	scroll-snap-align: center;
 	vertical-align: top;
 	white-space: normal;
-	padding: 0 6px 6px 8px;
+	padding: 0 7px 10px 7px;
+	scroll-snap-align: start;
 }
-#container div:not(:last-child) {
-	border-right: 2px solid var(--accent);
+#container div:not(:first-child, .border) {
+	scroll-snap-align: center;
 }
 #container div > ol, #container div > ul {
 	padding: 0;
+}
+.border {
+	display: inline-block;
+	height: 100%;
+	width: 3px;
+	background-color: var(--accent);
 }
 ol, ul {
 	list-style-position: inside;

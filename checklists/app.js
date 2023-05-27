@@ -49,7 +49,11 @@ function load(checklist, depth = 0, index, total) {
 		}
 	});
 	if (depth === 0) {
-		document.getElementById('container').appendChild(parent);
+		const container = document.getElementById('container');
+		const border = document.createElement('div');
+		border.classList.add('border');
+		container.appendChild(border);
+		container.appendChild(parent);
 	} else {
 		return parent;
 	}
