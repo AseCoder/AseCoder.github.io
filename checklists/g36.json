@@ -1,0 +1,270 @@
+{
+	"title": "Bonanza G36 Checklists",
+	"copyright": "Source: Model G36 Bonanza Pilot's Operating Handbook<br>© 2013 Beechcraft Corporation",
+	"checklists": [
+		[
+			"BEFORE ENGINE STARTING",
+			[
+				"Parking Brake -- CONFIRM SET",
+				"Left Side Circuit Breakers -- IN",
+				"Alternate Static Air Source -- NORMAL",
+				"Subpanel Switches -- OFF, BEACON ON",
+				"Landing Gear Handle -- DN",
+				"Throttle -- CLOSED",
+				"Propeller -- HIGH RPM",
+				"Mixture -- FULL RICH",
+				"Cowl Flaps -- OPEN",
+				"Flaps -- UP",
+				"Avionics Circuit Breakers -- IN",
+				"ELT Switch -- ARM",
+				"Battery 1 & 2, Alternator 1 & 2 -- ON",
+				"PFD -- VERIFY REVERSIONARY MODE",
+				"Alerts -- CHECK & CONSIDERED",
+				"Fuel Remaining -- SET",
+				[
+					{
+						"indent": 1
+					},
+					"Select ENGINE and SYSTEM Soft Keys",
+					"With Full Fuel -- Press RST FUEL",
+					"With Partial Fuel (if required) -- Press DEC FUEL or INC FUEL"
+				],
+				"Fuel Selector Valve -- SELECT FULLER TANK",
+				"Aux Fuel Pump -- SELECT OFF"
+			]
+		],
+		[
+			"ENGINE STARTING (BATTERY)",
+			"COLD STARTS",
+			[
+				"Throttle -- FULL OPEN",
+				"Propeller -- HIGH RPM",
+				"Mixture -- FULL RICH",
+				"Aux Fuel Pump -- HI UNTIL FUEL FLOW PEAKS THEN OFF",
+				"Throttle -- CLOSE, THEN OPEN APPROXIMATELY 1/2 INCH",
+				"Magneto/Start Switch -- START",
+				"Throttle -- 1000 to 1200 RPM AFTER START"
+			],
+			"FLOODED ENGINE",
+			[
+				"Mixture -- CUT OFF",
+				"Propeller -- HIGH RPM",
+				"Throttle -- 1/2 OPEN",
+				"Magneto/Start Switch -- START",
+				"As Engine Starts:",
+				[
+					{
+						"indent": 1
+					},
+					"Throttle -- IDLE",
+					"Mixture -- FULL RICH"
+				]
+			],
+			"HOT STARTS",
+			[
+				"Mixture -- CUT OFF",
+				"Propeller -- HIGH RPM",
+				"Aux Fuel Pump -- HI FOR 30-60 SECONDS, THEN OFF",
+				"Mixture -- FULL RICH",
+				"Throttle -- FULL OPEN",
+				"Aux Fuel Pump -- HI UNTIL FUEL FLOW PEAKS THEN OFF",
+				"Throttle -- CLOSE, THEN OPEN APPROXIMATELY 1/2 INCH",
+				"Magneto/Start Switch -- START",
+				"Aux Fuel Pump (if required) -- HI",
+				"Aux Fuel Pump -- OFF"
+			]
+		],
+		[
+			"BEFORE TAXI",
+			[
+				"Throttle -- 1000 to 1200 RPM",
+				"Oil Temperature and Pressure -- CHECK",
+				"Avionics Master -- ON",
+				"PFD and MFD -- DISPLAYED IN NORMAL MODE",
+				"AHRS -- ALIGN",
+				"ALT 1 and ALT 2 -- CHECK",
+				[
+					{
+						"indent": 1
+					},
+					"ALT 1 -- POSITIVE LOAD",
+					"ALT 2 -- ZERO LOAD"
+				],
+				"Bus 1 and Bus 2 Voltages -- CHECK",
+				[
+					{
+						"indent": 1
+					},
+					"MFD -- SELECT ENGINE AND SYSTEM",
+					"Bus 1 -- 27.5 - 29.0 Volts",
+					"Bus 2 -- 25.5 - 27.0 Volts"
+				],
+				"Alerts/Messages -- CHECK [BUSES TIED] ILLUMINATED",
+				"Lights -- AS REQUIRED",
+				"Avionics -- CHECK & SET",
+				"Brakes -- RELEASE"
+			]
+		],
+		[
+			"BEFORE TAKEOFF (RUNUP)",
+			[
+				"Parking Brake -- SET",
+				"Engine Instruments -- CHECK WITHIN OPER. LIMITS",
+				"Flight Instruments -- CHECK",
+				"Throttle -- 1700 RPM",
+				"Propeller -- EXERCISE",
+				[
+					{
+						"ul": true
+					},
+					"(to obtain 200 to 300 RPM drop)"
+				],
+				"Magnetos -- CHECK INDIVIDUALLY",
+				"Alternator 2 and Bus Tie -- CHECK",
+				[
+					"Throttle -- ≥ 2000 RPM",
+					[
+						{
+							"ul": true
+						},
+						"[BUSES TIED] -- Extinguished",
+						"Voltmeter 2: 27.5 - 29.0 VOLTS",
+						"Loadmeter 2: POSITIVE LOAD"
+					],
+					"Throttle -- 1000 - 1200 RPM",
+					[
+						{
+							"ul": true
+						},
+						"[BUSES TIED] - Illuminated"
+					]
+				],
+				"Elevator Trim -- SET 3° NOSE UP",
+				"Flaps -- CHECK OPERATION, SET FOR TAKEOFF",
+				"Flight Controls -- CHECK FREEDOM OF MOVEMENT AND PROPER DIRECTION OF TRAVEL",
+				"Doors and Windows -- SECURE",
+				"Fuel Selector Valve -- CHECK TANK SELECTED",
+				"Aux Fuel Pump -- OFF",
+				"Alerts/Messages -- EXTINGUISHED OR CONSIDERED",
+				"PFD Attitude and Heading -- NORMAL",
+				"Parking Brake -- RELEASE"
+			]
+		],
+		[
+			"BEFORE TAKEOFF (FINAL ITEMS)",
+			[
+				"Pitot Heat -- AS REQUIRED",
+				"Lights -- AS REQUIRED",
+				"Flaps -- CONFIRM SET",
+				"Transponder Code -- CONFIRM SET"
+			]
+		],
+		[
+			"TAKEOFF",
+			[
+				"Take-Off Power -- SET",
+				[
+					"Throttle -- FULL FORWARD",
+					"Propeller -- HIGH RPM",
+					"Mixture -- SET FUEL FLOW AT CYAN CLIMB FUEL FLOW MARKER",
+					"[BUSES TIED] -- EXTINGUISHED",
+					"Brakes -- RELEASE",
+					"Instruments -- CHECK"
+				]
+			]
+		],
+		[
+			"CLIMB",
+			[
+				"Landing Gear -- RETRACT",
+				"Flaps -- RETRACT",
+				"Power -- SET",
+				[
+					"Throttle -- FULL FORWARD",
+					"Propeller -- 2500 or 2700 RPM",
+					"Mixture -- MAINTAIN FUEL FLOW AT CYAN CLIMB FUEL FLOW MARKER"
+				],
+				"Cowl Flaps -- AS REQUIRED",
+				"Airspeed -- 100 - 110 KTS",
+				"Engine Temperatures -- MONITOR",
+				"Aux Fuel Pump -- AS REQUIRED"
+			]
+		],
+		[
+			"CRUISE",
+			[
+				"Cowl Flaps -- CLOSE",
+				"Power -- SET",
+				"Aux Fuel Pump -- OFF",
+				"Mixture -- LEAN USING EGT"
+			]
+		],
+		[
+			"DESCENT",
+			[
+				"Altimeters -- SET",
+				"Cowl Flaps -- CONFIRM CLOSED",
+				"Power -- AS REQUIRED",
+				"Mixture -- AS REQUIRED",
+				"Engine Temperatures -- MONITOR",
+				"Flaps -- AS REQUIRED",
+				"Windshield Defroster -- AS REQUIRED"
+			]
+		],
+		[
+			"BEFORE LANDING",
+			[
+				"Fuel Selector Valve -- SELECT FULLER TANK",
+				"Cowl Flaps -- AS REQUIRED",
+				"Mixture -- FULL RICH",
+				"Landing Gear (154 kts or below) -- DOWN AND CHECK",
+				"Landing Lights -- AS REQUIRED",
+				"Propeller -- HIGH RPM"
+			]
+		],
+		[
+			"NORMAL LANDING",
+			[
+				"Flaps (124 kts or below) -- DOWN",
+				"Airspeed -- ESTABLISH NORMAL APPROACH SPEED",
+				"Yaw Damp -- OFF"
+			]
+		],
+		[
+			"BALKED LANDING",
+			[
+				"Throttle and Propeller -- FULL FORWARD",
+				"Airspeed -- 80 KTS",
+				"Flaps -- UP",
+				"Landing Gear -- RETRACT",
+				"Cowl Flaps -- OPEN"
+			]
+		],
+		[
+			"AFTER LANDING",
+			[
+				"Cowl Flaps -- OPEN",
+				"Flaps -- UP",
+				"Landing, Taxi, and Strobe Lights -- AS REQUIRED",
+				"Trim Tabs -- RESET AS REQUIRED",
+				"[BUSES TIED] -- ILLUMINATED"
+			]
+		],
+		[
+			"SHUTDOWN AND SECURING",
+			[
+				"Parking Brake -- SET",
+				"Avionics -- OFF",
+				[
+					"MFD -- EXTINGUISHED",
+					"PFD -- VERIFY REVERSIONARY MODE"
+				],
+				"Electrical Equipment -- OFF",
+				"Throttle -- 1000 RPM",
+				"Mixture -- CUT OFF",
+				"Magnetos -- OFF",
+				"Battery 1 & 2, Alternator 1 & 2 -- OFF"
+			]
+		]
+	]
+}
