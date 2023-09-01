@@ -1,36 +1,19 @@
 {
 	"title": "Bonanza G36 Checklists",
-	"copyright": "Source: Model G36 Bonanza Pilot's Operating Handbook<br>© 2013 Beechcraft Corporation",
+	"copyright": "Source: Model G36 Bonanza Pilot's Operating Handbook<br>© 2013 Beechcraft Corporation<br>Modified",
 	"checklists": [
 		[
 			"BEFORE ENGINE STARTING",
 			[
-				"Parking Brake -- CONFIRM SET",
-				"Left Side Circuit Breakers -- IN",
-				"Alternate Static Air Source -- NORMAL",
 				"Subpanel Switches -- OFF, BEACON ON",
-				"Landing Gear Handle -- DN",
 				"Throttle -- CLOSED",
 				"Propeller -- HIGH RPM",
 				"Mixture -- FULL RICH",
 				"Cowl Flaps -- OPEN",
 				"Flaps -- UP",
-				"Avionics Circuit Breakers -- IN",
-				"ELT Switch -- ARM",
 				"Battery 1 & 2, Alternator 1 & 2 -- ON",
-				"PFD -- VERIFY REVERSIONARY MODE",
 				"Alerts -- CHECK & CONSIDERED",
-				"Fuel Remaining -- SET",
-				[
-					{
-						"indent": 1
-					},
-					"Select ENGINE and SYSTEM Soft Keys",
-					"With Full Fuel -- Press RST FUEL",
-					"With Partial Fuel (if required) -- Press DEC FUEL or INC FUEL"
-				],
-				"Fuel Selector Valve -- SELECT FULLER TANK",
-				"Aux Fuel Pump -- SELECT OFF"
+				"Fuel Selector Valve -- SELECT FULLER TANK"
 			]
 		],
 		[
@@ -78,43 +61,30 @@
 			"BEFORE TAXI",
 			[
 				"Throttle -- 1000 to 1200 RPM",
-				"Oil Temperature and Pressure -- CHECK",
 				"Avionics Master -- ON",
-				"PFD and MFD -- DISPLAYED IN NORMAL MODE",
-				"AHRS -- ALIGN",
-				"ALT 1 and ALT 2 -- CHECK",
-				[
-					{
-						"indent": 1
-					},
-					"ALT 1 -- POSITIVE LOAD",
-					"ALT 2 -- ZERO LOAD"
-				],
-				"Bus 1 and Bus 2 Voltages -- CHECK",
-				[
-					{
-						"indent": 1
-					},
-					"MFD -- SELECT ENGINE AND SYSTEM",
-					"Bus 1 -- 27.5 - 29.0 Volts",
-					"Bus 2 -- 25.5 - 27.0 Volts"
-				],
-				"Alerts/Messages -- CHECK [BUSES TIED] ILLUMINATED",
 				"Lights -- AS REQUIRED",
 				"Avionics -- CHECK & SET",
 				[
 					{
 						"ul": true
 					},
-					"BARO",
-					"Navigation",
-					"XPDR"
+					"Altimeters",
+					"FLIGHT PLAN",
+					"XPDR",
+					"PFD"
 				],
 				"Brakes -- RELEASE"
 			]
 		],
 		[
-			"BEFORE TAKEOFF (RUNUP)",
+			"BEFORE TAKEOFF",
+			[
+				"Elevator Trim -- SET 3-6° NOSE UP",
+				"Flaps -- TO",
+				"Pitot Heat -- AS REQUIRED",
+				"Lights -- AS REQUIRED"
+			],
+			"RUNUP",
 			[
 				"Parking Brake -- SET",
 				"Engine Instruments -- CHECK WITHIN OPER. LIMITS",
@@ -147,8 +117,6 @@
 						"[BUSES TIED] - Illuminated"
 					]
 				],
-				"Elevator Trim -- SET 3-6° NOSE UP",
-				"Flaps -- CHECK OPERATION, SET FOR TAKEOFF",
 				"Flight Controls -- CHECK FREEDOM OF MOVEMENT AND PROPER DIRECTION OF TRAVEL",
 				"Doors and Windows -- SECURE",
 				"Fuel Selector Valve -- CHECK TANK SELECTED",
@@ -156,15 +124,6 @@
 				"Alerts/Messages -- EXTINGUISHED OR CONSIDERED",
 				"PFD Attitude and Heading -- NORMAL",
 				"Parking Brake -- RELEASE"
-			]
-		],
-		[
-			"BEFORE TAKEOFF (FINAL ITEMS)",
-			[
-				"Pitot Heat -- AS REQUIRED",
-				"Lights -- AS REQUIRED",
-				"Flaps -- CONFIRM SET",
-				"Transponder Code -- CONFIRM SET"
 			]
 		],
 		[
@@ -194,8 +153,8 @@
 				],
 				"Cowl Flaps -- AS REQUIRED",
 				"Airspeed -- 100 - 110 KTS",
-				"Engine Temperatures -- MONITOR",
-				"Aux Fuel Pump -- AS REQUIRED"
+				"Aux Fuel Pump -- AS REQUIRED",
+				"Lights -- AS REQUIRED"
 			]
 		],
 		[
@@ -204,48 +163,26 @@
 				"Cowl Flaps -- CLOSE",
 				"Power -- SET",
 				"Aux Fuel Pump -- OFF",
-				"Mixture -- LEAN USING EGT"
+				"Mixture -- LEAN USING EGT",
+				"Lights -- AS REQUIRED",
+				"Fuel Selector Valve -- SELECT FULLER TANK"
 			]
 		],
 		[
-			"DESCENT",
+			"APPROACH",
 			[
 				"Altimeters -- SET",
-				"Cowl Flaps -- CONFIRM CLOSED",
-				"Power -- AS REQUIRED",
-				"Mixture -- AS REQUIRED",
-				"Engine Temperatures -- MONITOR",
-				"Flaps -- AS REQUIRED",
-				"Windshield Defroster -- AS REQUIRED"
-			]
-		],
-		[
-			"BEFORE LANDING",
-			[
-				"Fuel Selector Valve -- SELECT FULLER TANK",
-				"Cowl Flaps -- AS REQUIRED",
+				"Lights -- AS REQUIRED",
+				"Propeller -- HIGH RPM",
 				"Mixture -- FULL RICH",
-				"Landing Gear (154 kts or below) -- DOWN AND CHECK",
-				"Landing Lights -- AS REQUIRED",
-				"Propeller -- HIGH RPM"
+				"Landing Gear (154 kts or below) -- DOWN AND CHECK"
 			]
 		],
 		[
-			"NORMAL LANDING",
+			"LANDING",
 			[
 				"Flaps (124 kts or below) -- DOWN",
-				"Airspeed -- ESTABLISH NORMAL APPROACH SPEED",
 				"Yaw Damp -- OFF"
-			]
-		],
-		[
-			"BALKED LANDING",
-			[
-				"Throttle and Propeller -- FULL FORWARD",
-				"Airspeed -- 80 KTS",
-				"Flaps -- UP",
-				"Landing Gear -- RETRACT",
-				"Cowl Flaps -- OPEN"
 			]
 		],
 		[
@@ -253,7 +190,7 @@
 			[
 				"Cowl Flaps -- OPEN",
 				"Flaps -- UP",
-				"Landing, Taxi, and Strobe Lights -- AS REQUIRED",
+				"Lights -- AS REQUIRED",
 				"Trim Tabs -- RESET AS REQUIRED",
 				"[BUSES TIED] -- ILLUMINATED"
 			]
@@ -262,12 +199,7 @@
 			"SHUTDOWN AND SECURING",
 			[
 				"Parking Brake -- SET",
-				"Avionics -- OFF",
-				[
-					"MFD -- EXTINGUISHED",
-					"PFD -- VERIFY REVERSIONARY MODE"
-				],
-				"Electrical Equipment -- OFF",
+				"Avionics Master -- OFF",
 				"Throttle -- 1000 RPM",
 				"Mixture -- CUT OFF",
 				"Magnetos -- OFF",
