@@ -102,6 +102,14 @@
 				"Alerts/Messages -- CHECK [BUSES TIED] ILLUMINATED",
 				"Lights -- AS REQUIRED",
 				"Avionics -- CHECK & SET",
+				[
+					{
+						"ul": true
+					},
+					"BARO",
+					"Navigation",
+					"XPDR"
+				],
 				"Brakes -- RELEASE"
 			]
 		],
@@ -139,7 +147,7 @@
 						"[BUSES TIED] - Illuminated"
 					]
 				],
-				"Elevator Trim -- SET 3° NOSE UP",
+				"Elevator Trim -- SET 3-6° NOSE UP",
 				"Flaps -- CHECK OPERATION, SET FOR TAKEOFF",
 				"Flight Controls -- CHECK FREEDOM OF MOVEMENT AND PROPER DIRECTION OF TRAVEL",
 				"Doors and Windows -- SECURE",
