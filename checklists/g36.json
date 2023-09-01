@@ -3,7 +3,7 @@
 	"copyright": "Source: Model G36 Bonanza Pilot's Operating Handbook<br>© 2013 Beechcraft Corporation<br>Modified",
 	"checklists": [
 		[
-			"BEFORE ENGINE STARTING",
+			"BEFORE ENGINE START",
 			[
 				"Subpanel Switches -- OFF, BEACON ON",
 				"Throttle -- CLOSED",
@@ -17,7 +17,7 @@
 			]
 		],
 		[
-			"ENGINE STARTING (BATTERY)",
+			"ENGINE START (BATTERY)",
 			"COLD STARTS",
 			[
 				"Throttle -- FULL OPEN",

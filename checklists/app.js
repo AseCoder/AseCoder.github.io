@@ -37,7 +37,10 @@ function load(checklist, depth = 0, index, total) {
 	checklist.forEach((item, i) => {
 		if (typeof item === 'string' && depth === 0) {
 			const text = document.createElement('p');
-			text.textContent = (i === 0 ? `${index + 1}/${total}: ` : '') + item;
+			text.textContent = (i === 0 ? `${index + 1}/${total}: ` : '');
+			const bold = document.createElement('b');
+			bold.textContent = item;
+			text.appendChild(bold);
 			parent.appendChild(text);
 		} else if (typeof item === 'string' && depth !== 0) {
 			const text = document.createElement('li');
