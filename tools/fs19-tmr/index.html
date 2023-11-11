@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>FS19 TMR</title>
+	<link rel="stylesheet" href="../../v3-posts.css">
+	<link rel="stylesheet" href="../../font.css">
+	<style>
+		#volumeinput {
+			width: 4em;
+		}
+		table img {
+			height: 2.5em;
+			vertical-align: bottom;
+		}
+		.progresscontainer {
+			width: 8em;
+			background-color: #222;
+			height: 1.5em;
+			vertical-align: middle;
+		}
+		.progresscontainer div {
+			height: 100%;
+			display: block !important;
+		}
+		#hayprogress {
+			width: 0%;
+			background-color: #b1db5c;
+		}
+		#silageprogress {
+			width: 0%;
+			background-color: #614f43;
+		}
+		#strawprogress {
+			width: 0%;
+			background-color: #d9c679;
+		}
+		td {
+			vertical-align: middle;
+			padding-left: 4px;
+		}
+		tr:not(:last-child) > td {
+			padding-bottom: 15px;
+		}
+		td * {
+			display: inline-block;
+		}
+		table {
+			border-left: 4px solid #ffbd06;
+		}
+		table input {
+			width: 8em;
+		}
+	</style>
+</head>
+<body>
+	<article>
+		<h1>Farming Simulator 19 Total Mixed Ration Calculator</h1>
+		<p>Mixer volume: <input type="number" id="volumeinput"> m³</p>
+		<p>I want to <select id="minmax">
+			<option value="1">maximise</option>
+			<option value="0">minimise</option>
+		</select> the amount of <select id="type">
+			<option value="hay">Hay</option>
+			<option value="silage">Silage</option>
+			<option value="straw">Straw</option>
+		</select> used.</p>
+		<p>Starting values:</p>
+		<table id="starts">
+			<tr>
+				<td><img src="hay.png"></td>
+				<td>Hay:</td>
+				<td><input type="number" value="0" id="haystart"> <i>l</i></td>
+				<td><span id="haystartpercent"></span> %</td>
+			</tr>
+			<tr>
+				<td><img src="silage.png"></td>
+				<td>Silage:</td>
+				<td><input type="number" value="0" id="silagestart"> <i>l</i></td>
+				<td><span id="silagestartpercent"></span> %</td>
+			</tr>
+			<tr>
+				<td><img src="straw.png"></td>
+				<td>Straw:</td>
+				<td><input type="number" value="0" id="strawstart"> <i>l</i></td>
+				<td><span id="strawstartpercent"></span> %</td>
+			</tr>
+		</table>
+
+		<p>Suggested loading:</p>
+
+		<table id="results">
+			<tr>
+				<td><img src="hay.png"></td>
+				<td>Hay:</td>
+				<td><span id="hayamount"></span> <i>l</i></td>
+				<td><div class="progresscontainer"><div id="hayprogress"></div></div></td>
+				<td>→ <span id="haypercent"></span> %</td>
+			</tr>
+			<tr>
+				<td><img src="silage.png"></td>
+				<td>Silage:</td>
+				<td><span id="silageamount"></span> <i>l</i></td>
+				<td>
+					<div class="progresscontainer">
+						<div id="silageprogress"></div>
+					</div>
+				</td>
+				<td>→ <span id="silagepercent"></span> %</td>
+			</tr>
+			<tr>
+				<td><img src="straw.png"></td>
+				<td>Straw:</td>
+				<td><span id="strawamount"></span> <i>l</i></td>
+				<td>
+					<div class="progresscontainer">
+						<div id="strawprogress"></div>
+					</div>
+				</td>
+				<td>→ <span id="strawpercent"></span> %</td>
+			</tr>
+		</table>
+		<br>
+		<p>Loading checker:</p>
+		<p id="checkresult"></p>
+		<table id="checker">
+			<tr>
+				<td><img src="hay.png"></td>
+				<td>Hay:</td>
+				<td><input type="number" value="0" id="haycheck"> <i>l</i></td>
+				<td><span id="haycheckpercent"></span> %</td>
+			</tr>
+			<tr>
+				<td><img src="silage.png"></td>
+				<td>Silage:</td>
+				<td><input type="number" value="0" id="silagecheck"> <i>l</i></td>
+				<td><span id="silagecheckpercent"></span> %</td>
+			</tr>
+			<tr>
+				<td><img src="straw.png"></td>
+				<td>Straw:</td>
+				<td><input type="number" value="0" id="strawcheck"> <i>l</i></td>
+				<td><span id="strawcheckpercent"></span> %</td>
+			</tr>
+		</table>
+	</article>
+</body>
+<script src="app.js"></script>
+</html>
