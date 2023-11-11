@@ -84,7 +84,7 @@ const startingvalues = new Loading({ volume });
 const minmaxinput = document.getElementById('minmax');
 const typeinput = document.getElementById('type');
 minmaxinput.value = localStorage.getItem('minmax') || '1';
-typeinput.value = localStorage.getItem('type') || '0';
+typeinput.value = localStorage.getItem('type') || 'straw';
 minmaxinput.oninput = e => {
 	localStorage.setItem('minmax', e.target.value);
 	calculateResults();
