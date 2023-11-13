@@ -63,6 +63,11 @@ class Loading {
 	export() {
 		return { hay: this.hay, silage: this.silage, straw: this.straw, volume: this.volume };
 	}
+	reset() {
+		this.hay = 0;
+		this.silage = 0;
+		this.straw = 0;
+	}
 }
 
 // handle volume input
@@ -107,22 +112,21 @@ function handlestartingvalue(e, type) {
 		return;
 	} else e.target.style.backgroundColor = '';
 	startingvalues.set(type, value);
-	const total = startingvalues.hay + startingvalues.silage + startingvalues.straw;
-	document.getElementById('haystartpercent').textContent = (startingvalues.hay / total * 100 || 0).toFixed(1);
-	document.getElementById('silagestartpercent').textContent = (startingvalues.silage / total * 100 || 0).toFixed(1);
-	document.getElementById('strawstartpercent').textContent = (startingvalues.straw / total * 100 || 0).toFixed(1);
 	calculateResults();
 }
 startingvalueinputs.hay.oninput = e => handlestartingvalue(e, 'hay');
 startingvalueinputs.silage.oninput = e => handlestartingvalue(e, 'silage');
 startingvalueinputs.straw.oninput = e => handlestartingvalue(e, 'straw');
 
-function getOptimumPercent() {
-	return limitsMap[typeinput.value][parseInt(minmaxinput.value)];
-}
-function getOptimumAmount() {
-	return volume * 1000 * getOptimumPercent();
-}
+// reset button
+document.getElementById('resetstart').onclick = e => {
+	for (const type in startingvalueinputs) {
+		startingvalueinputs[type].value = '0';
+	}
+	startingvalues.reset();
+	calculateResults();
+};
+
 function paintTheTownRed() {
 	document.getElementById('starts').style.backgroundColor = 'red';
 	document.getElementById('results').style.backgroundColor = 'red';
@@ -138,6 +142,11 @@ function calculateResults() {
 	const exported = startingvalues.export();
 	const suggestedLoading = new Loading(exported);
 	console.log(suggestedLoading);
+	// calculate starting percents
+	const total = suggestedLoading.hay + suggestedLoading.silage + suggestedLoading.straw;
+	document.getElementById('haystartpercent').textContent = (suggestedLoading.hay / total * 100 || 0).toFixed(2);
+	document.getElementById('silagestartpercent').textContent = (suggestedLoading.silage / total * 100 || 0).toFixed(2);
+	document.getElementById('strawstartpercent').textContent = (suggestedLoading.straw / total * 100 || 0).toFixed(2);
 	// validate
 	if (!suggestedLoading.validate()) {
 		console.log('validation failed');
@@ -236,9 +245,9 @@ function displayResults(loadingInstance) {
 	hayamount.textContent = warningforhay + loadingInstance.get('hay');
 	silageamount.textContent = warningforsilage + loadingInstance.get('silage');
 	strawamount.textContent = warningforstraw + loadingInstance.get('straw');
-	const haypercentage = loadingInstance.percentage('hay');
-	const silagepercentage = loadingInstance.percentage('silage');
-	const strawpercentage = loadingInstance.percentage('straw');
+	const haypercentage = loadingInstance.percentage('hay').toFixed(2);
+	const silagepercentage = loadingInstance.percentage('silage').toFixed(2);
+	const strawpercentage = loadingInstance.percentage('straw').toFixed(2);
 	document.getElementById('hayprogress').style.width = haypercentage + '%';
 	document.getElementById('silageprogress').style.width = silagepercentage + '%';
 	document.getElementById('strawprogress').style.width = strawpercentage + '%';
@@ -267,11 +276,14 @@ function handlecheckingvalue(e, type) {
 		return;
 	} else e.target.style.backgroundColor = '';
 	checkingvalues.set(type, value);
+	calculateCheckingResult();
+}
+function calculateCheckingResult() {
 	const total = checkingvalues.hay + checkingvalues.silage + checkingvalues.straw;
-	document.getElementById('haycheckpercent').textContent = (checkingvalues.hay / total * 100 || 0).toFixed(1);
-	document.getElementById('silagecheckpercent').textContent = (checkingvalues.silage / total * 100 || 0).toFixed(1);
-	document.getElementById('strawcheckpercent').textContent = (checkingvalues.straw / total * 100 || 0).toFixed(1);
-	
+	document.getElementById('haycheckpercent').textContent = (checkingvalues.hay / total * 100 || 0).toFixed(2);
+	document.getElementById('silagecheckpercent').textContent = (checkingvalues.silage / total * 100 || 0).toFixed(2);
+	document.getElementById('strawcheckpercent').textContent = (checkingvalues.straw / total * 100 || 0).toFixed(2);
+
 	const checkresult = document.getElementById('checkresult');
 	if (checkingvalues.validateExtensive()) {
 		checkresult.textContent = 'Valid loading!';
@@ -284,3 +296,15 @@ function handlecheckingvalue(e, type) {
 checkingvalueinputs.hay.oninput = e => handlecheckingvalue(e, 'hay');
 checkingvalueinputs.silage.oninput = e => handlecheckingvalue(e, 'silage');
 checkingvalueinputs.straw.oninput = e => handlecheckingvalue(e, 'straw');
+
+// reset button
+document.getElementById('resetcheck').onclick = e => {
+	for (const type in checkingvalueinputs) {
+		checkingvalueinputs[type].value = '0';
+	}
+	checkingvalues.reset();
+	calculateCheckingResult();
+};
+
+calculateResults();
+calculateCheckingResult();

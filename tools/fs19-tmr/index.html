@@ -54,6 +54,23 @@
 		table input {
 			width: 8em;
 		}
+		.flexybox {
+			display: flex;
+			align-items: center;
+			gap: 16px;
+		}
+		.reset {
+			width: 2.8em;
+			height: 2.8em;
+			padding: 2px;
+			background-color: white;
+			border-radius: 7px;
+			border: 1px solid #aaa;
+		}
+		.reset img {
+			height: 100%;
+			width: 100%;
+		}
 	</style>
 </head>
 <body>
@@ -68,7 +85,12 @@
 			<option value="silage">Silage</option>
 			<option value="straw">Straw</option>
 		</select> used.</p>
-		<p>Starting values:</p>
+		<div class="flexybox">
+			<p>Starting values:</p>
+			<button class="reset" id="resetstart">
+				<img src="reset.svg" alt="Reset">
+			</button>
+		</div>
 		<table id="starts">
 			<tr>
 				<td><img src="hay.png"></td>
@@ -96,54 +118,59 @@
 			<tr>
 				<td><img src="hay.png"></td>
 				<td>Hay:</td>
-				<td><span id="hayamount"></span> <i>l</i></td>
+				<td><span id="hayamount">0</span> <i>l</i></td>
 				<td><div class="progresscontainer"><div id="hayprogress"></div></div></td>
-				<td>→ <span id="haypercent"></span> %</td>
+				<td>→ <span id="haypercent">0</span> %</td>
 			</tr>
 			<tr>
 				<td><img src="silage.png"></td>
 				<td>Silage:</td>
-				<td><span id="silageamount"></span> <i>l</i></td>
+				<td><span id="silageamount">0</span> <i>l</i></td>
 				<td>
 					<div class="progresscontainer">
 						<div id="silageprogress"></div>
 					</div>
 				</td>
-				<td>→ <span id="silagepercent"></span> %</td>
+				<td>→ <span id="silagepercent">0</span> %</td>
 			</tr>
 			<tr>
 				<td><img src="straw.png"></td>
 				<td>Straw:</td>
-				<td><span id="strawamount"></span> <i>l</i></td>
+				<td><span id="strawamount">0</span> <i>l</i></td>
 				<td>
 					<div class="progresscontainer">
 						<div id="strawprogress"></div>
 					</div>
 				</td>
-				<td>→ <span id="strawpercent"></span> %</td>
+				<td>→ <span id="strawpercent">0</span> %</td>
 			</tr>
 		</table>
 		<br>
-		<p>Loading checker:</p>
+		<div class="flexybox">
+			<p>Loading checker:</p>
+			<button class="reset" id="resetcheck">
+				<img src="reset.svg" alt="Reset">
+			</button>
+		</div>
 		<p id="checkresult"></p>
 		<table id="checker">
 			<tr>
 				<td><img src="hay.png"></td>
 				<td>Hay:</td>
 				<td><input type="number" value="0" id="haycheck"> <i>l</i></td>
-				<td><span id="haycheckpercent"></span> %</td>
+				<td><span id="haycheckpercent">0</span> %</td>
 			</tr>
 			<tr>
 				<td><img src="silage.png"></td>
 				<td>Silage:</td>
 				<td><input type="number" value="0" id="silagecheck"> <i>l</i></td>
-				<td><span id="silagecheckpercent"></span> %</td>
+				<td><span id="silagecheckpercent">0</span> %</td>
 			</tr>
 			<tr>
 				<td><img src="straw.png"></td>
 				<td>Straw:</td>
 				<td><input type="number" value="0" id="strawcheck"> <i>l</i></td>
-				<td><span id="strawcheckpercent"></span> %</td>
+				<td><span id="strawcheckpercent">0</span> %</td>
 			</tr>
 		</table>
 	</article>
