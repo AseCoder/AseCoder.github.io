@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>How to download videos from Twitter</title>
+	<link rel="stylesheet" href="../../font.css">
+	<link rel="stylesheet" href="../../v3-posts.css">
+	<meta name="theme-color" content="#946c4b">
+	<meta name="description" content="A tutorial">
+</head>
+<body>
+	<article>
+		<h1>How to download videos from Twitter</h1>
+		<p>For the technologically inclined. Working as of 2024-03-14.</p>
+		<h2>1. Finding the video URL</h2>
+		<p>When you have navigated to the twitter video you would like to download, open the network tab in your browser's developer tools. Refresh the page. Then look for a request whose domain starts with <code>prod-</code>, file name starts with <code>master_dynamic</code> and file extension is <code>.m3u8</code>. This request only happens once and it happens when the page loads. Copy the whole URL of the request.</p>
+		<img src="devtools.png" alt="The request highlighted in the network tab">
+		<h2>2. Downloading with FFMPEG</h2>
+		<p>Using the command prompt, navigate to the directory in which you would like to save the video. Then run the following command: <code>ffmpeg -i "the url you copied" -c copy output.mp4</code></p>
+		<p>This points FFMPEG to download the video stream from the internet and save it to a file. The console will spew a lot of nonsense as it downloads each individual <code>chunk</code> of the video.</p>
+	</article>
+</body>
+</html>
