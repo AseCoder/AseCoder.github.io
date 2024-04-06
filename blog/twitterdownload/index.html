@@ -16,6 +16,8 @@
 		<h2>1. Finding the video URL</h2>
 		<p>When you have navigated to the twitter video you would like to download, open the network tab in your browser's developer tools. Refresh the page. Then look for a request whose domain starts with <code>prod-</code>, file name starts with <code>master_dynamic</code> and file extension is <code>.m3u8</code>. This request only happens once and it happens when the page loads. Copy the whole URL of the request.</p>
 		<img src="devtools.png" alt="The request highlighted in the network tab">
+		<p>There is another type of URL, too: its domain name is <code>video.twimg.com</code> and the file extension and file type (<code>x-mpegurl</code>) are the same. There is no <code>master_dynamic</code> file, but I succeeded by copying the URL of the first request.</p>
+		<img src="devtools2.png" alt="The request highlighted in the network tab">
 		<h2>2. Downloading with FFMPEG</h2>
 		<p>Using the command prompt, navigate to the directory in which you would like to save the video. Then run the following command: <code>ffmpeg -i "the url you copied" -c copy output.mp4</code></p>
 		<p>This points FFMPEG to download the video stream from the internet and save it to a file. The console will spew a lot of nonsense as it downloads each individual <code>chunk</code> of the video.</p>
