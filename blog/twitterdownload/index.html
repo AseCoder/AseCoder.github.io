@@ -21,9 +21,29 @@
 		<h2>2. Downloading with FFMPEG</h2>
 		<p>Using the command prompt, navigate to the directory in which you would like to save the video. Then run the following command: <code>ffmpeg -i "the url you copied" -c copy output.mp4</code></p>
 		<p>This points FFMPEG to download the video stream from the internet and save it to a file. The console will spew a lot of nonsense as it downloads each individual <code>chunk</code> of the video.</p>
-		<p>If the download hangs, it might be beneficial to add <code>-rw_timeout [microseconds]</code> before <code>-i</code> to make FFMPEG retry if the network request times out. Try, for example, 5 seconds: <code>5000000</code>. According to my experimentation, though, this corrupts the parts of the output file where a network timeout or <code>timestamp discontinuity</code> happens. For this I prescribe <code>-fflags +genpts</code> and <code>-reset_timestamps 1</code> immediately after the input file, though I'm not sure which of these fixes the problem. <b>One might also try to download the video and audio separately using <code>-map</code> and then combining them.</b></p>
+		<h2>Tips & tricks</h2>
+		<ul>
+			<li>
+				<p>If the download hangs, it might be beneficial to add <code>-rw_timeout [microseconds]</code> before <code>-i</code> to
+				make FFMPEG retry if the network request times out. Try, for example, 5 seconds: <code>5000000</code>.</p>
+			</li>
+			<li>
+				<p>According to my experimentation, though, this corrupts the parts of the output file where a network timeout or
+				<code>timestamp discontinuity</code> happens. <b>For this I prescribe <code>-fflags +genpts</code> and
+				<code>-reset_timestamps 1</code> immediately after the input file</b>, though I'm not sure which of these fixes the problem.</p>
+			</li>
+			<li>
+				<p><b>You might also try downloading the video and audio separately using <code>-map</code> and then combining them.</b></p>
+			</li>
+			<li>
+				<p>When downloading a livestream live, you could try adding <code>-re</code> to the beginning.</p>
+			</li>
+			<li>
+				<p>If Twitter only gives you a <code>master_dynamic_highlatency.m3u8</code>, you can try swapping out "high" for "low" to access the low-latency stream. <b>This is beneficial especially when playing the livestream in VLC instead of the Twitter client.</b></p>
+			</li>
+		</ul>
 		<p>
-			In conclusion, I've found the following works best:
+			In conclusion, I've found the following works best for downloading a replay of a livestream:
 			<br>
 			<code>ffmpeg -rw_timeout 3000000 -i
 			"url"
