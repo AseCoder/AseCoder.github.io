@@ -90,10 +90,10 @@
 		<button class="blue" onclick="redirect('intel-chipset')">Intel Chipset</button>
 		<button class="red" onclick="redirect('amd-chipset')">AMD Chipset</button>
 	</div>
+	<script>
+		function redirect(dest) {
+			window.location = dest + '/index.html';
+		}
+	</script>
 </body>
-<script>
-	function redirect(dest) {
-		window.location = dest + '/index.html';
-	}
-</script>
 </html>

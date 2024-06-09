@@ -59,214 +59,213 @@
 		<p>notes:</p>
 		<textarea style="width: 100%;" rows="10" id="notearea"></textarea>
 	</div>
-</body>
-<script src="formatTime.js"></script>
-<script src="parseTime.js"></script>
-<script src="timeNames.js"></script>
-<script>
-	const inputFields = {
-		f: 'time',
-		p: 'parsetime',
-		c: 'convertinput'
-	};
-	const outputFields = {
-		f: 'formatOutput',
-		p: 'parseOutput',
-		c: 'convertoutput'
-	};
-	let userInputField;
+	<script src="formatTime.js"></script>
+	<script src="parseTime.js"></script>
+	<script src="timeNames.js"></script>
+	<script>
+		const inputFields = {
+			f: 'time',
+			p: 'parsetime',
+			c: 'convertinput'
+		};
+		const outputFields = {
+			f: 'formatOutput',
+			p: 'parseOutput',
+			c: 'convertoutput'
+		};
+		let userInputField;
 
-	function runOnInput(id, params = '') {
-		const funcName = document.getElementById(id).oninput.toString().split('\n')[1];
-		console.log('running function', funcName, 'with params', params);
-		eval(funcName.slice(0, funcName.length - 2) + '(' + params + ')');
-	}
+		function runOnInput(id, params = '') {
+			const funcName = document.getElementById(id).oninput.toString().split('\n')[1];
+			console.log('running function', funcName, 'with params', params);
+			eval(funcName.slice(0, funcName.length - 2) + '(' + params + ')');
+		}
 
-	// load from url
-	// url syntax:
-	// in: [type of input: f, p, c][input text]
-	// out: [type of output: f, p ,c]-[first option value]-[second option value etc]
-	// example: ?in=f86400000&out=c-h
-	// format 86400000 milliseconds, convert into hours
-	const urlSearchParams = new URLSearchParams(window.location.search);
-	const queryInput = urlSearchParams.get('in');
-	if (queryInput) {
-		// get the first character of ?in, lookup the element id for that input field, and set the value to the remaining value of ?in
-		document.getElementById(inputFields[queryInput[0]]).value = queryInput.slice(1);
+		// load from url
+		// url syntax:
+		// in: [type of input: f, p, c][input text]
+		// out: [type of output: f, p ,c]-[first option value]-[second option value etc]
+		// example: ?in=f86400000&out=c-h
+		// format 86400000 milliseconds, convert into hours
+		const urlSearchParams = new URLSearchParams(window.location.search);
+		const queryInput = urlSearchParams.get('in');
+		if (queryInput) {
+			// get the first character of ?in, lookup the element id for that input field, and set the value to the remaining value of ?in
+			document.getElementById(inputFields[queryInput[0]]).value = queryInput.slice(1);
 
-		userInputField = queryInput[0];
+			userInputField = queryInput[0];
 
-		// get the function name and run it with param
-		runOnInput(inputFields[queryInput[0]], '{ highlightIn: true }');
-	
-		console.log('ran oninput on', inputFields[queryInput[0]]);
-	
-		// handle the output and options
-		const out = urlSearchParams.get('out');
-		const outputparts = out.split('-');
-		switch (out[0]) {
-			case 'f':
-				document.getElementById('accuracy').value = outputparts[1];
-				document.getElementById('longNames').checked = parseInt(outputparts[2]);
-				document.getElementById('commas').checked = parseInt(outputparts[3]);
-				doFormatTime({ machine: true, highlightOut: true, highlightIn: queryInput[0] === out[0] });
-				break;
-			case 'p':
-				doParseTime({ machine: true, highlightOut: true, highlightIn: queryInput[0] === out[0] });
-				break;
-			case 'c':
-				document.getElementById('converttarget').value = outputparts[1];
-				doConvertTime({ machine: true, highlightOut: true, highlightIn: queryInput[0] === out[0] });
-				break;
-		}
-	}
+			// get the function name and run it with param
+			runOnInput(inputFields[queryInput[0]], '{ highlightIn: true }');
 
-	function doFormatTime(options = {}) {
-		const { machine, highlightIn, highlightOut, settingsChanged } = options;
-		if (!document.getElementById(inputFields.f).value) return;
-		const input = document.getElementById(inputFields.f).value;
-		document.getElementById(outputFields.f).innerText = formatTime(parseInt(input), parseInt(document.getElementById('accuracy').value), {
-			longNames: document.getElementById('longNames').checked,
-			commas: document.getElementById('commas').checked
-		}) || '';
-		if (!machine && !settingsChanged) {
-			userInputField = 'f';
-			document.getElementById(inputFields.c).value = input;
-			document.getElementById(inputFields.p).value = input;
-			doConvertTime({ machine: true });
-			doParseTime({ machine: true });
-		}
-		if (highlightIn) {
-			console.log('input is format, highligting');
-			document.getElementById(inputFields.f).classList.add('active');
-		} else {
-			document.getElementById(inputFields.f).classList.remove('active');
-		}
-		if (highlightOut) {
-			document.getElementById(outputFields.f).classList.add('active');
-		} else {
-			document.getElementById(outputFields.f).classList.remove('active');
-		}
-	}
+			console.log('ran oninput on', inputFields[queryInput[0]]);
 
-	function doParseTime(options = {}) {
-		const { machine, highlightIn, highlightOut, settingsChanged } = options;
-		const input = parseTime(document.getElementById(inputFields.p).value) || '';
-		document.getElementById(outputFields.p).innerText = input;
-		if (!machine && !settingsChanged) {
-			userInputField = 'p';
-			document.getElementById(inputFields.f).value = input;
-			document.getElementById(inputFields.c).value = input;
-			doFormatTime({ machine: true });
-			doConvertTime({ machine: true });
-		}
-		if (highlightIn) {
-			document.getElementById(inputFields.p).classList.add('active');
-		} else {
-			document.getElementById(inputFields.p).classList.remove('active');
-		}
-		if (highlightOut) {
-			document.getElementById(outputFields.p).classList.add('active');
-		} else {
-			document.getElementById(outputFields.p).classList.remove('active');
-		}
-	}
-
-	function doConvertTime(options = {}) {
-		const { machine, highlightIn, highlightOut, settingsChanged } = options;
-		const targetText = document.getElementById('converttarget').value;
-		const target = targetText ? timeNames.find(x => x.name.startsWith(targetText === 'm' ? 'minute' : targetText)) : { name: 'ms', length: 1 };
-		const input = document.getElementById(inputFields.c).value || '';
-		const inputms = parseTime(input);
-		document.getElementById(outputFields.c).innerText = (inputms / target.length).toLocaleString('en-US', { maximumFractionDigits: 4 }) + target.name.slice(0, ['ms', 'month'].includes(target.name) ? 2 : 1);
-		if (!machine && !settingsChanged) {
-			userInputField = 'c';
-			document.getElementById(inputFields.p).value = input;
-			document.getElementById(inputFields.f).value = inputms;
-			doParseTime({ machine: true });
-			doFormatTime({ machine: true });
-		}
-		if (highlightIn) {
-			document.getElementById(inputFields.c).classList.add('active');
-		} else {
-			document.getElementById(inputFields.c).classList.remove('active');
-		}
-		if (highlightOut) {
-			document.getElementById(outputFields.c).classList.add('active');
-		} else {
-			document.getElementById(outputFields.c).classList.remove('active');
-		}
-	}
-	function buttonPressAnimation(id) {
-		const el = document.getElementById(id);
-		el.classList.add('active');
-		let oldText;
-		if (id.startsWith('share')) {
-			oldText = el.innerText;
-			el.innerText = 'Copied';
-		}
-		setTimeout(() => {
-			el.classList.remove('active');
-			if (id.startsWith('share')) el.innerText = oldText;
-		}, 800);
-		return;
-	}
-	function copyOutput(id) {
-		const el = document.getElementById(id);
-		navigator.clipboard.writeText(el.value || el.innerText);
-	}
-	function noteOutput(id) {
-		const el = document.getElementById(id);
-		const value = el.value || el.innerText;
-		if (!value) return;
-		document.getElementById('notearea').value += value + '\n';
-	}
-	function share(outputType, buttonId) {
-		if (!outputType || !userInputField) return;
-		// remove active from everything
-		document.querySelectorAll('.active').forEach(el => {
-			if (el.nodeName.toLowerCase() !== 'button') el.classList.remove('active')
-		});
-		buttonPressAnimation(buttonId);
-		const outputText = document.getElementById(outputFields[outputType]).innerText;
-		const inputText = document.getElementById(inputFields[userInputField]).value;
-		console.log('input', inputText, 'output', outputText);
-		// ?in=f86400000&out=c-h
-		// construct settings
-		const out = [outputType];
-		switch (outputType) {
-			case 'f':
-				doFormatTime({ machine: true, highlightOut: true, highlightIn: outputType === userInputField });
-				out.push(document.getElementById('accuracy').value);
-				out.push(document.getElementById('longNames').checked === true ? '1' : '0');
-				out.push(document.getElementById('commas').checked === true ? '1' : '0');
-				break;
-			case 'p':
-				doParseTime({ machine: true, highlightOut: true, highlightIn: outputType === userInputField });
-				break;
-			case 'c':
-				doConvertTime({ machine: true, highlightOut: true, highlightIn: outputType === userInputField });
-				out.push(document.getElementById('converttarget').value);
-		}
-		
-		if (outputType !== userInputField) { // highlight input
-			switch (userInputField) {
+			// handle the output and options
+			const out = urlSearchParams.get('out');
+			const outputparts = out.split('-');
+			switch (out[0]) {
 				case 'f':
-					doFormatTime({ machine: true, highlightIn: true });
+					document.getElementById('accuracy').value = outputparts[1];
+					document.getElementById('longNames').checked = parseInt(outputparts[2]);
+					document.getElementById('commas').checked = parseInt(outputparts[3]);
+					doFormatTime({ machine: true, highlightOut: true, highlightIn: queryInput[0] === out[0] });
 					break;
 				case 'p':
-					doParseTime({ machine: true, highlightIn: true });
+					doParseTime({ machine: true, highlightOut: true, highlightIn: queryInput[0] === out[0] });
 					break;
 				case 'c':
-					doConvertTime({ machine: true, highlightIn: true });
+					document.getElementById('converttarget').value = outputparts[1];
+					doConvertTime({ machine: true, highlightOut: true, highlightIn: queryInput[0] === out[0] });
+					break;
 			}
 		}
 
-		// create url and copy it
-		const shareUrl = encodeURI(`${window.location.href.split('?')[0]}?in=${userInputField + inputText}&out=${out.join('-')}`);
-		console.log(shareUrl);
-		navigator.clipboard.writeText(shareUrl);
-	}
+		function doFormatTime(options = {}) {
+			const { machine, highlightIn, highlightOut, settingsChanged } = options;
+			if (!document.getElementById(inputFields.f).value) return;
+			const input = document.getElementById(inputFields.f).value;
+			document.getElementById(outputFields.f).innerText = formatTime(parseInt(input), parseInt(document.getElementById('accuracy').value), {
+				longNames: document.getElementById('longNames').checked,
+				commas: document.getElementById('commas').checked
+			}) || '';
+			if (!machine && !settingsChanged) {
+				userInputField = 'f';
+				document.getElementById(inputFields.c).value = input;
+				document.getElementById(inputFields.p).value = input;
+				doConvertTime({ machine: true });
+				doParseTime({ machine: true });
+			}
+			if (highlightIn) {
+				console.log('input is format, highligting');
+				document.getElementById(inputFields.f).classList.add('active');
+			} else {
+				document.getElementById(inputFields.f).classList.remove('active');
+			}
+			if (highlightOut) {
+				document.getElementById(outputFields.f).classList.add('active');
+			} else {
+				document.getElementById(outputFields.f).classList.remove('active');
+			}
+		}
 
-</script>
+		function doParseTime(options = {}) {
+			const { machine, highlightIn, highlightOut, settingsChanged } = options;
+			const input = parseTime(document.getElementById(inputFields.p).value) || '';
+			document.getElementById(outputFields.p).innerText = input;
+			if (!machine && !settingsChanged) {
+				userInputField = 'p';
+				document.getElementById(inputFields.f).value = input;
+				document.getElementById(inputFields.c).value = input;
+				doFormatTime({ machine: true });
+				doConvertTime({ machine: true });
+			}
+			if (highlightIn) {
+				document.getElementById(inputFields.p).classList.add('active');
+			} else {
+				document.getElementById(inputFields.p).classList.remove('active');
+			}
+			if (highlightOut) {
+				document.getElementById(outputFields.p).classList.add('active');
+			} else {
+				document.getElementById(outputFields.p).classList.remove('active');
+			}
+		}
+
+		function doConvertTime(options = {}) {
+			const { machine, highlightIn, highlightOut, settingsChanged } = options;
+			const targetText = document.getElementById('converttarget').value;
+			const target = targetText ? timeNames.find(x => x.name.startsWith(targetText === 'm' ? 'minute' : targetText)) : { name: 'ms', length: 1 };
+			const input = document.getElementById(inputFields.c).value || '';
+			const inputms = parseTime(input);
+			document.getElementById(outputFields.c).innerText = (inputms / target.length).toLocaleString('en-US', { maximumFractionDigits: 4 }) + target.name.slice(0, ['ms', 'month'].includes(target.name) ? 2 : 1);
+			if (!machine && !settingsChanged) {
+				userInputField = 'c';
+				document.getElementById(inputFields.p).value = input;
+				document.getElementById(inputFields.f).value = inputms;
+				doParseTime({ machine: true });
+				doFormatTime({ machine: true });
+			}
+			if (highlightIn) {
+				document.getElementById(inputFields.c).classList.add('active');
+			} else {
+				document.getElementById(inputFields.c).classList.remove('active');
+			}
+			if (highlightOut) {
+				document.getElementById(outputFields.c).classList.add('active');
+			} else {
+				document.getElementById(outputFields.c).classList.remove('active');
+			}
+		}
+		function buttonPressAnimation(id) {
+			const el = document.getElementById(id);
+			el.classList.add('active');
+			let oldText;
+			if (id.startsWith('share')) {
+				oldText = el.innerText;
+				el.innerText = 'Copied';
+			}
+			setTimeout(() => {
+				el.classList.remove('active');
+				if (id.startsWith('share')) el.innerText = oldText;
+			}, 800);
+			return;
+		}
+		function copyOutput(id) {
+			const el = document.getElementById(id);
+			navigator.clipboard.writeText(el.value || el.innerText);
+		}
+		function noteOutput(id) {
+			const el = document.getElementById(id);
+			const value = el.value || el.innerText;
+			if (!value) return;
+			document.getElementById('notearea').value += value + '\n';
+		}
+		function share(outputType, buttonId) {
+			if (!outputType || !userInputField) return;
+			// remove active from everything
+			document.querySelectorAll('.active').forEach(el => {
+				if (el.nodeName.toLowerCase() !== 'button') el.classList.remove('active')
+			});
+			buttonPressAnimation(buttonId);
+			const outputText = document.getElementById(outputFields[outputType]).innerText;
+			const inputText = document.getElementById(inputFields[userInputField]).value;
+			console.log('input', inputText, 'output', outputText);
+			// ?in=f86400000&out=c-h
+			// construct settings
+			const out = [outputType];
+			switch (outputType) {
+				case 'f':
+					doFormatTime({ machine: true, highlightOut: true, highlightIn: outputType === userInputField });
+					out.push(document.getElementById('accuracy').value);
+					out.push(document.getElementById('longNames').checked === true ? '1' : '0');
+					out.push(document.getElementById('commas').checked === true ? '1' : '0');
+					break;
+				case 'p':
+					doParseTime({ machine: true, highlightOut: true, highlightIn: outputType === userInputField });
+					break;
+				case 'c':
+					doConvertTime({ machine: true, highlightOut: true, highlightIn: outputType === userInputField });
+					out.push(document.getElementById('converttarget').value);
+			}
+
+			if (outputType !== userInputField) { // highlight input
+				switch (userInputField) {
+					case 'f':
+						doFormatTime({ machine: true, highlightIn: true });
+						break;
+					case 'p':
+						doParseTime({ machine: true, highlightIn: true });
+						break;
+					case 'c':
+						doConvertTime({ machine: true, highlightIn: true });
+				}
+			}
+
+			// create url and copy it
+			const shareUrl = encodeURI(`${window.location.href.split('?')[0]}?in=${userInputField + inputText}&out=${out.join('-')}`);
+			console.log(shareUrl);
+			navigator.clipboard.writeText(shareUrl);
+		}
+	</script>
+</body>
 </html>
