@@ -10,7 +10,7 @@ p {
 	font-size: small;
 	margin: 20px 0;
 }
-table {
+table, ol, ul {
 	font-size: small;
 }
 h1 {
