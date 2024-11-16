@@ -1,5 +1,6 @@
 @font-face {
 	font-family: 'dyslexie';
-	src: url('Dyslexie-Regular.woff') format('woff');
-	font-weight: 100;
+	src: url('Dyslexie.woff2') format('woff2'),
+		 url('Dyslexie-Regular.woff') format('woff');
+	font-weight: 400;
 }
