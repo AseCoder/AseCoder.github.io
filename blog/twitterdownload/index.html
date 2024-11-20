@@ -12,7 +12,7 @@
 <body>
 	<article>
 		<h1>How to download videos from Twitter</h1>
-		<p>For the technologically inclined. Working as of 2024-06-05.</p>
+		<p>For the technologically inclined. Working as of 2024-11-20.</p>
 		<h2>1. Finding the video URL</h2>
 		<p>When you have navigated to the twitter video you would like to download, open the network tab in your browser's developer tools. Refresh the page. Then look for a request whose domain starts with <code>prod-</code>, file name starts with <code>master_dynamic</code> and file extension is <code>.m3u8</code>. This request only happens once and it happens when the page loads. Copy the whole URL of the request. Do not copy the <code>playlist_</code> URL as I've found that that one doesn't include HD streams.</p>
 		<img src="devtools.png" alt="The request highlighted in the network tab">
@@ -40,6 +40,12 @@
 			</li>
 			<li>
 				<p>If Twitter only gives you a <code>master_dynamic_highlatency.m3u8</code>, you can try swapping out "high" for "low" to access the low-latency stream. <b>This is beneficial especially when playing the livestream in VLC instead of the Twitter client.</b></p>
+			</li>
+			<li style="color: yellow;">
+				<p><code>timestamp discontinuity</code> is a significant problem when downloading livestreams live. Further experimentation is required.</p>
+			</li>
+			<li style="color: yellow;">
+				<p>When downloading the streams separately, it might not be necessary to run two commands. Just have two outputs instead.</p>
 			</li>
 		</ul>
 		<p>
