@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Epochtoy</title>
+	<meta name="description"
+		content="A tool for translating between dates and the UNIX epoch">
+	<meta name="theme-color" content="#80c74a">
+	<link rel="stylesheet" href="../../font.css">
+	<link rel="stylesheet" href="../../v3-posts.css">
+	<link rel="stylesheet" href="master.css">
+	<script src="app.js" defer></script>
+</head>
+<body>
+	<article>
+		<h1>Epochtoy</h1>
+		<p>
+			Input format:
+			<span class="dualchoice">
+				<a href="javascript:dateMode();" id="dateMode" class="left active">Date</a>
+				<a href="javascript:epochMode();" id="epochMode" class="right">UNIX epoch</a>
+			</span>
+		</p>
+
+		<div id="datepage">
+			<p>Input a date:</p>
+			<table>
+				<tr>
+					<th>Year</th>
+					<th>Month</th>
+					<th>Day</th>
+				</tr>
+				<tr>
+					<td><input type="number" oninput="date_update()" placeholder="1970" id="year"></td>
+					<td><input type="number" oninput="date_update()" placeholder="1" id="month"></td>
+					<td><input type="number" oninput="date_update()" placeholder="1" id="day"></td>
+				</tr>
+				<tr>
+					<th>Hour</th>
+					<th>Minute</th>
+					<th>Second</th>
+				</tr>
+				<tr>
+					<td><input type="number" oninput="date_update()" placeholder="0" id="hour"></td>
+					<td><input type="number" oninput="date_update()" placeholder="0" id="minute"></td>
+					<td><input type="number" oninput="date_update()" placeholder="0" id="second"></td>
+				</tr>
+			</table>
+			<h2>Output</h2>
+			<p>Milliseconds elapsed since the UNIX epoch:</p>
+			<p class="output" id="ms_date"></p>
+			<button class="copy" onclick="copy('ms_date')">Copy</button>
+			<p>Date formatted to current locale:</p>
+			<p class="output" id="format_date"></p>
+			<button class="copy" onclick="copy('format_date')">Copy</button>
+			<p>Discord timestamp formatting:</p>
+			<label for="style_date">Style:</label>
+			<select oninput="date_update()" id="style_date">
+				<option value="t">(t) Short Time</option>
+				<option value="T">(T) Long Time</option>
+				<option value="d">(d) Short Date</option>
+				<option value="D">(D) Long Date</option>
+				<option selected value="f">(f) Short Date/Time</option>
+				<option value="F">(F) Long Date/Time</option>
+				<option value="R">(R) Relative Time</option>
+			</select>
+			<p class="output" id="dc_date"></p>
+			<button class="copy" onclick="copy('dc_date')">Copy</button>
+		</div>
+
+		<div id="epochpage" hidden>
+			<p>Input milliseconds elapsed since the UNIX epoch:</p>
+			<input type="number" oninput="epoch_update()" id="ms_epoch">
+			<h2>Output</h2>
+			<p>Date formatted to current locale:</p>
+			<p class="output" id="format_epoch"></p>
+			<button class="copy" onclick="copy('format_epoch')">Copy</button>
+			<p>Discord timestamp formatting:</p>
+			<label for="style_epoch">Style:</label>
+			<select oninput="epoch_update()" id="style_epoch">
+				<option value="t">(t) Short Time</option>
+				<option value="T">(T) Long Time</option>
+				<option value="d">(d) Short Date</option>
+				<option value="D">(D) Long Date</option>
+				<option selected value="f">(f) Short Date/Time</option>
+				<option value="F">(F) Long Date/Time</option>
+				<option value="R">(R) Relative Time</option>
+			</select>
+			<p class="output" id="dc_epoch"></p>
+			<button class="copy" onclick="copy('dc_epoch')">Copy</button>
+		</div>
+		<p class="disclaimer">All dates and times are in UTC unless specified otherwise.</p>
+		<p class="disclaimer">This is the new version of <a href="../date">datetime</a>.</p>
+	</article>
+</body>
+</html>

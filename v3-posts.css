@@ -1,16 +1,15 @@
+:root {
+	--posts-backco: #111115
+}
 body {
-	background-color: #111115;
+	background-color: var(--posts-backco);
 	color: white;
 	font-family: dyslexie, sans-serif;
 	word-wrap: break-word;
 	text-align: center;
 	line-height: 2;
 }
-p {
-	font-size: small;
-	margin: 20px 0;
-}
-table, ol, ul {
+p, a, span, table, ol, ul, label {
 	font-size: small;
 }
 h1 {

@@ -1,0 +1,75 @@
+.dualchoice {
+	display: inline-grid;
+	grid-template-columns: 1fr 1fr;
+	border: 2px solid white;
+	border-radius: 8px;
+	overflow: hidden;
+}
+.dualchoice * {
+	text-wrap: nowrap;
+	padding: 8px;
+	text-align: center;
+	color: white !important;
+	text-decoration: none;
+}
+.dualchoice .left {
+	border-right: 2px solid white;
+}
+a.active {
+	background-color: #298057;
+}
+th {
+	text-align: center;
+}
+input, select {
+	border: 2px solid white;
+	background-color: var(--posts-backco);
+	border-radius: 8px;
+	color: white;
+	font-size: medium;
+	box-sizing: border-box;
+	padding: 5px;
+}
+table input {
+	width: 100%;
+}
+input {
+	font-family: consolas, monospace;
+}
+.output {
+	background-color: #222227;
+	padding: 0px 8px;
+	border-radius: 4px;
+	font-family: consolas, monospace;
+	font-size: medium;
+	/* ^ copied from v3-posts <code> */
+	height: 2em;
+	box-sizing: border-box;
+	width: min-content;
+	max-width: 100%;
+	text-wrap: nowrap;
+	overflow: hidden;
+}
+button.copy {
+	background-color: var(--posts-backco);
+	border: 2px solid white;
+	color: inherit;
+	font-family: inherit;
+	font-size: small;
+	border-radius: 8px;
+	padding: 2px 8px;
+	cursor: pointer;
+	transition: 200ms;
+	position: relative;
+}
+button.copy:hover {
+	border-color: #52ffb1;
+	color: #52ffb1;
+}
+button.copy:active {
+	top: 4px;
+}
+select > option {
+	color: black;
+	background-color: white;
+}
