@@ -36,7 +36,7 @@
 				<p><b>You might also try downloading the video and audio separately using <code>-map</code> and then combining them.</b></p>
 			</li>
 			<li>
-				<p>When downloading a livestream live, you could try adding <code>-re</code> to the beginning.</p>
+				<p><s>When downloading a livestream live, you could try adding <code>-re</code> to the beginning.</s> <spans style="color: red;">DO NOT DO THIS!</spans> <a href="https://stackoverflow.com/questions/48479141/understanding-ffmpeg-re-parameter">Reference</a></p>
 			</li>
 			<li>
 				<p>If Twitter only gives you a <code>master_dynamic_highlatency.m3u8</code>, you can try swapping out "high" for "low" to access the low-latency stream. <b>This is beneficial especially when playing the livestream in VLC instead of the Twitter client.</b></p>
@@ -48,6 +48,7 @@
 				<p>When downloading the streams separately, it might not be necessary to run two commands. Just have two outputs instead.</p>
 			</li>
 		</ul>
+		<p class="disclaimer">(The following is outdated.)</p>
 		<p>
 			In conclusion, I've found the following works best for downloading a replay of a livestream:
 			<br>
