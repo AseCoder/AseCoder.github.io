@@ -1,8 +1,14 @@
 :root {
-	--posts-backco: #111115
+	--posts-blackco: #111115;
+	--posts-darkgrey: #222227;
+	/* average of the other two greys: */
+	--posts-grey: #5f6070;
+	--posts-lightgrey: #9c9db8;
+	--posts-teal: #52ffb1;
+	--posts-lime: #c5ff59;
 }
 body {
-	background-color: var(--posts-backco);
+	background-color: var(--posts-blackco);
 	color: white;
 	font-family: dyslexie, sans-serif;
 	word-wrap: break-word;
@@ -15,22 +21,33 @@ p, a, span, table, ol, ul, label {
 h1 {
 	font-size: large;
 }
-h2 {
+h2, summary {
 	font-size: medium;
+}
+summary {
+	font-weight: bold;
+}
+details {
+	border: 2px solid var(--posts-grey);
+	padding: 0.5em;
+	border-radius: 10px;
+}
+details > :last-child {
+	margin-bottom: 0;
 }
 img {
 	width: 100%;
 }
 code {
-	background-color: #222227;
+	background-color: var(--posts-darkgrey);
 	padding: 2px 5px;
 	border-radius: 4px;
 }
 a:link {
-	color: #52ffb1;
+	color: var(--posts-teal);
 }
 a:visited {
-	color: #c5ff59;
+	color: var(--posts-lime);
 }
 article {
 	width: min(100%, 900px);
@@ -38,5 +55,5 @@ article {
 	text-align: left;
 }
 .disclaimer {
-	color: #9c9db8;
+	color: var(--posts-lightgrey);
 }
