@@ -12,7 +12,7 @@
 <body>
 	<article>
 		<h1>How to download videos from Twitter</h1>
-		<p>For the technologically inclined. Working as of 2025-11-18.</p>
+		<p>For the technologically inclined. Working as of 2025-01-18.</p>
 
 		<h2>1. Finding the video URL</h2>
 		<p>When you have navigated to the twitter video you would like to download, open the network tab in your browser's developer tools and refresh the page to record the first requests of the initial page load. Then look for a request whose domain starts with <code>prod-</code>, file name starts with <code>master_dynamic</code> and file extension is <code>.m3u8</code>. This request only happens once and it happens when the page loads. Copy the whole URL of the request. Do not copy the <code>playlist_</code> URL as I've found that that one doesn't include HD streams.</p>
@@ -86,7 +86,7 @@
 				<code>ffmpeg -i output_v.mp4 -i output_a.mp4 -c copy output.mp4</code>
 			</p>
 		</details>
-		<p class="disclaimer">Published 2024-03-14, last edited 2025-11-18</p>
+		<p class="disclaimer">Published 2024-03-14, last edited 2025-01-18</p>
 	</article>
 </body>
 </html>
