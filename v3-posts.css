@@ -14,6 +14,7 @@ body {
 	word-wrap: break-word;
 	text-align: center;
 	line-height: 2;
+	hyphens: auto;
 }
 p, a, span, table, ol, ul, label {
 	font-size: small;
@@ -32,12 +33,26 @@ details {
 	padding: 0.5em;
 	border-radius: 10px;
 }
-details > :last-child {
+details > :last-child { /* is this really necessary? */
 	margin-bottom: 0;
 }
-img {
-	width: 100%;
+a > img {
+	vertical-align: top; /* https: //stackoverflow.com/questions/17505418/link-wrapped-around-image-makes-div-slightly-taller?rq=3 */
 }
+
+img.square {
+	width: min(500px, 100%);
+}
+
+/* deprecated. specify image size in inline css if necessary */
+img.small {
+	height: 300px;
+}
+img.wide {
+	width: 100%;
+	height: unset;
+}
+
 code {
 	background-color: var(--posts-darkgrey);
 	padding: 2px 5px;
@@ -56,4 +71,18 @@ article {
 }
 .disclaimer {
 	color: var(--posts-lightgrey);
+}
+.scrollcontainer {
+	overflow: auto;
+}
+table.styled {
+	border-collapse: collapse;
+}
+table.styled th, table.styled td {
+	border: 1px solid var(--posts-lightgrey);
+	padding: 0 4px;
+	text-wrap: nowrap;
+}
+table.styled tr:nth-child(even) {
+	background-color: var(--posts-darkgrey);
 }
