@@ -39,7 +39,9 @@ details > :last-child { /* is this really necessary? */
 a > img {
 	vertical-align: top; /* https: //stackoverflow.com/questions/17505418/link-wrapped-around-image-makes-div-slightly-taller?rq=3 */
 }
-
+img {
+	width: 100%;
+}
 img.square {
 	width: min(500px, 100%);
 }
