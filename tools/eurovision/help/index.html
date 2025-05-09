@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Eurovision points table - Help</title>
+	<meta name="theme-color" content="#f0f">
+	<link rel="stylesheet" href="../../../font.css">
+	<link rel="stylesheet" href="../../../v3-posts.css">
+	<link rel="stylesheet" href="../master.css">
+</head>
+<body>
+	<article>
+		<h1>Help page</h1>
+		<p>I created this tool to predict the winner of Eurovision immediately after the televote points of the country, that came second in the jury vote, are revealed. Previously I have used my phone's calculator for this, but the user experience is error-prone. This tool includes error checking and provides visual feedback to the user. I am not affiliated with Eurovision and this tool was created without permission from Eurovision.</p>
+		<p>This tool relies on the fact that the total number of points given is known: A jury from every participating country (<code>37</code>) gives points (<code>1 + 2 + 3 + 4 + 5 + 6 + 7 + 8 + 10 + 12 = 58</code>), and in total the juries give <code>37 * 58 = 2146</code> points. The televote happens in a similar manner: all participating countries (<code>37</code>) and The Rest Of The World give <code>58</code> points each, totaling <code>(37 + 1) * 58 = 2204</code>. There are many ways to do this calculation, but for example, by subtracting the points of all other
+		countries from the total points to be given (<code>4350</code>), one gets the points of the remaining country.</p>
+		<details>
+			<summary>Extra: Commentary on the system</summary>
+			<p>The introduction of Rest Of The World points a couple of years back was either poorly communicated by Eurovision or I had somehow missed it in the leadup to the final. My lackluster preparation led me to falsely believe that Käärijä had won by a point. I was quite disappointed firstly when Loreen won and secondly when I learned about my mistake of omitting ROTW from my calculation.</p>
+			<p>It is somewhat misleading that year after year the hosts announce that half of the points come from the juries and half from the audience, when that is not exactly true.</p>
+		</details>
+		<h2>Operation</h2>
+		<p>The tool is designed to be used in the same order as the television broadcast. However, there is not much use in entering the jury votes before all the jury votes are revealed, as they change with every jury. Immediately after the jury vote is finished I recommend entering the jury vote results in ascending order.</p>
+		<img src="1.png" class="smallimg">
+		<details>
+			<summary>Extra: Entering jury points</summary>
+			<p>The jury vote results don't actually need to be entered at all for the tool to function, but they're a useful checksum when entering the other points and <b>without jury votes the tool will not announce a winner, the user has to look for who has the most points in the end.</b></p>
+			<p>The jury vote results should be entered in ascending order because the bottom countries receive their televote results first, after which their televote points are no longer visible.</p>
+			<p>If you enter too many jury vote points the system will warn you:</p>
+			<img src="red1.png" class="smallimg">
+		</details>
+		<p>When entering the televotes as they come in, you will see that the tool calculates the sum of a country's jury vote points and televote points, and places it in grey in the "sum" column. This requires no action from the user, it is only a placeholder. However, if it doesn't match the value on your television, you should be concerned. In this way the jury vote results act as a checksum when entered. When a country's televote points have been entered, the country's name and flag are greyed out for clarity.</p>
+		<img src="2.png" class="smallimg">
+		<details>
+			<summary>Extra: Calculations and placeholders</summary>
+			<p>When two out of three columns have a value, the third column is calculated. You could, for example, enter a country's jury vote points and sum, and the tool would calculate the televote points:</p>
+			<img src="3.png" class="smallimg">
+		</details>
+		<p>After all countries but one have had their televote points entered, the tool calculates the televote points of the remaining country and puts the value in a placeholder. If that country also has a jury vote value, the tool calculates the sum for that country. To announce the winner, the tool finds the country with the highest sum.</p>
+		<img src="4.png" class="smallimg">
+		<p>Countries with no sum (not even a placeholder) are excluded from the winner search. This is why the jury vote results should be entered.</p>
+
+		<h1>Advanced tips</h1>
+		<h2>Statistics snippets</h2>
+		<p>The two lines of text under the table update to reflect the progress of entering the results. They keep track of the remaining jury vote points and televote points that haven't yet been given to any country.</p>
+		<h2>"Countries to remove"</h2>
+		<p>This text input is used to remove unwanted countries from the table. My plan is to exclude disqualified countries from this tool before the grand final, but in case I don't do that, or for whatever testing purposes, the option is there for the user. Enter a comma-separated list of country names. It is not case-sensitive, but it is space-sensitive, so for example "uNiteD KiNgDOm" is fine but "UnitedKingdom" is not. Whitespace next to commas doesn't matter. The input field uses <code>LocalStorage</code> in the background to cache the value between sessions.</p>
+		<p>Refresh the page to apply the change.</p>
+		<h2>Redcell</h2>
+		<p>When you enter an erroneous value, the text of the cell turns red as an indicator. This is not the end of the world: the tool will still continue functioning mostly normally, but you should be aware of why it is giving you the red cell and what effects an incorrect value there might have. A simple way to get rid of a redcell is to delete the red value. All of the redcell logic is explained below:</p>
+		<ul>
+			<li>
+				Whenever you edit the value of a cell, all of the cells on that row are initially turned back to white if they were red.
+				<ul><li class="disclaimer">This could be classified as a bug, but it's the simplest way to remove stale redcells, so it stays for now.</li></ul>
+			</li>
+			<li>
+				The cell you're editing turns red if the sum of jury points given out is greater than it should be,
+				<ul><li class="disclaimer">So if you sum every value in the "jury" column and it's <code>&gt;2146</code>, the cell you're in turns red.</li></ul>
+			</li>
+			<li>if a negative value is entered,</li>
+			<li>
+				if the calculation result from two columns results in a negative number,
+				<ul><li class="disclaimer">Requires a value in the "sum" column. For example:<img src="red2.png" class="smallimg"></li></ul>
+			</li>
+			<li>if a number that is not equal to the placeholder is entered, or</li>
+			<li>if all three columns have a value and one value is changed such that the calculation is no longer true.</li>
+		</ul>
+		<p>Whenever a cell turns red, a simple explanation is provided in the developer console. This can help you understand what you're doing wrong.</p>
+		<p class="disclaimer">Published on 2025-05-10</p>
+	</article>
+</body>
+</html>

@@ -1,0 +1,104 @@
+:root {
+	--posts-teal: #0ff;
+	--posts-lime: #ff0;
+}
+a {
+	font-size: inherit;
+}
+h1, h2 {
+	color: #f0f;
+}
+.segregate {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	text-align: center;
+}
+.segregate > * {
+	max-width: 50%;
+	max-height: 150px;
+	flex: 1;
+}
+.hscroll {
+	overflow-x: auto;
+	max-width: 500px;
+	margin: 0 auto;
+}
+.pinktext {
+	color: #f0f;
+}
+.cyantext {
+	color: #0ff;
+}
+.yellowtext {
+	color: #ff0;
+}
+img {
+	width: unset;
+}
+table {
+	width: 100%; /* container has limit */
+	border-collapse: collapse;
+}
+tr:nth-child(even) {
+	background-color: rgba(255, 255, 255, 0.07);
+}
+td:first-child {
+	text-wrap: nowrap;
+}
+td:first-child *, h1 * {
+	vertical-align: middle;
+}
+table img, h1 img {
+	height: 1.5em;
+}
+table input {
+	color: white;
+	background-color: black;
+	width: 40px;
+	border-radius: 5px;
+	padding: 0 3px;
+	font-size: 1.25em;
+	display: block;
+}
+.juryin {
+	border: 1px solid #f0f;
+}
+.telein {
+	border: 1px solid #0ff;
+}
+.sumin {
+	border: 1px solid #ff0
+}
+.redcell {
+	color: red;
+}
+.greyedout {
+	opacity: 0.4;
+}
+textarea {
+	color: white;
+	background-color: black;
+	border-radius: 5px;
+	padding: 4px 8px;
+	font-size: 1.25em;
+	display: block;
+	border: none;
+	width: 100%;
+	box-sizing: border-box;
+}
+details {
+	border: none;
+	border-radius: 0;
+	border-left: 4px solid #0ff;
+	background-color: #044;
+	padding: 3px 6px;
+	box-sizing: border-box;
+}
+.smallimg {
+	width: min(500px, 100%);
+	border: 2px solid #aaa;
+	border-radius: 8px;
+	box-shadow: black 0 0 10px;
+	margin: 4px;
+}

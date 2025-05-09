@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Eurovision points table</title>
+	<meta name="description" content="A tool for marking points and predicting the winner">
+	<meta name="theme-color" content="#f0f">
+	<link rel="stylesheet" href="../../font.css">
+	<link rel="stylesheet" href="../../v3-posts.css">
+	<link rel="stylesheet" href="master.css">
+	<script src="app.js" defer></script>
+</head>
+<body>
+	<article>
+		<div class="segregate">
+			<img src="ESC_Basel2025_White_V2.svg" alt="Eurovision logo">
+			<h1><a href="help/">Help</a></h1>
+		</div>
+		<div class="hscroll">
+			<table id="table">
+				<tr>
+					<th>Country</th>
+					<th class="pinktext">Jury</th>
+					<th class="cyantext">Tele</th>
+					<th class="yellowtext">Sum</th>
+				</tr>
+			</table>
+		</div>
+		<p id="stats"></p>
+		<p id="jurystats">2146 jury points remaining.</p>
+		<h1 id="winner"></h1>
+		<br>
+		<textarea id="toremove" placeholder="Countries to remove..." rows="5" onchange="toremoveChanged(event)"></textarea>
+		<p class="disclaimer">Published on 2025-05-10<br>Heart flag logos are from <a href="https://eurovision.tv/mediacentre/logos-and-artwork">https://eurovision.tv/mediacentre/logos-and-artwork</a>.</p>
+	</article>
+</body>
+</html>
