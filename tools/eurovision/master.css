@@ -96,9 +96,10 @@ details {
 	box-sizing: border-box;
 }
 .smallimg {
-	width: min(500px, 100%);
+	width: min(500px, calc(100% - 8px));
 	border: 2px solid #aaa;
 	border-radius: 8px;
 	box-shadow: black 0 0 10px;
 	margin: 4px;
+	box-sizing: border-box;
 }
