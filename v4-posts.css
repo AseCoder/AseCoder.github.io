@@ -1,0 +1,88 @@
+:root {
+	--posts-blackco: #111115;
+	--posts-darkgrey: #222227;
+	/* average of the other two greys: */
+	--posts-grey: #5f6070;
+	--posts-lightgrey: #9c9db8;
+	--posts-teal: #52ffb1;
+	--posts-lime: #c5ff59;
+	--posts-text: #fff;
+}
+
+body.light {
+	--posts-blackco: initial;
+	--posts-darkgrey: #eee;
+	/* average of the other two greys: */
+	--posts-grey: #aaa;
+	--posts-lightgrey: #666;
+	--posts-teal: #07b566;
+	--posts-lime: #69ab00;
+	--posts-text: initial;
+}
+
+body {
+	background-color: var(--posts-blackco);
+	color: var(--posts-text);
+	font-family: dyslexie, sans-serif;
+	hyphens: auto;
+}
+
+article {
+	width: min(100%, 900px);
+	margin: auto;
+}
+
+img.large {
+	width: 100%;
+}
+
+img.small {
+	width: min(500px, 100%);
+}
+
+a>img {
+	vertical-align: top;
+	/* https: //stackoverflow.com/questions/17505418/link-wrapped-around-image-makes-div-slightly-taller?rq=3 */
+}
+
+code {
+	background-color: var(--posts-darkgrey);
+	padding: 2px 5px;
+	border-radius: 4px;
+}
+
+summary::marker {
+	color: var(--posts-teal);
+	font-size: 1.5em;
+}
+
+a:link {
+	color: var(--posts-teal);
+}
+
+a:visited {
+	color: var(--posts-lime);
+}
+
+.disclaimer {
+	color: var(--posts-lightgrey);
+}
+
+.scrollcontainer {
+	overflow: auto;
+}
+
+table.posts-styled {
+	border-collapse: collapse;
+}
+
+table.posts-styled th,
+table.posts-styled td {
+	border: 1px solid var(--posts-lightgrey);
+	padding: 0 4px;
+	text-wrap: nowrap;
+}
+
+table.posts-styled tr:nth-child(even) {
+	background-color: var(--posts-darkgrey);
+}

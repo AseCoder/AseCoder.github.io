@@ -1,0 +1,24 @@
+:root {
+	--blue-bg: #083290;
+}
+
+body.light {
+	--blue-bg: #b0d9ff;
+}
+
+span.blue {
+	background-color: var(--blue-bg);
+	padding: 4px 10px;
+	border-radius: 6px;
+	font-family: consolas, monospace;
+	margin: 0 3px;
+	text-wrap: nowrap;
+}
+
+table.ingredients td:first-child {
+	text-align: right;
+}
+
+table.ingredients th:first-child {
+	text-align: center;
+}
