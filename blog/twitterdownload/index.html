@@ -5,88 +5,76 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>How to download videos from Twitter</title>
 	<link rel="stylesheet" href="../../font.css">
-	<link rel="stylesheet" href="../../v3-posts.css">
+	<link rel="stylesheet" href="../../v4-posts.css">
 	<meta name="theme-color" content="#946c4b">
 	<meta name="description" content="A tutorial">
 </head>
 <body>
-	<article>
+	<div class="posts-container">
 		<h1>How to download videos from Twitter</h1>
-		<p>For the technologically inclined. Working as of 2025-01-18.</p>
+		<p>For the technologically inclined. Working as of 2025-05-31.</p>
 
 		<h2>1. Finding the video URL</h2>
-		<p>When you have navigated to the twitter video you would like to download, open the network tab in your browser's developer tools and refresh the page to record the first requests of the initial page load. Then look for a request whose domain starts with <code>prod-</code>, file name starts with <code>master_dynamic</code> and file extension is <code>.m3u8</code>. This request only happens once and it happens when the page loads. Copy the whole URL of the request. Do not copy the <code>playlist_</code> URL as I've found that that one doesn't include HD streams.</p>
-		<img src="devtools.png" alt="The request highlighted in the network tab">
+		<p>When you have navigated to the twitter video you would like to download, open the network tab in your browser's developer tools and refresh the page to record the first requests of the initial page load. Then look for a request whose domain starts with <code>prod-</code>, file name starts with <code>master_dynamic_delta</code> and file extension is <code>.m3u8</code>. This request only happens once and it happens when the page loads. Copy the whole URL of the request.</p>
+		<img src="devtools.png" alt="The request highlighted in the network tab" class="large">
+		<p class="disclaimer"><i>This image is somewhat outdated. The resource identifier is not exactly the same anymore.</i></p>
 		<p>There is another type of URL, too: its domain name is <code>video.twimg.com</code> and the file extension and file type (<code>x-mpegurl</code>) are the same. There is no <code>master_dynamic</code> file, but I succeeded by copying the URL of the first request.</p>
-		<img src="devtools2.png" alt="The request highlighted in the network tab">
+		<img src="devtools2.png" alt="The request highlighted in the network tab" class="large">
 
 		<h2>2. Downloading with FFMPEG</h2>
 		<p>Using the command prompt, navigate to the directory in which you would like to save the video. Then run the following command: <code>ffmpeg -i "the url you copied" -c copy output.mp4</code></p>
 		<p>This points FFMPEG to download the video stream from the internet and save it to a file. The console will spew a lot of nonsense as it downloads each individual <code>chunk</code> of the video.</p>
 
-		<h2>3. Tips & Tricks for downloading livestreams live</h2>
-		<p><b>Rationale:</b> The above instructions should work fine for all VODs and other ordinary videos, but Twitter livestreams are another beast entirely. There is more to learn, but here are the fruits of my testing:</p>
+		<h1>On livestreams</h1>
+		<p>The motivation for this explainer came when I wanted to download the Twitter livestream of Starship's third flight test. Downloading stream replays, ie. VODs, was trivial, but I could never get a satisfactory result when downloading a livestream live, as it was happening. Looking back, my problems were largely caused by Twitter's shitty streaming infrastructure, no doubt a consequence of Elon, although my limited experience with <code>ffmpeg</code> and video streams probably didn't make the situation any better.</p>
+
+		<p>Twitter has now rolled out 4K streaming and I applaud the changes they've made to the streaming protocol. Live downloads run without hiccups and the bitrate is commendable. These changes required a little research to fully understand, and I now feel confident in my ability to explain:</p>
+
+		<h2>Twitter's streaming protocol in practice</h2>
+		
+		<p>Everything starts with a HTTP request to <code>master_dynamic_delta.m3u8</code>. It is a wrapper and contains all of the <i>programs</i>, each corresponding to a different video resolution. These programs all have their own unique <code>dynamic_delta.m3u8</code> playlist. In my experience this playlist resource is continually updated to include the latest <i>chunks</i> of the stream, and therefore repeatedly appears in the browser's developer tools.</p>
+		
+		<p>I have observed two kinds of playlists. One kind includes a dozen <code>.ts</code> (chunk) files amounting to 20–30 seconds of video, and the other kind includes all chunks from <code>0</code> up to the latest chunk.</p>
+		<!-- is seeking to start only possible on streams that have all chunks? -->
+
+		<h2>Secret low-latency stream</h2>
+
+		<p>By replacing <code>delta</code> with <code>lowlatency</code> in the URL, one can access a lower latency stream that nevertheless has the same quality as the higher latency stream. (Same bitrate in my testing.) It has a few oddities, though:</p>
 		<ul>
-			<li>
-				When <code>ffprobe</code>'ing the stream <code>url.m3u8</code>, one might find that the stream is composed of multiple <i>programs</i>, each with their own audio and video stream. This is to 	facilitate different video resolutions.
-				<ul><li>The desired program can be chosen with <code>-map p:4</code>, where 4 is the desired program index. I've found that if the program is not selected manually, ffmpeg defaults to a low resolution stream.</li></ul>
+			<li>The Twitter client always plays the high-latency stream, so it's unclear where, or if, the low-latency stream is used.</li>
+			<li>Instead of all or a dozen chunks, a <code>dynamic_lowlatency.m3u8</code> playlist has only included three chunks in my testing.
+				<ul><li>This means that seeking or scrubbing a low-latency stream is not possible, because the earlier chunks are not available (even though their URLs are easy to guess).</li></ul>
 			</li>
-			<li>
-				If Twitter only provides a <code>master_dynamic_highlatency.m3u8</code>, one can try swapping "high" out for "low" to access the low-latency stream. <b>This is beneficial especially when playing the livestream in VLC instead of the Twitter client.</b>
+			<li>The low-latency stream is not terminated correctly.
+				<ul><li>I once tried downloading both the high-latency and low-latency stream. When the stream ended, the high-latency stream's download ended correctly, but the low-latency stream's download process errored and kept trying to read chunks that didn't exist.</li></ul>
 			</li>
+			<li>But just to be clear, the low-latency stream does have a noticeably lower latency than the high-latency stream (roughly ten seconds).</li>
+		</ul>
+
+		<h2>FFMPEG and VLC</h2>
+
+		<p>Ever since SpaceX stopped streaming launches (on YouTube), the community has despised Twitter's stream UI, and recently they have resorted to watching the stream with VLC. By entering a <code>master_dynamic_lowlatency.m3u8</code> or resolution-specific <code>dynamic_lowlatency.m3u8</code> URL into the "Open network stream" field, one can watch a Twitter livestream with a better UI and lower latency that in the Twitter web client. The only downside is that VLC cannot seek the stream whereas the Twitter UI can.</p>
+
+		<p>FFMPEG is a powerful beast and was an important tool in my research for this explainer. Here are some example commands and explanations:</p>
+		<ul>
+			<li><code>ffprobe "master_dynamic_delta.m3u8"</code><ul><li>Lists all of the programs in the master file, and their video resolutions.</li></ul></li>
 			<li>
-				Typically the download will be plagued with audio/video sync issues, parts of the video being corrupted or missing, or <code>timestamp discontinuity</code> warnings from ffmpeg.
+				<code>ffmpeg -ss 0 -i "master_dynamic_delta.m3u8" -c copy -map 0:10 -map 0:11 output.mp4</code>
 				<ul>
-					<li>Intuitively the high latency stream should be used for its better stability.</li>
-					<!-- ^ does that solve missing video bits (~2 seconds each, random occurences)? -->
-					<li>
-						One can try downloading the video and audio streams into separate files with <code>-map 0:13 video.mp4 -map 0:14 audio.mp4</code>.
-						<ul>
-							<li>Oddly this results in high CPU usage (20–40%)</li>
-							<li>and when the files are combined, the audio is slightly out of sync.</li>
-							<!-- combining the separate files works fine (with above issues), so why doesnt downloading both into one file? -->
-						</ul>
+					<li>Seeks to the beginning and downloads streams <code>10</code> and <code>11</code>, which are usually the 4K video stream and the highest quality audio stream.</li>
+					<li>Use <code>ffprobe</code> to determine the correct stream numbers to use.</li>
+					<li><code>-ss [seconds]</code> starts reading the stream at the specified seconds if seeking is possible.</li>
+					<li>Use <code>ffplay</code> to determine the current amount of seconds elapsed since the beginning of the stream.
+						<ul><li>When using
+						<code>-ss</code> in an <code>ffplay</code> command, the displayed seconds amount is not correct. For example, I have seen 96000 seconds when the correct amount was 5000.</li></ul>
 					</li>
 				</ul>
 			</li>
 		</ul>
 
-		<details>
-			<summary>4. Outdated Tips & tricks</summary>
-			<p class="disclaimer">(The following tips are not to be used. This section provides some insight and reference into my past testing and mainly functions as a list of bad ideas I've already tried.)</p>
-			<ul>
-				<li>
-					<p>If the download hangs, it might be beneficial to add <code>-rw_timeout [microseconds]</code> before <code>-i</code> to make FFMPEG retry if the network request times out. Try, for example, 5 seconds: <code>5000000</code>. </p>
-				</li>
-				<li>
-					<p>According to my experimentation, though, this corrupts the parts of the output file where a network timeout or <code>timestamp discontinuity</code> happens. <b>For this I prescribe <code>-fflags +genpts</code> and <code>-reset_timestamps 1</code> immediately after the input file</b>, though I'm not sure which of these fixes the problem. </p>
-				</li>
-				<li>
-					<p><b>You might also try downloading the video and audio separately using <code>-map</code> and then combining them.</b></p>
-				</li>
-				<li>
-					<p><s>When downloading a livestream live, you could try adding <code>-re</code> to the beginning.</s> <spans style="color: red;">DO NOT DO THIS!</spans> <a href="https://stackoverflow.com/questions/48479141/understanding-ffmpeg-re-parameter">Reference</a> </p>
-				</li>
-				<li style="color: yellow;">
-					<p><code>timestamp discontinuity</code> is a significant problem when downloading livestreams live. Further experimentation is required.</p>
-				</li>
-				<li style="color: yellow;">
-					<p>When downloading the streams separately, it might not be necessary to run two commands. Just have two outputs instead.</p>
-				</li>
-			</ul>
-			<p>
-				In conclusion, I've found the following works best for downloading a replay of a livestream:
-				<br>
-				<code>ffmpeg -rw_timeout 3000000 -i "url" -fflags +genpts -reset_timestamps 1 -map 0:[id of video stream] -c copy output_v.mp4</code>
-				<br>
-				<code>ffmpeg -rw_timeout 3000000 -i "url" -fflags +genpts -reset_timestamps 1 -map 0:[id of audio stream] -c copy output_a.mp4</code>
-				<br>
-				And then combining the two:
-				<br>
-				<code>ffmpeg -i output_v.mp4 -i output_a.mp4 -c copy output.mp4</code>
-			</p>
-		</details>
-		<p class="disclaimer">Published 2024-03-14, last edited 2025-01-18</p>
-	</article>
+		<p>When given a <code>master_dynamic_delta.m3u8</code> URL and nothing else, both <code>ffmpeg</code> and VLC will sometimes select a low-resolution stream by default. This is why I recommend selecting the 4K stream in the Twitter stream UI first, <i>then</i> copying the <code>dynamic_delta.m3u8</code> URL for the 4K stream, then changing <code>delta</code> to <code>lowlatency</code> and finally entering it into VLC. For FFMPEG I recommend manually selecting the best video and audio stream, but I encourage experimenting with something along the lines of <code>ffmpeg ... -map 0:p:4</code> and <code>ffplay -vst p:4</code>.</p>
+
+		<p class="disclaimer">Published 2024-03-14, last edited 2025-06-01</p>
+	</div>
 </body>
 </html>
