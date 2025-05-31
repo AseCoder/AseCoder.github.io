@@ -5,6 +5,7 @@
 	--posts-grey: #5f6070;
 	--posts-lightgrey: #9c9db8;
 	--posts-teal: #52ffb1;
+	--posts-teal-dark: #0d1a14;
 	--posts-lime: #c5ff59;
 	--posts-text: #fff;
 }
@@ -16,6 +17,7 @@ body.light {
 	--posts-grey: #aaa;
 	--posts-lightgrey: #666;
 	--posts-teal: #07b566;
+	--posts-teal-dark: #e6fff4;
 	--posts-lime: #69ab00;
 	--posts-text: initial;
 }
@@ -27,7 +29,7 @@ body {
 	hyphens: auto;
 }
 
-article {
+body>div.posts-container {
 	width: min(100%, 900px);
 	margin: auto;
 }
@@ -51,9 +53,21 @@ code {
 	border-radius: 4px;
 }
 
-summary::marker {
+details.styled-simple>summary::marker {
 	color: var(--posts-teal);
 	font-size: 1.5em;
+}
+
+details.styled-bold {
+	border-left: 6px solid var(--posts-teal);
+	padding: 8px 0 8px 10px;
+	box-sizing: border-box;
+	background-color: var(--posts-teal-dark);
+}
+
+details.styled-bold>summary {
+	font-size: 1.5em;
+	font-weight: bold;
 }
 
 a:link {
