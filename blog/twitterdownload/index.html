@@ -53,7 +53,7 @@
 
 		<h2>FFMPEG and VLC</h2>
 
-		<p>Ever since SpaceX stopped streaming launches (on YouTube), the community has despised Twitter's stream UI, and recently they have resorted to watching the stream with VLC. By entering a <code>master_dynamic_lowlatency.m3u8</code> or resolution-specific <code>dynamic_lowlatency.m3u8</code> URL into the "Open network stream" field, one can watch a Twitter livestream with a better UI and lower latency that in the Twitter web client. The only downside is that VLC cannot seek the stream whereas the Twitter UI can.</p>
+		<p>Ever since SpaceX stopped streaming launches (on YouTube), the community has despised Twitter's stream UI, and recently they have resorted to watching the stream with VLC: By entering a <code>master_dynamic_lowlatency.m3u8</code> or resolution-specific <code>dynamic_lowlatency.m3u8</code> URL into the "Open network stream" field, one can watch a Twitter livestream with a better UI and lower latency than in the Twitter web client. The only downside is that VLC cannot seek the stream whereas the Twitter UI can.</p>
 
 		<p>FFMPEG is a powerful beast and was an important tool in my research for this explainer. Here are some example commands and explanations:</p>
 		<ul>
@@ -72,7 +72,7 @@
 			</li>
 		</ul>
 
-		<p>When given a <code>master_dynamic_delta.m3u8</code> URL and nothing else, both <code>ffmpeg</code> and VLC will sometimes select a low-resolution stream by default. This is why I recommend selecting the 4K stream in the Twitter stream UI first, <i>then</i> copying the <code>dynamic_delta.m3u8</code> URL for the 4K stream, then changing <code>delta</code> to <code>lowlatency</code> and finally entering it into VLC. For FFMPEG I recommend manually selecting the best video and audio stream, but I encourage experimenting with something along the lines of <code>ffmpeg ... -map 0:p:4</code> and <code>ffplay -vst p:4</code>.</p>
+		<p>When given a <code>master_dynamic_delta.m3u8</code> URL and nothing else, both <code>ffmpeg</code> and VLC will sometimes select a low-resolution stream by default. This is why I recommend selecting the 4K stream in the Twitter UI first, <i>then</i> copying the <code>dynamic_delta.m3u8</code> URL for the 4K stream, then changing <code>delta</code> to <code>lowlatency</code> and finally entering it into VLC. For FFMPEG I recommend manually selecting the best video and audio stream, but I encourage experimenting with something along the lines of <code>ffmpeg ... -map 0:p:4</code> and <code>ffplay -vst p:4</code>.</p>
 
 		<p class="disclaimer">Published 2024-03-14, last edited 2025-06-01</p>
 	</div>
