@@ -6,6 +6,12 @@ body.light {
 	--blue-bg: #b0d9ff;
 }
 
+@media print {
+	:root {
+		--blue-bg: #b0d9ff;
+	}
+}
+
 span.blue {
 	background-color: var(--blue-bg);
 	padding: 4px 10px;
