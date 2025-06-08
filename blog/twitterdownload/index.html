@@ -42,12 +42,13 @@
 		<p>By replacing <code>delta</code> with <code>lowlatency</code> in the URL, one can access a lower latency stream that nevertheless has the same quality as the higher latency stream. (Same bitrate in my testing.) It has a few oddities, though:</p>
 		<ul>
 			<li>The Twitter client always plays the high-latency stream, so it's unclear where, or if, the low-latency stream is used.</li>
-			<li>Instead of all or a dozen chunks, a <code>dynamic_lowlatency.m3u8</code> playlist has only included three chunks in my testing.
-				<ul><li>This means that seeking or scrubbing a low-latency stream is not possible, because the earlier chunks are not available (even though their URLs are easy to guess).</li></ul>
+			<li>Instead of all or a dozen chunks, a <code>dynamic_lowlatency.m3u8</code> playlist has only included three or four chunks in my testing.
+				<ul><li>This means that seeking or scrubbing a low-latency stream is not possible, because the earlier chunks are not available.</li></ul>
 			</li>
 			<li>The low-latency stream is not terminated correctly.
 				<ul><li>I once tried downloading both the high-latency and low-latency stream. When the stream ended, the high-latency stream's download ended correctly, but the low-latency stream's download process errored and kept trying to read chunks that didn't exist.</li></ul>
 			</li>
+			<li>When <code>master_dynamic_lowlatency.m3u8</code> is <code>ffprobe</code>'d, the resolution of the 1080p and 2160p video streams is <code>none</code> for some reason, but they still work.</li>
 			<li>But just to be clear, the low-latency stream does have a noticeably lower latency than the high-latency stream (roughly ten seconds).</li>
 		</ul>
 
@@ -63,7 +64,10 @@
 				<ul>
 					<li>Seeks to the beginning and downloads streams <code>10</code> and <code>11</code>, which are usually the 4K video stream and the highest quality audio stream.</li>
 					<li>Use <code>ffprobe</code> to determine the correct stream numbers to use.</li>
-					<li><code>-ss [seconds]</code> starts reading the stream at the specified seconds if seeking is possible.</li>
+					<li>
+						<code>-ss [seconds]</code> starts reading the stream at the specified seconds if seeking is possible.
+						<ul><li>Alternatively one could experiment with the <code>-live_start_index [number]</code> option of the HLS demuxer.</li></ul>
+					</li>
 					<li>Use <code>ffplay</code> to determine the current amount of seconds elapsed since the beginning of the stream.
 						<ul><li>When using
 						<code>-ss</code> in an <code>ffplay</code> command, the displayed seconds amount is not correct. For example, I have seen 96000 seconds when the correct amount was 5000.</li></ul>
@@ -73,8 +77,11 @@
 		</ul>
 
 		<p>When given a <code>master_dynamic_delta.m3u8</code> URL and nothing else, both <code>ffmpeg</code> and VLC will sometimes select a low-resolution stream by default. This is why I recommend selecting the 4K stream in the Twitter UI first, <i>then</i> copying the <code>dynamic_delta.m3u8</code> URL for the 4K stream, then changing <code>delta</code> to <code>lowlatency</code> and finally entering it into VLC. For FFMPEG I recommend manually selecting the best video and audio stream, but I encourage experimenting with something along the lines of <code>ffmpeg ... -map 0:p:4</code> and <code>ffplay -vst p:4</code>.</p>
-
-		<p class="disclaimer">Published 2024-03-14, last edited 2025-06-01</p>
+		<h2>References</h2>
+		<p><a href="https://ffmpeg.org/ffmpeg-all.html#hls-1">FFMPEG documentation on the HLS demuxer</a></p>
+		<p><a href="https://en.wikipedia.org/wiki/M3U">Wikipedia: M3U file format</a></p>
+		<p><a href="https://en.wikipedia.org/wiki/HTTP_Live_Streaming">Wikipedia: HLS</a></p>
+		<p class="disclaimer">Published 2024-03-14, last edited 2025-06-08</p>
 	</div>
 </body>
 </html>
