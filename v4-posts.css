@@ -81,6 +81,10 @@ details.styled-simple>summary::marker {
 	font-size: 1.5em;
 }
 
+details.styled-simple>summary {
+	cursor: pointer;
+}
+
 details.styled-bold {
 	border-left: 6px solid var(--posts-teal);
 	padding: 8px 0 8px 10px;
