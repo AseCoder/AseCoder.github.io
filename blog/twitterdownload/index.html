@@ -26,7 +26,7 @@
 		<p>This points FFMPEG to download the video stream from the internet and save it to a file. The console will spew a lot of nonsense as it downloads each individual <code>chunk</code> of the video.</p>
 
 		<h1>On livestreams</h1>
-		<p>The motivation for this explainer came when I wanted to download the Twitter livestream of Starship's third flight test. Downloading stream replays, ie. VODs, was trivial, but I could never get a satisfactory result when downloading a livestream live, as it was happening. Looking back, my problems were largely caused by Twitter's shitty streaming infrastructure, no doubt a consequence of Elon, although my limited experience with <code>ffmpeg</code> and video streams probably didn't make the situation any better.</p>
+		<p>The motivation for this explainer came when I wanted to download the Twitter livestream of Starship's third flight test. Downloading stream replays, ie. VODs, was trivial, but I could never get a satisfactory result when downloading a livestream live as it was happening. Looking back, my problems were largely caused by Twitter's shitty streaming infrastructure, no doubt a consequence of Elon, although my limited experience with <code>ffmpeg</code> and video streams probably didn't make the situation any better.</p>
 
 		<p>Twitter has now rolled out 4K streaming and I applaud the changes they've made to the streaming protocol. Live downloads run without hiccups and the bitrate is commendable. These changes required a little research to fully understand, and I now feel confident in my ability to explain:</p>
 
@@ -35,11 +35,16 @@
 		<p>Everything starts with a HTTP request to <code>master_dynamic_delta.m3u8</code>. It is a wrapper and contains all of the <i>programs</i>, each corresponding to a different video resolution. These programs all have their own unique <code>dynamic_delta.m3u8</code> playlist. In my experience this playlist resource is continually updated to include the latest <i>chunks</i> of the stream, and therefore repeatedly appears in the browser's developer tools.</p>
 		
 		<p>I have observed two kinds of playlists. One kind includes a dozen <code>.ts</code> (chunk) files amounting to 20–30 seconds of video, and the other kind includes all chunks from <code>0</code> up to the latest chunk.</p>
-		<!-- is seeking to start only possible on streams that have all chunks? -->
+
+		<p>The URL query parameter <code>_HLS_skip=YES</code> determines which kind is returned by the server.</p>
+		<ul>
+			<li>When the url ends in <code>dynamic_delta.m3u8?type=live</code>, all chunks are returned, going all the way back to the stream's beginning.</li>
+			<li>When the url ends in <code>dynamic_delta.m3u8?type=live&_HLS_skip=YES</code>, only a dozen of the most recent chunks are returned.</li>
+		</ul>
 
 		<h2>Secret low-latency stream</h2>
 
-		<p>By replacing <code>delta</code> with <code>lowlatency</code> in the URL, one can access a lower latency stream that nevertheless has the same quality as the higher latency stream. (Same bitrate in my testing.) It has a few oddities, though:</p>
+		<p>By replacing <code>delta</code> with <code>lowlatency</code> in the URL, one can access a lower latency stream that nevertheless is identical in quality to the higher latency stream. (Both streams are serving literally the same bytes.) It has a few oddities, though:</p>
 		<ul>
 			<li>The Twitter client always plays the high-latency stream, so it's unclear where, or if, the low-latency stream is used.</li>
 			<li>Instead of all or a dozen chunks, a <code>dynamic_lowlatency.m3u8</code> playlist has only included three or four chunks in my testing.
@@ -49,8 +54,23 @@
 				<ul><li>I once tried downloading both the high-latency and low-latency stream. When the stream ended, the high-latency stream's download ended correctly, but the low-latency stream's download process errored and kept trying to read chunks that didn't exist.</li></ul>
 			</li>
 			<li>When <code>master_dynamic_lowlatency.m3u8</code> is <code>ffprobe</code>'d, the resolution of the 1080p and 2160p video streams is <code>none</code> for some reason, but they still work.</li>
-			<li>But just to be clear, the low-latency stream does have a noticeably lower latency than the high-latency stream (roughly ten seconds).</li>
+			<li>
+				But just to be clear, the low-latency stream does have a noticeably lower latency than the high-latency stream (roughly ten seconds) (probably an exact multiple of the 3-second chunks so 9–12 seconds).
+				<ul>
+					<li>The difference in latency is because the low-latency stream's playlist simply serves more recent chunks.</li>
+					<li>I've found that the most recent chunk in the <b>high</b>-latency stream's playlist can be <i>10 seconds old.</i></li>
+					<li>In contrast, the low-latency stream's playlist's most recent chunk is usually dated at the same second as the HTTP request to the playlist's URL. Therefore I conclude that the high-latency stream is intentionally delaying chunks for some reason.</li>
+				</ul>
+			</li>
 		</ul>
+
+		<details class="styled-simple">
+			<summary>More on how chunks are "dated":</summary>
+			<p>The playlist <code>.m3u8</code> has comments such as <code>#EXT-X-PROGRAM-DATE-TIME:2025-06-08T14:24:09.404Z</code> that each correspond to one chunk (except in the low-latency stream's playlists, where the last couple of chunks do not have this comment). This date format is human-readable. There is another date hidden in the chunks' filenames. For example in <code>chunk_1749828580033639606_156_a.ts</code>, "1749828580033" is the date. It is formatted as milliseconds elapsed since the UNIX epoch. The rest of the number is seemingly random, or at least its purpose is not immediately apparent. Technically it's possible that the date part could be 3 characters shorter, such that it expresses only second-accuracy.</p>
+
+			<p>When <a href="https://asecoder.github.io/tools/epochtoy/">parsed</a>, these filename dates are consistently about 5–6 seconds earlier than the corresponding human-readable date comment. It is unclear if this filename date is the starting or ending time of the chunk, but ending time would make more sense in the case of same-second chunks in the low-latency playlist.</p>
+			<br>
+		</details>
 
 		<h2>FFMPEG and VLC</h2>
 
@@ -66,7 +86,7 @@
 					<li>Use <code>ffprobe</code> to determine the correct stream numbers to use.</li>
 					<li>
 						<code>-ss [seconds]</code> starts reading the stream at the specified seconds if seeking is possible.
-						<ul><li>Alternatively one could experiment with the <code>-live_start_index [number]</code> option of the HLS demuxer.</li></ul>
+						<ul><li>Alternatively one could experiment with the <code>-live_start_index [number]</code> option of the HLS demuxer.</li><li>Note that I haven't gotten either of these to work. I have only been able to watch the stream from the beginning with <code>ffplay -ss 0</code>. This requires further testing.</li></ul>
 					</li>
 					<li>Use <code>ffplay</code> to determine the current amount of seconds elapsed since the beginning of the stream.
 						<ul><li>When using
@@ -76,12 +96,13 @@
 			</li>
 		</ul>
 
-		<p>When given a <code>master_dynamic_delta.m3u8</code> URL and nothing else, both <code>ffmpeg</code> and VLC will sometimes select a low-resolution stream by default. This is why I recommend selecting the 4K stream in the Twitter UI first, <i>then</i> copying the <code>dynamic_delta.m3u8</code> URL for the 4K stream, then changing <code>delta</code> to <code>lowlatency</code> and finally entering it into VLC. For FFMPEG I recommend manually selecting the best video and audio stream, but I encourage experimenting with something along the lines of <code>ffmpeg ... -map 0:p:4</code> and <code>ffplay -vst p:4</code>.</p>
+		<p>When given a <code>master_dynamic_delta.m3u8</code> URL and nothing else, both <code>ffmpeg</code> and VLC will sometimes select a low-resolution stream by default. This is why I recommend selecting the 4K stream in the Twitter UI first, <i>then</i> copying the <code>dynamic_delta.m3u8</code> URL for the 4K stream, then changing <code>delta</code> to <code>lowlatency</code> and finally entering it into VLC. For FFMPEG I recommend manually selecting the best video and audio stream, for example <code>ffmpeg ... -map 0:p:3 -dn</code> selects the fourth program and discards data streams (<code>timed_id3</code>).</p>
 		<h2>References</h2>
 		<p><a href="https://ffmpeg.org/ffmpeg-all.html#hls-1">FFMPEG documentation on the HLS demuxer</a></p>
 		<p><a href="https://en.wikipedia.org/wiki/M3U">Wikipedia: M3U file format</a></p>
 		<p><a href="https://en.wikipedia.org/wiki/HTTP_Live_Streaming">Wikipedia: HLS</a></p>
-		<p class="disclaimer">Published 2024-03-14, last edited 2025-06-08</p>
+		<a href="https://mashable.com/article/elon-musk-twitter-periscope-test">A 2023 Mashable article about livestreaming on Twitter</a>
+		<p class="disclaimer">Published 2024-03-14, last edited 2025-06-13</p>
 	</div>
 </body>
 </html>
