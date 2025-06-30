@@ -93,8 +93,18 @@ details.styled-bold {
 }
 
 details.styled-bold>summary {
-	font-size: 1.5em;
+	cursor: pointer;
 	font-weight: bold;
+}
+
+details.styled-bold>summary.h1,
+details.styled-bold>summary.h1::marker {
+	font-size: 1.5em;
+}
+
+details.styled-bold>summary.h2,
+details.styled-bold>summary.h2::marker {
+	font-size: 1.15em;
 }
 
 a:link {
