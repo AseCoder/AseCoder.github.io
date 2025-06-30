@@ -32,15 +32,23 @@
 
 		<h2>Twitter's streaming protocol in practice</h2>
 		
-		<p>Everything starts with a HTTP request to <code>master_dynamic_delta.m3u8</code>. It is a wrapper and contains all of the <i>programs</i>, each corresponding to a different video resolution. These programs all have their own unique <code>dynamic_delta.m3u8</code> playlist. In my experience this playlist resource is continually updated to include the latest <i>chunks</i> of the stream, and therefore repeatedly appears in the browser's developer tools.</p>
-		
-		<p>I have observed two kinds of playlists. One kind includes a dozen <code>.ts</code> (chunk) files amounting to 20–30 seconds of video, and the other kind includes all chunks from <code>0</code> up to the latest chunk.</p>
+		<p>Everything starts with a HTTP request to <code>master_dynamic_delta.m3u8</code>. This is the <i>index</i> (also known as a "master playlist") and it contains all the <i>variant streams</i> (aka. "programs" in FFMPEG) as a list of <code>dynamic_delta.m3u8</code> URLs, each playlist corresponding to a different video resolution. In my experience a variant stream's <code>dynamic_delta.m3u8</code> resource is continually updated to include the latest <i>chunks</i> of the stream, and therefore repeatedly appears in the browser's developer tools.</p>
 
-		<p>The URL query parameter <code>_HLS_skip=YES</code> determines which kind is returned by the server.</p>
-		<ul>
-			<li>When the url ends in <code>dynamic_delta.m3u8?type=live</code>, all chunks are returned, going all the way back to the stream's beginning.</li>
-			<li>When the url ends in <code>dynamic_delta.m3u8?type=live&_HLS_skip=YES</code>, only a dozen of the most recent chunks are returned.</li>
-		</ul>
+		<details class="styled-bold">
+			<summary class="h2">Extra: .m3u8 URLs</summary>
+			<p>I have observed two kinds of playlists. One kind includes a dozen <code>.ts</code> (chunk) files amounting to 20–30 seconds of video, and the other kind includes all chunks from <code>0</code> up to the latest chunk.</p>
+			
+			<p>The URL query parameter <code>_HLS_skip=YES</code> determines which kind is returned by the server.</p>
+			<ul>
+				<li>When the url ends in <code>dynamic_delta.m3u8?type=live</code>, all chunks are returned, going all the way back to the stream's beginning.</li>
+				<li>When the url ends in <code>dynamic_delta.m3u8?type=live&_HLS_skip=YES</code>, only a dozen of the most recent chunks are returned.</li>
+				<li>The Twitter web client seems to first request all the chunks and thereafter only the dozen.</li>
+			</ul>
+			
+			<p>The stream is always served from either a <code>us-west-1</code> or <code>us-west-2</code> subdomain, and I'm on the other side of the globe, so their CDN is probably only limited to those two servers. There is no geographical advantage to be taken, for example by trying to reduce latency by moving closer to the origin server with a VPN.</p>
+		</details>
+		
+		
 
 		<h2>Secret low-latency stream</h2>
 
@@ -48,14 +56,17 @@
 		<ul>
 			<li>The Twitter client always plays the high-latency stream, so it's unclear where, or if, the low-latency stream is used.</li>
 			<li>Instead of all or a dozen chunks, a <code>dynamic_lowlatency.m3u8</code> playlist has only included three or four chunks in my testing.
-				<ul><li>This means that seeking or scrubbing a low-latency stream is not possible, because the earlier chunks are not available.</li></ul>
+				<ul>
+					<li>This means that seeking or scrubbing a low-latency stream is not possible, because the earlier chunks are not available.</li>
+					<li>The <code>_HLS_skip=YES</code> query parameter has no effect on this.</li>
+				</ul>
 			</li>
 			<li>The low-latency stream is not terminated correctly.
 				<ul><li>I once tried downloading both the high-latency and low-latency stream. When the stream ended, the high-latency stream's download ended correctly, but the low-latency stream's download process errored and kept trying to read chunks that didn't exist.</li></ul>
 			</li>
 			<li>When <code>master_dynamic_lowlatency.m3u8</code> is <code>ffprobe</code>'d, the resolution of the 1080p and 2160p video streams is <code>none</code> for some reason, but they still work.</li>
 			<li>
-				But just to be clear, the low-latency stream does have a noticeably lower latency than the high-latency stream (roughly ten seconds) (probably an exact multiple of the 3-second chunks so 9–12 seconds).
+				But just to be clear, the low-latency stream does have a noticeably lower latency than the high-latency stream (roughly ten seconds) (probably an exact multiple of the 3-second-long chunks so 9–12 seconds).
 				<ul>
 					<li>The difference in latency is because the low-latency stream's playlist simply serves more recent chunks.</li>
 					<li>I've found that the most recent chunk in the <b>high</b>-latency stream's playlist can be <i>10 seconds old.</i></li>
@@ -64,34 +75,39 @@
 			</li>
 		</ul>
 
-		<details class="styled-simple">
-			<summary>More on how chunks are "dated":</summary>
-			<p>The playlist <code>.m3u8</code> has comments such as <code>#EXT-X-PROGRAM-DATE-TIME:2025-06-08T14:24:09.404Z</code> that each correspond to one chunk (except in the low-latency stream's playlists, where the last couple of chunks do not have this comment). This date format is human-readable. There is another date hidden in the chunks' filenames. For example in <code>chunk_1749828580033639606_156_a.ts</code>, "1749828580033" is the date. It is formatted as milliseconds elapsed since the UNIX epoch. The rest of the number is seemingly random, or at least its purpose is not immediately apparent. Technically it's possible that the date part could be 3 characters shorter, such that it expresses only second-accuracy.</p>
+		<details class="styled-bold">
+			<summary class="h2">Extra: dating chunks</summary>
+			<p>The playlist <code>.m3u8</code> has comments such as <code>#EXT-X-PROGRAM-DATE-TIME:2025-06-08T14:24:09.404Z</code> that each correspond to one chunk (except in the low-latency stream's playlists, where the last couple of chunks do not have this comment). This date format is human-readable. There is another date hidden in the chunks' filenames. For example in <code>chunk_1749828580033639606_156_a.ts</code>, "1749828580033" is the date. It is formatted as <i>milliseconds elapsed since the UNIX epoch</i>. The rest of the number is seemingly random, or at least its purpose is not immediately apparent. (Technically it's possible that the date part could be 3 characters shorter, such that it expresses only second-accuracy.)</p>
 
-			<p>When <a href="https://asecoder.github.io/tools/epochtoy/">parsed</a>, these filename dates are consistently about 5–6 seconds earlier than the corresponding human-readable date comment. It is unclear if this filename date is the starting or ending time of the chunk, but ending time would make more sense in the case of same-second chunks in the low-latency playlist.</p>
-			<br>
+			<p>When <a href="https://asecoder.github.io/tools/epochtoy/">parsed</a>, these filename dates are consistently about 5–6 seconds earlier than the corresponding human-readable date comment. It is unclear if this filename date is the starting or ending time of the chunk, but ending time would make more sense in the case of same-second chunks in the low-latency playlist. I doubt they would be serving chunks that are not yet complete.</p>
 		</details>
 
 		<h2>FFMPEG and VLC</h2>
 
-		<p>Ever since SpaceX stopped streaming launches (on YouTube), the community has despised Twitter's stream UI, and recently they have resorted to watching the stream with VLC: By entering a <code>master_dynamic_lowlatency.m3u8</code> or resolution-specific <code>dynamic_lowlatency.m3u8</code> URL into the "Open network stream" field, one can watch a Twitter livestream with a better UI and lower latency than in the Twitter web client. The only downside is that VLC cannot seek the stream whereas the Twitter UI can.</p>
+		<p>Ever since SpaceX stopped streaming launches (on YouTube), the community has despised Twitter's stream UI, and recently they have resorted to watching the stream with VLC: by entering a <code>master_dynamic_lowlatency.m3u8</code> or resolution-specific <code>dynamic_lowlatency.m3u8</code> URL into the "Open network stream" field, one can watch a Twitter livestream with a better UI and lower latency than in the Twitter web client. The only downside is that VLC cannot seek the stream whereas the Twitter UI can.</p>
 
 		<p>FFMPEG is a powerful beast and was an important tool in my research for this explainer. Here are some example commands and explanations:</p>
 		<ul>
-			<li><code>ffprobe "master_dynamic_delta.m3u8"</code><ul><li>Lists all of the programs in the master file, and their video resolutions.</li></ul></li>
+			<li><code>ffprobe "master_dynamic_delta.m3u8"</code><ul><li>Lists all the variant streams in the index, and their video resolutions.</li></ul></li>
 			<li>
-				<code>ffmpeg -ss 0 -i "master_dynamic_delta.m3u8" -c copy -map 0:10 -map 0:11 output.mp4</code>
+				<code>ffmpeg -i "master_dynamic_delta.m3u8" -c copy -map 0:10 -map 0:11 output.mp4</code>
 				<ul>
-					<li>Seeks to the beginning and downloads streams <code>10</code> and <code>11</code>, which are usually the 4K video stream and the highest quality audio stream.</li>
-					<li>Use <code>ffprobe</code> to determine the correct stream numbers to use.</li>
-					<li>
-						<code>-ss [seconds]</code> starts reading the stream at the specified seconds if seeking is possible.
-						<ul><li>Alternatively one could experiment with the <code>-live_start_index [number]</code> option of the HLS demuxer.</li><li>Note that I haven't gotten either of these to work. I have only been able to watch the stream from the beginning with <code>ffplay -ss 0</code>. This requires further testing.</li></ul>
+					<li>Downloads streams <code>10</code> and <code>11</code>, which are usually the 4K video stream and the highest quality audio stream.
+						<ul><li>Use <code>ffprobe</code> to determine the correct stream numbers to use.</li></ul>
 					</li>
-					<li>Use <code>ffplay</code> to determine the current amount of seconds elapsed since the beginning of the stream.
-						<ul><li>When using
-						<code>-ss</code> in an <code>ffplay</code> command, the displayed seconds amount is not correct. For example, I have seen 96000 seconds when the correct amount was 5000.</li></ul>
+				</ul>
+			</li>
+			<li>
+				<code>ffmpeg -live_start_index 0 -i ".../dynamic_delta.m3u8?type=live" -c copy output.mp4</code>
+				<ul>
+					<li>Seeks to the beginning using the <code>-live_start_index [number]</code> option of the HLS demuxer and downloads the stream.
+						<ul>
+							<li>The number is the index of the wanted chunk. For example <code>chunk_1749828580033639606_156_a.ts</code> is the 156th chunk.</li>
+							<li>This number can be roughly guesstimated because every chunk is 3 seconds long (±1 %).</li>
+							<li>This option can also be used with <code>ffplay</code>.</li>
+						</ul>
 					</li>
+					<li>Note that the entered input url must <b>not</b> include <code>_HLS_skip=YES</code>, as it would truncate the playlist to only the most recent chunks, when we specifically want all the chunks from the beginning.</li>
 				</ul>
 			</li>
 		</ul>
@@ -102,7 +118,7 @@
 		<p><a href="https://en.wikipedia.org/wiki/M3U">Wikipedia: M3U file format</a></p>
 		<p><a href="https://en.wikipedia.org/wiki/HTTP_Live_Streaming">Wikipedia: HLS</a></p>
 		<a href="https://mashable.com/article/elon-musk-twitter-periscope-test">A 2023 Mashable article about livestreaming on Twitter</a>
-		<p class="disclaimer">Published 2024-03-14, last edited 2025-06-13</p>
+		<p class="disclaimer">Published 2024-03-14, last edited 2025-06-30</p>
 	</div>
 </body>
 </html>
