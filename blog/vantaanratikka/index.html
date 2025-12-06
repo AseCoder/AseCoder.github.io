@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>PUTUU</title>
+	<link rel="stylesheet" href="../../font.css">
+	<link rel="stylesheet" href="../../v4-posts.css">
+	<meta name="theme-color" content="#946c4b">
+	<meta name="description" content="TODO">
+</head>
+<body class="dark">
+	<div class="posts-container">
+		<div class="posts-titlecontainer">
+			<h1>Mietteitä Vantaan <a href="">patikkaratikasta</a></h1>
+			<button onclick="swapMode()" class="posts-modeselector">
+				<div class="posts-activemode">
+					<div class="posts-svgmask" id="darkModeButton"></div>
+				</div>
+				<div>
+					<div class="posts-svgmask" id="lightModeButton"></div>
+				</div>
+			</button>
+			<script>
+				function swapMode() {
+					["dark", "light"].forEach(prefix => document.getElementById(prefix + "ModeButton").parentElement.classList.toggle("posts-activemode"));
+					localStorage.setItem("lightmode", !document.body.classList.toggle("dark"))
+				}
+				if (localStorage.getItem("lightmode") == "true") swapMode()
+			</script>
+		</div>
+		<p>se menee vaan aviapolikseen asti</p>
+	</div>
+</body>
+</html>

@@ -1,16 +1,4 @@
 :root {
-	--posts-blackco: #111115;
-	--posts-darkgrey: #222227;
-	/* average of the other two greys: */
-	--posts-grey: #5f6070;
-	--posts-lightgrey: #9c9db8;
-	--posts-teal: #52ffb1;
-	--posts-teal-dark: #0d1a14;
-	--posts-lime: #c5ff59;
-	--posts-text: #fff;
-}
-
-body.light {
 	--posts-blackco: initial;
 	--posts-darkgrey: #eee;
 	/* average of the other two greys: */
@@ -19,20 +7,20 @@ body.light {
 	--posts-teal: #07b566;
 	--posts-teal-dark: #e6fff4;
 	--posts-lime: #69ab00;
-	--posts-text: initial;
+	--posts-text: #000;
 }
 
-@media print {
-	:root {
-		--posts-blackco: initial;
-		--posts-darkgrey: #eee;
+@media not print {
+	body.dark {
+		--posts-blackco: #111115;
+		--posts-darkgrey: #222227;
 		/* average of the other two greys: */
-		--posts-grey: #aaa;
-		--posts-lightgrey: #666;
-		--posts-teal: #07b566;
-		--posts-teal-dark: #e6fff4;
-		--posts-lime: #69ab00;
-		--posts-text: initial;
+		--posts-grey: #5f6070;
+		--posts-lightgrey: #9c9db8;
+		--posts-teal: #52ffb1;
+		--posts-teal-dark: #0d1a14;
+		--posts-lime: #c5ff59;
+		--posts-text: #fff;
 	}
 }
 
@@ -42,6 +30,57 @@ body {
 	font-family: dyslexie, sans-serif;
 	font-size: 14px;
 	hyphens: auto;
+}
+
+.posts-titlecontainer {
+	display: flex;
+	justify-content: space-between;
+	align-items: baseline;
+	flex-wrap: wrap;
+	column-gap: 2em;
+}
+
+.posts-titlecontainer h1 {
+	margin: 0;
+}
+
+button.posts-modeselector {
+	border: 1px solid var(--posts-text);
+	border-radius: 15px;
+	padding: 0;
+	background-color: transparent;
+	display: flex;
+	overflow: hidden;
+	cursor: pointer;
+}
+
+button.posts-modeselector>div {
+	padding: 6px;
+	height: 2em;
+}
+
+.posts-modeselector .posts-svgmask {
+	background-color: var(--posts-text);
+	height: 100%;
+	aspect-ratio: 1;
+	mask-repeat: no-repeat;
+	mask-position: center;
+}
+
+.posts-modeselector>.posts-activemode {
+	background-color: var(--posts-teal);
+}
+
+.posts-modeselector>.posts-activemode>div {
+	background-color: var(--posts-teal-dark);
+}
+
+#darkModeButton {
+	mask-image: url("./posts-mooncrescent.svg");
+}
+
+#lightModeButton {
+	mask-image: url("./posts-sun.svg");
 }
 
 h1 {
