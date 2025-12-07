@@ -1,12 +1,12 @@
 :root {
-	--posts-blackco: initial;
+	--posts-blackco: #fff;
 	--posts-darkgrey: #eee;
 	/* average of the other two greys: */
 	--posts-grey: #aaa;
 	--posts-lightgrey: #666;
-	--posts-teal: #07b566;
+	--posts-teal: #00b377;
 	--posts-teal-dark: #e6fff4;
-	--posts-lime: #69ab00;
+	--posts-lime: #95b300;
 	--posts-text: #000;
 }
 
@@ -22,6 +22,9 @@
 		--posts-lime: #c5ff59;
 		--posts-text: #fff;
 	}
+	button.posts-modeselector {
+		visibility: visible !important;
+	}
 }
 
 body {
@@ -32,31 +35,36 @@ body {
 	hyphens: auto;
 }
 
-.posts-titlecontainer {
+div.posts-titlecontainer {
 	display: flex;
 	justify-content: space-between;
-	align-items: baseline;
+	align-items: top;
 	flex-wrap: wrap;
 	column-gap: 2em;
+	row-gap: .67em;
+	margin: .67em 0;
 }
 
-.posts-titlecontainer h1 {
+div.posts-titlecontainer h1 {
 	margin: 0;
 }
 
 button.posts-modeselector {
-	border: 1px solid var(--posts-text);
-	border-radius: 15px;
+	visibility: hidden;
 	padding: 0;
-	background-color: transparent;
+	border: 1px solid var(--posts-text);
+	border-radius: 1.1em;
+	background-color: var(--posts-text);
 	display: flex;
 	overflow: hidden;
 	cursor: pointer;
+	height: min-content;
 }
 
 button.posts-modeselector>div {
-	padding: 6px;
+	padding: .4em;
 	height: 2em;
+	background-color: var(--posts-blackco);
 }
 
 .posts-modeselector .posts-svgmask {
@@ -91,28 +99,39 @@ h2 {
 	font-size: 1.15em;
 }
 
-body>div.posts-container {
+body>main.posts-container {
 	width: min(100%, 900px);
-	margin: auto;
+	margin: 0 auto;
 }
 
-img.large {
+figure {
+	margin-inline: 0;
+}
+
+figcaption {
+	color: var(--posts-lightgrey);
+	font-style: italic;
+}
+
+img.posts-large {
 	width: 100%;
 }
 
-img.small {
+/* under development */
+img.posts-small {
 	width: min(500px, 100%);
-}
-
-a>img {
-	vertical-align: top;
-	/* https: //stackoverflow.com/questions/17505418/link-wrapped-around-image-makes-div-slightly-taller?rq=3 */
 }
 
 code {
 	background-color: var(--posts-darkgrey);
 	padding: 2px 5px;
 	border-radius: 4px;
+}
+
+blockquote {
+	margin-inline: 0;
+	padding: .3em 0 .3em 1em;
+	border-left: 4px solid var(--posts-grey);
 }
 
 details.styled-simple>summary::marker {
@@ -152,6 +171,15 @@ a:link {
 
 a:visited {
 	color: var(--posts-lime);
+}
+
+a>img {
+	vertical-align: top;
+	/* https: //stackoverflow.com/questions/17505418/link-wrapped-around-image-makes-div-slightly-taller?rq=3 */
+}
+
+sup>a {
+	text-decoration: none;
 }
 
 .disclaimer {
