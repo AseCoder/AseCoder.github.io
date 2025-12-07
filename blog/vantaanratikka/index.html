@@ -1,35 +1,109 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fi">
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>PUTUU</title>
+	<title>Mietteitä Vantaan patikkaratikasta</title>
 	<link rel="stylesheet" href="../../font.css">
 	<link rel="stylesheet" href="../../v4-posts.css">
 	<meta name="theme-color" content="#946c4b">
-	<meta name="description" content="TODO">
+	<meta name="description" content="Huvikseni sukelsin julkiseen aineistoon.">
 </head>
 <body class="dark">
-	<div class="posts-container">
-		<div class="posts-titlecontainer">
-			<h1>Mietteitä Vantaan <a href="">patikkaratikasta</a></h1>
-			<button onclick="swapMode()" class="posts-modeselector">
-				<div class="posts-activemode">
-					<div class="posts-svgmask" id="darkModeButton"></div>
-				</div>
-				<div>
-					<div class="posts-svgmask" id="lightModeButton"></div>
-				</div>
-			</button>
-			<script>
-				function swapMode() {
-					["dark", "light"].forEach(prefix => document.getElementById(prefix + "ModeButton").parentElement.classList.toggle("posts-activemode"));
-					localStorage.setItem("lightmode", !document.body.classList.toggle("dark"))
-				}
-				if (localStorage.getItem("lightmode") == "true") swapMode()
-			</script>
-		</div>
-		<p>se menee vaan aviapolikseen asti</p>
-	</div>
+	<main class="posts-container">
+		<header>
+			<div class="posts-titlecontainer">
+				<h1>Mietteitä Vantaan <a href="https://kotus.fi/kuukauden-sana-marraskuussa-2025-on-patikkaratikka/">patikkaratikasta</a></h1>
+				<button onclick="swapMode()" class="posts-modeselector">
+					<div class="posts-activemode">
+						<div class="posts-svgmask" id="darkModeButton"></div>
+					</div>
+					<div>
+						<div class="posts-svgmask" id="lightModeButton"></div>
+					</div>
+				</button>
+				<script>
+					function swapMode() {
+						["dark", "light"].forEach(prefix => document.getElementById(prefix + "ModeButton").parentElement.classList.toggle("posts-activemode"));
+						localStorage.setItem("lightmode", !document.body.classList.toggle("dark"))
+					}
+					if (localStorage.getItem("lightmode") == "true") swapMode()
+				</script>
+			</div>
+			<p>Vantaan kaupunginvaltuusto hyväksyi<sup><a href="https://yle.fi/a/74-20194491">[1]</a></sup> ratikan tarkistetun hankesuunnitelman 17.11.2025 äänin 44–23. Kohusuunnitelman hyväksyminen oli yllättävä päätös, koska lentoasemayhteyttä pidettiin tärkeänä. Huvikseni sukelsin julkiseen aineistoon.</p>
+		</header>
+
+		<h2>2019</h2>
+		<p>Ratikan on jo pitkään suunniteltu menevän lentoasemalle asti. 18.9.2019 julkaistussa yleissuunnitelmassa<sup><a href="https://ratikka.vantaa.fi/sites/default/files/document/Vantaan-ratikan-yleissuunnitelma.pdf">[2]</a></sup> sivulla 31 kerrotaan:</p>
+		<blockquote><b>Lentoaseman päätepysäkin sijaintia on suunniteltu yhdessä Finavian kanssa, ja lopullista linjausta ei ole vielä päätetty.</b> Päätepysäkille pyritään löytämään yhdessä ratkaisu, joka sopii lentoaseman alueen kehityssuunnitelmiin ja josta kulkuyhteydet raitiotiepysäkiltä terminaaleihin ovat mahdollisimman sujuvat. Yleissuunnitelmaan tuli valita yksi vaihtoehdoista vaikutustenarviointia ja kustannusarviota varten, ja vaihtoehdoksi valittiin maan tasossa kulkeva linjaus, jonka päätepysäkki on terminaalin 1 edustalla, Parkkitien länsireunalla.</blockquote>
+		<figure>
+			<img src="58087-1.jpg" alt="Kuva katusuunnitelmasta" class="posts-large">
+			<figcaption>Lentoaseman pysäkin yksi vaihtoehto. Lähde: yleissuunnitelman liite 2: Vantaan ratikan asemapiirustukset, piirros 58087-1<sup><a href="https://ratikka.vantaa.fi/sites/default/files/document/Liite-2-Vantaan-ratikan-asemapiirustukset.pdf">[3]</a></sup></figcaption>
+		</figure>
+		<p>Tällöin ei siis vielä ollut mitään kiveen hakattua suunnitelmaa lentoaseman päätepysäkistä.</p>
+
+		<h2>2023</h2>
+		<p>3.4.2023 julkaistussa ratikan hankesuunnitelmassa<sup><a href="https://ratikka.vantaa.fi/sites/default/files/document/Vantaan-ratikan-hankesuunnitelma-3.4.2023.pdf">[4]</a></sup> sivulla 28 kerrotaan:</p>
+		<blockquote>Lentäjäntiellä ratikka kulkee kadun päällä omalla siltakannellaan. [– –] <b>Lentoaseman päätepysäkki on suunniteltu bussiterminaalin päälle sillalle.</b> Pysäkki on noin 7 metriä maan pinnan yläpuolella. Pysäkille on suunniteltu kävelyramppi kolme metriä alemmas Lentoaseman Edustasillalle ja lähtevien lentojen terminaaliin. Pysäkille on myös suunniteltu kävely-yhteys P5-pysäköintilaitokseen ja hissiyhteys bussiterminaaliin sekä saapuvien lentojen terminaaliin. [– –] Päätepysäkki toteutetaan kolmen raiteen päätepysäkkinä. Tämä mahdollistaa päätepysäkin käyttämisen toisellekin tiheälle kulkevalle ratikkalinjalle Vantaan ratikan lisäksi, jos ratikkaverkko laajenee tulevaisuudessa.</blockquote>
+		<figure>
+			<img src="58685.jpg" alt="Pysäkki ja silta" class="posts-large">
+			<img src="58684.jpg" alt="Sillan alku Teletiellä" class="posts-large">
+			<figcaption>Lentoaseman pysäkin kiveen hakattu suunnitelma. Lähde: lentoaseman ja Tietotien katusuunnitelmat, piirrokset 58685<sup><a href="https://ratikka.vantaa.fi/sites/default/files/document/lentajantie_siltataso_katusuunnitelma_58685_1.pdf">[5]</a></sup> ja 58684.<sup><a href="https://ratikka.vantaa.fi/sites/default/files/document/teletie_valilla_lentajantie_tietotie_katusuunnitelma_58684_1.pdf">[6]</a></sup> Omituista on, ettei näitä piirroksia ole Vantaan nettisivuilla, mutta googlettamalla ne löytyvät</figcaption>
+		</figure>
+		<p>Hankesuunnitelmaan liittyen julkaistiin myös:</p>
+		<ul>
+			<li><a href="https://youtu.be/GrCmOhp_caQ">Havainnollistamisvideo lentoaseman pysäkin katusuunnitelmaluonnoksesta</a> (3D-animaatio!)</li>
+			<li><a href="https://www.vantaa.fi/fi/kaavoitus/kaavat/vantaan-ratikka-lentoasema-ja-teletie">Lentoaseman ja Teletien asemakaavamuutos</a>, jota ei ole vielä hyväksytty</li>
+			<li><a href="https://youtu.be/oPU76UQ-XoI">Lentäjäntien katusuunnitelmaluonnoksen esittelyvideo</a></li>
+			<li><a href="https://youtu.be/aFXvs_Nxxmk">Teletien katusuunnitelmaluonnoksen esittelyvideo</a></li>
+		</ul>
+		<p>Silloin vaikutti olevan selkeä suunnitelma pysäkistä, ja toteutukseen tarvittava asemakaavamuutoskin oli esillä.</p>
+
+		<h2>Lokakuu 2025</h2>
+		<p>Vantaan ratikan tarkistettu hankesuunnitelma<sup><a href="https://ratikka.vantaa.fi/sites/default/files/document/Vantaan%20ratikan%20tarkistettu%20hankesuunnitelma.pdf">[7]</a></sup> julkaistiin lokakuun lopulla ilman lentoaseman pysäkkiä. Tarkistetussa hankesuunnitelmassa kerrotaan muutoksista edelliseen hankesuunnitelmaan ja muutosten vaikutuksista. Tässä vaiheessa pitääkin siirtyä journalistisiin lähteisiin.</p>
+		<p>Ylen uutisessa<sup><a href="https://yle.fi/a/74-20190521">[8]</a></sup> 27.10.2025 apulaiskaupunginjohtaja Tero Anttila kertoo lentoaseman pysäkistä:</p>
+		<blockquote>Suunnitteluvaiheessa selvisi, että lentokentän päähän suunnitellun sillan rakentaminen olisi kestänyt jopa neljä vuotta, ja täksi ajaksi sillan viereen jäävät pysäköintitalo, hotelli ja toimistotalo olisi pitänyt ottaa pois käytöstä jopa vuosien ajaksi.<br><br>Anttilan mukaan viime talvena kävi myös ilmi, että Finavialla on omia suunnitelmia terminaalin sisäänkäynnin pitkän aikavälin kehittämisessä.</blockquote>
+		<p>Finavian omista suunnitelmista ei ole tarkkaa tietoa. Helsingin Sanomat kertoo uutisessaan<sup><a href="https://www.hs.fi/pkseutu/art-2000011586040.html">[9]</a></sup> (28.10.2025):</p>
+		<blockquote>Moni HS:n haastattelema poliitikko kritisoi voimakkaasti lentoasemayhtiö Finaviaa, koska neuvotteluissa on syntynyt vaikutelma, ettei yhtiö ole hirveän kiinnostunut koko ratikasta. [– –] On mahdollista, että <b>bussiasema siirtyy 2030-luvulla jonnekin muualle</b>, jolloin ratikan suunnitellulle päätepysäkille terminaalirakennuksen kylkeen päästäisiin maata pitkin ilman kallista siltaratkaisua. [– –] Finavian viestinnästä kommentoidaan HS:lle, ettei Finavialla ole tällä hetkellä omia kehityshankkeita, jotka liittyisivät Vantaan ratikan maanpäälliseen reittiin terminaalin yhteyteen.</blockquote>
+		<p>Finavian viimeinen lausunto on ristiriidassa kaiken muun kanssa.</p>
+
+		<h2>Marraskuu 2025</h2>
+		<p>Myöhemmässä uutisessaan (10.11.2025) Yle kertoo<sup><a href="https://yle.fi/a/74-20193226">[10]</a></sup>, että kaupunginhallitus esittää tarkistetun hankesuunnitelman hyväksymistä kaupunginvaltuustolle, ja lentoaseman päätepysäkistä tehdään uusi suunnitelma vuoden 2026 kesäkuun loppuun mennessä.</p>
+		<blockquote>Päätepysäkin vaihtoehtoja tarkastellaan yhteistyössä Finavian kanssa. – – Lentoaseman päätepysäkin sijoittamisesta tehdään päätös vuoden 2027 loppuun mennessä.</blockquote>
+		<p>Kaupunginvaltuusto hyväksyi tarkistetun hankesuunnitelman, ja heti seuraavana päivänä Vantaa<sup><a href="https://www.vantaa.fi/fi/ajankohtaista/tiedote/vantaan-ratikan-paatepysakkivaihtoehtoja-lentoaseman-ydinalueella-aletaan-suunnitella-yhteistyossa-finavian-kanssa">[11]</a></sup> ja Finavia<sup><a href="https://www.finavia.fi/fi/uutishuone/2025/vantaan-ratikan-paatepysakkivaihtoehtoja-lentoaseman-ydinalueella-aletaan">[12]</a></sup> julkaisivat yhteistiedotteen, jossa kerrotaan lentoasemapysäkin suunnittelusta ja sijoitusvaihtoehdoista.</p>
+		<blockquote>Ratikka-allianssi tekee yhteistyössä Finavian kanssa hankesuunnitelmaa täydentävän suunnitelman raitiotiestä lentoaseman terminaalin lähialueella.</blockquote>
+		<figure>
+			<img src="vaihtoehdot.jpg" alt="Vaihtoehdot kartalla" class="posts-large">
+			<figcaption>Täydentävää hankesuunnitelmaa varten kartoitetut päätepysäkkivaihtoehdot. Lähde: Vantaan ja Finavian yhteistiedote</figcaption>
+		</figure>
+		<p>Ensimmäinen vaihtoehto sijaitsee Terminaalitiellä, ja sen etäisyys terminaaliin on noin 365 metriä. Toinen vaihtoehto sijaitsee Teletiellä, ja sen etäisyys terminaaliin on noin 345 metriä. Finavian Ulla Serlenius kertoo vaihtoehdoista:</p>
+		<blockquote>Nyt käsiteltävät vaihtoehdot, joiden pohjalta tarkempi suunnitelma tehdään, ovat Finavian näkökulmasta ilman muuta toteuttavissa lentoasemalla. – – Jo tässä vaiheessa kartoituksista on käynyt ilmi, että kummatkin vaihtoehdot aiheuttavat merkittäviä muutoksia laajalla alueella lentoasemalla. Terminaalitielle sijoitettu päätepysäkki aiheuttaisi isoja muutoksia lentoasema-alueen maaliikenteelle ja Teletielle sijoitettu päätepysäkki aiheuttaisi muutoksia lentoliikenteen käytössä olevalle asematasoalueelle.</blockquote>
+		<p>Asematasoalueen muutoksilla viitataan luultavasti asemakaavamuutoksessa mainittuun alueiden lunastamiseen ja rakennusten purkamiseen.</p>
+		<h2>Tulkintani</h2>
+		<p>Lentoaseman päätepysäkistä ei ole ollut syystä tai toisesta hyvää ja valmista suunnitelmaa, vaikka ratikkaa on suunniteltu jo monta vuotta. Marraskuussa ratikan rakentaminen oli jo käytännössä aloitettu ilman poliittista päätöstä – esimerkiksi Tikkurilan aseman alittavan tunnelin kaivuuta on valmisteltu jo kesästä asti. Rakentamisen suunniteltu aikataulu aiheutti poliittista painetta, joten kunnanvaltuusto runnoi keskeneräisen suunnitelman läpi vain, jotta rakentaminen voitaisiin aloittaa ilman viivästyksistä koituvia lisäkustannuksia. Lentoaseman pysäkkiä tuskin jätettiin pois ainoastaan säästösyistä, vaan pääosin siksi, ettei sen suunnitelma ollut vielä valmis. Suunnitelmana on toteuttaa lentoaseman päätepysäkki niin pian kuin mahdollista. Tulkintaani tukevat apulaiskaupunginjohtaja Tero Anttilan valikoidut kommentit Ylen uutisessa<sup><a href="https://yle.fi/a/74-20194836">[13]</a></sup> (18.11.2025):</p>
+		<blockquote>– Pidän hyvin todennäköisenä, että päätepysäkki vuonna 2029 on lähellä lentoaseman terminaalia.<br>– Jos tämä menee maaliin, suunnitelmasta nyt puuttuva osuus päätetään ja toteutetaan samanaikaisesti kuin varsinainen
+		muu työ, eli lentoterminaalin alueelle saakka, noin 300 metrin päähän lentoterminaalin pääovesta.<br>– Allianssin rakentajakumppanit ovat varanneet resursseja jo ennen vuodenvaihdetta alkavaan rakentamiseen. Jos tämä olisi päätetty palauttaa kokonaan uudelleen valmisteltavaksi vain tuon lentoaseman pään osalta, se olisi ollut tehotonta ja aiheuttanut lisäkustannuksia.</blockquote>
+		<p>Toivon todella, että päätepysäkki saadaan aivan terminaalin viereen. Toisaalta tiedotteen mukaan se ei ole edes yksi vaihtoehdoista ja HS:n mukaan se voisi ehkä tapahtua 2030-luvulla. Odotan mielenkiinnolla, mihin ratkaisuun osapuolet päätyvät. Vielä lopuksi on pantava merkille, että Vantaan ratikan varrelle tulee paljon enemmän puita ja kasvillisuutta kuin Tampereen ratikan varrelle.</p>
+
+		<footer>
+			<h2>Lähdeviittaukset:</h2>
+			<p>[1]: <a href="https://yle.fi/a/74-20194491">Yle: "Nyt se on varmaa: Vantaalle rakennetaan ratikka"</a> (17.11.2025)</p>
+			<p>[2]: <a href="https://ratikka.vantaa.fi/sites/default/files/document/Vantaan-ratikan-yleissuunnitelma.pdf">Vantaan ratikan yleissuunnitelma</a> (18.9.2019)</p>
+			<p>[3]: <a href="https://ratikka.vantaa.fi/sites/default/files/document/Liite-2-Vantaan-ratikan-asemapiirustukset.pdf">Yleissuunnitelman liite 2: Vantaan ratikan asemapiirustukset, piirros 58087-1</a> (18.9.2019)</p>
+			<p>[4]: <a href="https://ratikka.vantaa.fi/sites/default/files/document/Vantaan-ratikan-hankesuunnitelma-3.4.2023.pdf">Vantaan ratikan hankesuunnitelma</a> (3.4.2023)</p>
+			<p>[5]: <a href="https://ratikka.vantaa.fi/sites/default/files/document/lentajantie_siltataso_katusuunnitelma_58685_1.pdf">Vantaa: Lentäjäntien katusuunnitelma, piirros 58685</a> (15.9.2022)</p>
+			<p>[6]: <a href="https://ratikka.vantaa.fi/sites/default/files/document/teletie_valilla_lentajantie_tietotie_katusuunnitelma_58684_1.pdf">Vantaa: Teletien katusuunnitelma, piirros 58684</a> (19.9.2022)</p>
+			<p>[7]: <a href="https://ratikka.vantaa.fi/sites/default/files/document/Vantaan%20ratikan%20tarkistettu%20hankesuunnitelma.pdf">Vantaan ratikan tarkistettu hankesuunnitelma</a> (8.10.2025)</p>
+			<p>[8]: <a href="https://yle.fi/a/74-20190521">Yle: Vantaan ratikan hinta paisui, päätepysäkki siirtyi ja pyöräteitä jää tekemättä – näin kaupungin johto perustelee</a> (27.10.2025)</p>
+			<p>[9]: <a href="https://www.hs.fi/pkseutu/art-2000011586040.html">HS: Vantaan ratikka on vaarassa jopa kaatua</a> (28.10.2025)</p>
+			<p>[10]: <a href="https://yle.fi/a/74-20193226">Yle: Vantaan ratikan päätepysäkistä tehdään uusi suunnitelma – kaupunginhallitus lähetti paketin valtuustolle äänin 11–4</a> (10.11.2025)</p>
+			<p>[11]: <a href="https://www.vantaa.fi/fi/ajankohtaista/tiedote/vantaan-ratikan-paatepysakkivaihtoehtoja-lentoaseman-ydinalueella-aletaan-suunnitella-yhteistyossa-finavian-kanssa">Vantaan ratikan päätepysäkkivaihtoehtoja lentoaseman ydinalueella aletaan suunnitella yhteistyössä Finavian kanssa</a> (18.11.2025)</p>
+			<p>[12]: <a href="https://www.finavia.fi/fi/uutishuone/2025/vantaan-ratikan-paatepysakkivaihtoehtoja-lentoaseman-ydinalueella-aletaan">Vantaan ratikan päätepysäkkivaihtoehtoja lentoaseman ydinalueella aletaan suunnitella yhteistyössä Finavian kanssa</a> (18.11.2025)</p>
+			<p>[13]: <a href="https://yle.fi/a/74-20194836">Vantaan apulaiskaupunginjohtaja perustelee, miksi ratikkareittiä lentokentälle saakka ei päätetty heti</a> (18.11.2025)</p>
+			
+
+			<p class="disclaimer">Julkaistu 7.12.2025</p>
+		</footer>
+	</main>
 </body>
 </html>

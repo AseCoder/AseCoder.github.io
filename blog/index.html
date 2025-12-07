@@ -7,22 +7,47 @@
 	<meta name="description" content="This is my blog where I may occasionally post borderline blog-like content.">
 	<meta name="theme-color" content="#946c4b">
 	<link rel="stylesheet" href="../font.css">
-	<link rel="stylesheet" href="../posts.css">
+	<link rel="stylesheet" href="../v4-posts.css">
 	<title>Blog</title>
 </head>
-<body>
-	<h1>This is my blog where I may occasionally post borderline blog-like content.</h1>
-	<ul>
-		<li>[2025-03-17] <a href="cayo-perico/index.html">(GTAO) Cayo Perico Heist Tips:</a> a Collection of Resources</li>
-		<li>[2024-03-14] <a href="twitterdownload/index.html">How to download videos from Twitter:</a> a tutorial</li>
-		<li>[2023-03-12] <a href="ratikka/index.html">Ratikan suunnitelma</a> sisältää linkkejä ratikan asiakirjoihin</li>
-		<li>[2022-07-26] <a href="infinity=0/index.html">Infinity = 0</a> is a fallacious mathematical proof</li>
-		<li>[2022-06-16] <a href="bezier_vectors/index.html">Bézier curve with vectors</a> explains the math behind a cubic Bezier curve</li>
-		<li>[2022-02-28] <a href="functional_groups/index.html">Functional groups</a> explains the functional groups in chemistry</li>
-		<li>[2021-01-23] <a href="election-explained/index.html">The finnish parliamentary election explained</a> explains how d'Hondt's method is applied in the finnish paraliamentary election</li>
-		<li>[2021-09-13] <a href="world_statistics/index.html">World Statistics</a> is a list of statistics that I find interesting</li>
-		<li>[2021-09-13] <a href="books/index.html">My Library</a> is a developing list of books I want to read, or have read</li>
-		<li>[2021-06-14] <a href="laythe-base/index.html">Laythe Base</a> documents the flight of a sea base I sent to laythe in Kerbal Space Program</li>
-	</ul>
+<body class="dark">
+	<main class="posts-container">
+		<header>
+			<div class="posts-titlecontainer">
+				<h1>This is my blog where I may occasionally post borderline blog-like content.</h1>
+				<button onclick="swapMode()" class="posts-modeselector">
+					<div class="posts-activemode">
+						<div class="posts-svgmask" id="darkModeButton"></div>
+					</div>
+					<div>
+						<div class="posts-svgmask" id="lightModeButton"></div>
+					</div>
+				</button>
+				<script>
+					function swapMode() {
+						["dark", "light"].forEach(prefix => document.getElementById(prefix + "ModeButton").parentElement.classList.toggle("posts-activemode"));
+						localStorage.setItem("lightmode", !document.body.classList.toggle("dark"))
+					}
+					if (localStorage.getItem("lightmode") == "true") swapMode()
+				</script>
+			</div>
+		</header>
+		<ul>
+			<li>[2025-12-07] <a href="vantaanratikka/">Mietteitä Vantaan patikkaratikasta</a> kertoo Vantaan ratikan
+				päätepysäkkikohusta.</li>
+			<li>[2025-03-17] <a href="cayo-perico/index.html">(GTAO) Cayo Perico Heist Tips:</a> a Collection of Resources</li>
+			<li>[2024-03-14] <a href="twitterdownload/index.html">How to download videos from Twitter:</a> a tutorial</li>
+			<li>[2023-03-12] <a href="ratikka/index.html">Ratikan suunnitelma</a> sisältää linkkejä ratikan asiakirjoihin</li>
+			<li>[2022-07-26] <a href="infinity=0/index.html">Infinity = 0</a> is a fallacious mathematical proof</li>
+			<li>[2022-06-16] <a href="bezier_vectors/index.html">Bézier curve with vectors</a> explains the math behind a cubic
+				Bezier curve</li>
+			<li>[2022-02-28] <a href="functional_groups/index.html">Functional groups</a> explains the functional groups in
+				chemistry</li>
+			<li>[2021-09-13] <a href="books/index.html">My Library</a> is a developing list of books I want to read, or have
+				read</li>
+			<li>[2021-06-14] <a href="laythe-base/index.html">Laythe Base</a> documents the flight of a sea base I sent to
+				laythe in Kerbal Space Program</li>
+		</ul>
+	</main>
 </body>
 </html>
