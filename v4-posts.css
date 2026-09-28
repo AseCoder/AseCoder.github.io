@@ -4,9 +4,9 @@
 	/* average of the other two greys: */
 	--posts-grey: #aaa;
 	--posts-lightgrey: #666;
-	--posts-teal: #00b377;
+	--posts-teal: #09853f;
 	--posts-teal-dark: #e6fff4;
-	--posts-lime: #95b300;
+	--posts-lime: #607a00;
 	--posts-text: #000;
 }
 
@@ -126,6 +126,14 @@ code {
 	background-color: var(--posts-darkgrey);
 	padding: 2px 5px;
 	border-radius: 4px;
+	word-break: break-all;
+}
+
+pre {
+	background-color: var(--posts-darkgrey);
+	padding: 5px 8px;
+	border-radius: 4px;
+	inline-size: min-content;
 }
 
 blockquote {
