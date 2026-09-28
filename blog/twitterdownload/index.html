@@ -12,9 +12,26 @@
 <body class="dark">
 	<main class="posts-container">
 		<header>
-			<h1>How to download videos from Twitter</h1>
-			<p>For the technologically inclined. Working as of 2025-05-31.</p>
+			<div class="posts-titlecontainer">
+				<h1>How to download videos from Twitter</h1>
+				<button onclick="swapMode()" class="posts-modeselector">
+					<div class="posts-activemode">
+						<div class="posts-svgmask" id="darkModeButton"></div>
+					</div>
+					<div>
+						<div class="posts-svgmask" id="lightModeButton"></div>
+					</div>
+				</button>
+				<script>
+					function swapMode() {
+						["dark", "light"].forEach(prefix => document.getElementById(prefix + "ModeButton").parentElement.classList.toggle("posts-activemode"));
+						localStorage.setItem("lightmode", !document.body.classList.toggle("dark"))
+					}
+					if (localStorage.getItem("lightmode") == "true") swapMode()
+				</script>
+			</div>
 		</header>
+		<p>For the technologically inclined. Working as of 2025-05-31.</p>
 
 		<h2>1. Finding the video URL</h2>
 		<p>When you have navigated to the twitter video you would like to download, open the network tab in your browser's developer tools and refresh the page to record the first requests of the initial page load. Then look for a request whose domain starts with <code>prod-</code>, file name starts with <code>master_dynamic_delta</code> and file extension is <code>.m3u8</code>. This request only happens once and it happens when the page loads. Copy the whole URL of the request.</p>
