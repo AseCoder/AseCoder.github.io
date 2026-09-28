@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Terminal commands for converting and wrangling media">
+	<meta name="theme-color" content="#946c4b">
+	<link rel="stylesheet" href="../../font.css">
+	<link rel="stylesheet" href="../../v4-posts.css">
+	<title>FFMPEG cheatsheet</title>
+</head>
+
+<body class="dark">
+	<main class="posts-container">
+		<header>
+			<div class="posts-titlecontainer">
+				<h1>FFMPEG cheatsheet</h1>
+				<button onclick="swapMode()" class="posts-modeselector">
+					<div class="posts-activemode">
+						<div class="posts-svgmask" id="darkModeButton"></div>
+					</div>
+					<div>
+						<div class="posts-svgmask" id="lightModeButton"></div>
+					</div>
+				</button>
+				<script>
+					function swapMode() {
+						["dark", "light"].forEach(prefix => document.getElementById(prefix + "ModeButton").parentElement.classList.toggle("posts-activemode"));
+						localStorage.setItem("lightmode", !document.body.classList.toggle("dark"))
+					}
+					if (localStorage.getItem("lightmode") == "true") swapMode()
+				</script>
+			</div>
+		</header>
+		<p>These are some useful command templates for converting and wrangling photos, videos and GIFs with command line tools like FFMPEG and ImageMagick. Many of these are specific to me and my hardware.</p>
+		<h2>FFMPEG</h2>
+		<hr>
+		<p><code>ffmpeg -hwaccel cuda -i "" -c:v h264_nvenc -preset p7 -qp 34</code>
+		</p>
+		<details class="styled-simple">
+			<summary>Explanation</summary>
+			<p>Read a file or URL with Cuda hardware acceleration and encode to H.264 with hardware acceleration, a slow preset and constant quality (smaller is better).</p>
+		</details>
+		<hr>
+		<p><code>ffmpeg -hwaccel cuda -i "" -c:v h264_nvenc -preset p7 -rc-lookahead 55 -multipass fullres -bufsize 2M -b:v 900k</code></p>
+		<details class="styled-simple">
+			<summary>Explanation</summary>
+			<p>Read a file or URL with Cuda hardware acceleration and encode to H.264 with hardware acceleration, a slow preset, rate control (lookahead frames, buffer size), two passes and a constant video bitrate.</p>
+			<p>Discord tip: for the maximum file size of 20 MB and video length <i>t</i>, the maximum bitrate is<br>20 (MB) / <i>t</i> = 160 / <i>t</i> (Mb/s)</p>
+		</details>
+		<hr>
+		<p><code>-c:v hevc_nvenc -tag:v hvc1</code></p>
+		<details class="styled-simple">
+			<summary>Explanation</summary>
+			<p>For H.265 (HEVC) encoding. Use <code>-tag:v hvc1</code> to ensure compatibility with Apple devices.</p>
+		</details>
+		<hr>
+		<p><code>ffmpeg -i "" -vf "select='eq(pict_type,PICT_TYPE_I)'" -vsync vfr thumb%04d.png</code></p>
+		<details class="styled-simple">
+			<summary>Explanation</summary>
+			<p>Output one image for every I-frame. <code>%04d</code> means that the ordinal number of each output image will be formatted using four digits. Similar to number formatting in the C language.</p>
+		</details>
+		<hr>
+		<p><code>ffmpeg -i "images\%4d.png" -r 10 animation.gif</code></p>
+		<details class="styled-simple">
+			<summary>Explanation</summary>
+			<p>Image sequence to 10 fps GIF. There are more options that can make GIFs look better, because they're limited to 256 colours.</p>
+		</details>
+		<hr>
+		<p><code>ffmpeg -i url.mp4 -vf "scale=640:-1:flags=lanczos,split[x1][x2]; [x1]palettegen=stats_mode=single[p];
+		[x2][p]paletteuse=new=1" output.gif</code></p>
+		<details class="styled-simple">
+			<summary>Explanation</summary>
+			<p>Convert the input video to a GIF. Scale to 640 pixels on one axis and retain the aspect ratio (<code>:-1</code>). Generate a palette of the colours in the video instead of using the default GIF palette.</p>
+		</details>
+		<hr>
+		<p><code>ffmpeg -hwaccel cuda -i ".mov" -filter_complex
+		"[0]trim=end_frame=24,scale=640:-1:flags=lanczos,split[s1][s2]; [s1]reverse[r]; [s2][r]concat=n=2:v=1:a=0,
+		split[x1][x2]; [x1]palettegen=stats_mode=single[p]; [x2][p]paletteuse=new=1" output.gif</code></p>
+		<details class="styled-simple">
+			<summary>Explanation</summary>
+			<p>Back and forth GIF. Only includes the first 23 frames of the input video, scales it as above, concatenates the clip in reverse, and generates a custom palette.</p>
+		</details>
+		<hr>
+		<p><code>-ss 1:40.9</code></p>
+		<details class="styled-simple">
+			<summary>Explanation</summary>
+			<p>Seek exactly to 1 minute and 40.9 seconds in the video. This is an input parameter (goes before <code>-i</code>).</p>
+		</details>
+		<hr>
+		<p><code>-frames:v 50</code></p>
+		<details class="styled-simple">
+			<summary>Explanation</summary>
+			<p>Take a number of frames from the input. Similar to the time-based <code>-t [seconds]</code>.</p>
+		</details>
+		<hr>
+		<p><code>-f concat -i mylist.txt -c copy</code></p>
+		<details class="styled-simple">
+			<summary>Explanation</summary>
+			<p>If the input videos have the same parameters, you can make a list of them in <code>mylist.txt</code>:</p>
+			<pre>
+file '/path/to/file1'
+file '/path/to/file2'
+file '/path/to/file3'
+</pre>
+			<p>and pass that file as an input to FFMPEG.</p>
+		</details>
+		<hr>
+		<p><code>ffmpeg -i file1.mp4 -i file2.mp4 -i file3.mp4 -filter_complex "[0:v] [0:a] [1:v] [1:a] [2:v] [2:a] concat=n=3:v=1:a=1 [v] [a]" -map "[v]" -map "[a]"</code></p>
+		<details class="styled-simple">
+			<summary>Explanation</summary>
+			<p>If the inputs have different parameters and you want to reencode them. If you don't have three inputs, change the filter inputs before "concat" and the <code>n</code>.</p>
+		</details>
+		<hr>
+		<p><code>-movflags +faststart</code></p>
+		<details class="styled-simple">
+			<summary>Explanation</summary>
+			<p>Optimizes the output video for network playback by moving some data from the end of the file to the beginning, so the user does not have to download the whole file to begin playing.</p>
+		</details>
+		<hr>
+		<details class="styled-simple">
+			<summary>AAC audio encoding</summary>
+			<p>The best AAC encoder is <code>libfdk_aac</code>. By default it has a 14 kHz lowpass filter. Try <code>-cutoff 18000</code>, but it may reduce quality.</p>
+			<p>I have to use the <code>aac</code> encoder.</p>
+			<p>Set bitrate with <code>-b:a 128k</code>.</p>
+		</details>
+		<hr>
+		<p><code>ffmpeg -i ".tif" -c:v libsvtav1 -vf scale=1920:-1 -crf 1 output.avif</code></p>
+		<details class="styled-simple">
+			<summary>Explanation</summary>
+			<p>This uses AVIF image encoding. <code>-crf</code> sets the quality, in this case very low.</p>
+			<p>Use the <code>svt-av1-psy</code> encoder instead of <code>libaom-av1</code>.</p>
+			<p>I don't think I have the psy one. <code>libsvtav1</code> is the closest one.</p>
+			<blockquote>The AOM encoder was built to be a textbook example of the AV1 Encoder, to demonstrate it's functions for research purposes. It's a Reference Encoder.
+			<br><br>
+			SVT-AV1 was built with efficiency in mind. It leverages modern CPUs' full instruction sets and multiple cores/threads for accelerated operations.
+			<br><br>
+			SVT-AV1-PSY is a psycho-visually optimized branch of SVT-AV1. It tunes the baseline parameters of SVT-AV1 (and adds new ones) to be more psychologically lossless per a given bitrate/preset.</blockquote>
+			<p>(<a href="https://www.reddit.com/r/AV1/comments/1fkdbwy/comment/lnvnj4v/">^ Reddit comment</a>)</p>
+			<p><code>ffmpeg -h encoder=libsvtav1</code> for help.</p>
+		</details>
+		<hr>
+		<p><code>ffmpeg -hwaccel cuda -i "" -c:v h264_nvenc -preset p7 -qp 33 -movflags +faststart -vf
+		"zscale=pin=bt2020:tin=arib-std-b67:min=bt2020nc:rin=tv,zscale=t=linear:npl=700,format=gbrpf32le,tonemap=mobius:desat=2,zscale=p=bt709:t=bt709:m=bt709:r=pc,format=yuv420p"
+		output.mp4</code></p>
+		<details class="styled-simple">
+			<summary>Explanation</summary>
+			<p>Converts iPhone 16 HDR (Dolby Vision) video to SDR.</p>
+			<p>Nominal peak luminance is 700 (100 would be the default) and desaturation is 2 (2 is the default) and pc blacks instead of tv.</p>
+		</details>
+		<hr>
+		<p><code>ffmpeg -f lavfi -i anullsrc=channel_layout=stereo:sample_rate=44100 -loop 1 -i "url" -vf scale=x:-1 -t 4 -pix_fmt yuv420p -color_range tv output.mp4</code></p>
+		<details class="styled-simple">
+			<summary>Explanation</summary>
+			<p>Loop one scaled image frame for 4 seconds at undefined framerate. Include silent audio channel.</p>
+		</details>
+		<hr>
+
+		<br>
+		<h2>MPV</h2>
+		<p><code>--hwdec=auto</code>
+		</p>
+		<details class="styled-simple">
+			<summary>Explanation</summary>
+			<p>MPV video player hardware acceleration.</p>
+		</details>
+		<hr>
+
+		<br>
+		<h2>ImageMagick</h2>
+		<p><code>magick convert -density 300 ".pdf"[0] -background white
+		-flatten page1.png</code>
+		</p>
+		<details class="styled-simple">
+			<summary>Explanation</summary>
+			<p>Using ImageMagick, converts the first (0-index) page of the PDF to a PNG at 300 DPI. Also works with a web URL. Without background and flatten it leaves the background transparent. Might be picky with any weird symbols in the filename. Safest to have a simple filename in the current folder.</p>
+		</details>
+		<hr>
+		<p>See also <a href="../twitterdownload/">How to download videos from Twitter</a>.</p>
+		<p class="disclaimer">Published 2026-09-28</p>
+		
+	</main>
+</body>
+
+</html>
